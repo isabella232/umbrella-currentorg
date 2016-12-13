@@ -147,7 +147,7 @@ add_action('personal_options_update', 'current_save_user_profile_fields');
 
 class ProfileCategoryWalker extends Walker_Category{
 
-	public function start_el(&$output, $term, $depth, $args){
+	public function start_el(&$output, $term, $depth = 0, $args = Array(), $id = 0 ){
 		$args = wp_parse_args($args, array(
 			'name' => 'profile_category_input',
 			'checked' => array(),
