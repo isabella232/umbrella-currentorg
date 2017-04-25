@@ -382,6 +382,9 @@ h1.entry-title {
 .entry-content p.wp-media-credit {
   font-family: "freight-sans-pro", "Helvetica Neue", Arial, sans-serif;
 }
+.entry-content p.wp-media-credit {
+  font-size: 13.04px;
+}
 
 .post-social .icon-mail:before {
     margin-right: 1px;
