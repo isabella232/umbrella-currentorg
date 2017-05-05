@@ -222,3 +222,11 @@ function current_insert_home_list_widget_area($post, $query) {
 		dynamic_sidebar('homepage-after-third-post');
 }
 add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area', 10, 2);
+
+function current_wallit_js() {
+	echo '<script src="https://cdn.wallit.io/paywall.min.js"></script>
+		<script type="text/javascript">
+		wallit.paywall.init(\'0bf27215-847a-4f97-93f5-6633b76d27ff\');
+		</script>';
+}
+add_action( 'wp_head', 'current_wallit_js' );
