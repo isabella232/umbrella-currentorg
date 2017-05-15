@@ -707,3 +707,15 @@ article .entry-content p {
   padding: 10px;
   font-size: 18px;
 }
+
+/* 5.5.17 Homepage Job Board Widget Styles */
+
+ .jt_row1,
+ .jt_row2,
+ .jt_alljobs {
+	 padding: .75em;
+ }
+
+ jt_row1 {
+	 background-color: #454c54;
+ }
