@@ -710,12 +710,31 @@ article .entry-content p {
 
 /* 5.5.17 Homepage Job Board Widget Styles */
 
- .jt_row1,
- .jt_row2,
- .jt_alljobs {
-	 padding: .75em;
- }
+#sidebar {
+  border-left: 1px solid #ddd;
+}
 
- jt_row1 {
-	 background-color: #454c54;
- }
+#sidebar .widget.rev {
+  padding: 0px;
+  background-color: white;
+}
+
+.widget.rev a {
+  color: #0082a3;
+}
+
+.jt_row1,
+.jt_row2,
+.jt_alljobs {
+  padding: 1em;
+}
+
+.jt_row1 {
+  background-color: #e9f3fb;
+}
+
+.jt_job_location,
+.jt_job_company {
+  font-size: 14px;
+  color: #000;
+}
