@@ -711,13 +711,16 @@ article .entry-content p {
 /* 5.5.17 Homepage Job Board Widget Styles */
 
 #sidebar .widget.rev {
-  padding: 24px 0 0 0;
+  padding: 0;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: 24px;
 }
 .widget.rev a {
   color: #0082a3;
+}
+.widget.rev > .widgettitle {
+  margin-top: 24px;
 }
 
 .jt_job_list  a {
