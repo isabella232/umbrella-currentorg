@@ -719,7 +719,7 @@ article .entry-content p {
 .widget.rev a {
   color: #0082a3;
 }
-.widget.rev > .widgettitle {
+#sidebar .widget.rev h3.widgettitle {
   margin-top: 24px;
 }
 
