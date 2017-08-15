@@ -253,8 +253,8 @@ function current_chartbeat() {
             document.body.appendChild(e);
         }
         var oldonload = window.onload;
-        window.onload = (typeof window.onload != 'function') ?
-            loadChartbeat : function() {
+		window.onload = (typeof window.onload != 'function') ?
+        loadChartbeat : function() {
                 oldonload();
                 loadChartbeat();
             };
