@@ -242,6 +242,8 @@ function current_chartbeat() {
     _sf_async_config.useCanonical = true;
     _cbq = window._cbq = (window._cbq || []);
     _cbq.push(['_acct', 'paid']);
+	_cbq.push(['_acct', 'lgdin']);
+	_cbq.push(['_acct', 'anon']);
     /** CONFIGURATION END **/
 
 	(function() {
