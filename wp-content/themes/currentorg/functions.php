@@ -223,11 +223,45 @@ function current_insert_home_list_widget_area($post, $query) {
 }
 add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area', 10, 2);
 
+/**
+ * wallit paywall, with some Chartbeat logging integration
+ *
+ * When the wallit user is granted access:
+ * - attempt to push the 'lgdin' status to chartbeat
+ * - if the reason for granting the access is because of money, try to push the 'paid' status to chartbeat
+ *
+ * @link https://wallit.github.io/api/js#resourceaccessdata-object#i-need-to-replace-my-content-on-access-granted-with-the-full-content
+ * @link https://wallit.github.io/api/js#resourceaccessdataquota-object
+ */
 function current_wallit_js() {
-	echo '<script src="https://cdn.wallit.io/paywall.min.js"></script>
+	?>
+		<script src="https://cdn.wallit.io/paywall.min.js"></script>
 		<script type="text/javascript">
-		wallit.paywall.init(\'0bf27215-847a-4f97-93f5-6633b76d27ff\');
-		</script>';
+		wallit.paywall.init(
+			'0bf27215-847a-4f97-93f5-6633b76d27ff',
+			{
+				accessGranted: function(data) {
+					_cbq = window._cbq = (window._cbq || []);
+					try {
+						_cbq.push(['_acct', 'lgdin']);
+					} catch (e) {
+						console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
+						console.log(e);
+					}
+
+					if (data.AccessReason == 'Purchase' || data.AccessReason == 'Dubscription' ) {
+						try {
+							_cbq.push(['_acct', 'paid']);
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit paid status to Chartbeat.');
+							console.log(e);
+						}
+					}
+				}
+			}
+		);
+		</script>
+	<?php
 }
 add_action( 'wp_head', 'current_wallit_js' );
 
@@ -242,9 +276,14 @@ function current_chartbeat() {
 		_sf_async_config.domain = 'current.org'
 		_sf_async_config.useCanonical = true;
 		_cbq = window._cbq = (window._cbq || []);
-		_cbq.push(['_acct', 'paid']);
-		_cbq.push(['_acct', 'lgdin']);
-		_cbq.push(['_acct', 'anon']);
+		<?php
+
+		if ( is_user_logged_in() ) {
+			echo "_cbq.push(['_acct', 'lgdin']);";
+		} else {
+			echo "_cbq.push(['_acct', 'anon']);";
+		}
+		?>
 		/** CONFIGURATION END **/
 
 		(function() {
