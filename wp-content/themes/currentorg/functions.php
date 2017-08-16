@@ -233,34 +233,36 @@ add_action( 'wp_head', 'current_wallit_js' );
 
 
 function current_chartbeat() {
+	?>
 	<script type='text/javascript'>
-    var _sf_async_config = _sf_async_config || {};
+		var _sf_async_config = _sf_async_config || {};
 
-	/** CONFIGURATION START **/
-    _sf_async_config.uid = 57004;
-    _sf_async_config.domain = 'current.org'
-    _sf_async_config.useCanonical = true;
-    _cbq = window._cbq = (window._cbq || []);
-    _cbq.push(['_acct', 'paid']);
-	_cbq.push(['_acct', 'lgdin']);
-	_cbq.push(['_acct', 'anon']);
-    /** CONFIGURATION END **/
+		/** CONFIGURATION START **/
+		_sf_async_config.uid = 57004;
+		_sf_async_config.domain = 'current.org'
+		_sf_async_config.useCanonical = true;
+		_cbq = window._cbq = (window._cbq || []);
+		_cbq.push(['_acct', 'paid']);
+		_cbq.push(['_acct', 'lgdin']);
+		_cbq.push(['_acct', 'anon']);
+		/** CONFIGURATION END **/
 
-	(function() {
-		function loadChartbeat() {
-            var e = document.createElement('script');
-            e.setAttribute('language', 'javascript');
-            e.setAttribute('type', 'text/javascript');
-            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
-            document.body.appendChild(e);
-        }
-        var oldonload = window.onload;
-		window.onload = (typeof window.onload != 'function') ?
-        loadChartbeat : function() {
-                oldonload();
-                loadChartbeat();
-            };
-    })();
-</script>
+		(function() {
+			function loadChartbeat() {
+				var e = document.createElement('script');
+				e.setAttribute('language', 'javascript');
+				e.setAttribute('type', 'text/javascript');
+				e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+				document.body.appendChild(e);
+			}
+			var oldonload = window.onload;
+			window.onload = (typeof window.onload != 'function') ?
+			loadChartbeat : function() {
+					oldonload();
+					loadChartbeat();
+				};
+		})();
+	</script>
+	<?php
 }
 add_action( 'wp_footer', 'current_chartbeat' );
