@@ -226,7 +226,7 @@ add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area',
 /**
  * wallit paywall, with some Chartbeat logging integration
  *
- * When the wallit user is granted access:
+ * When a wallit user (has a wallit account) is granted access:
  * - attempt to push the 'lgdin' status to chartbeat
  * - if the reason for granting the access is because of money, try to push the 'paid' status to chartbeat
  *
@@ -242,16 +242,25 @@ function current_wallit_js() {
 			{
 				accessGranted: function(data) {
 					_cbq = window._cbq = (window._cbq || []);
-					try {
-						_cbq.push(['_acct', 'lgdin']);
-					} catch (e) {
-						console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
-						console.log(e);
-					} finally {
-						console.log('attempted to pass the lgdin status to chartbeat');
+					if (
+						data.AccessReason == 'Purchase'
+						|| data.AccessReason == 'Subscription'
+						|| data.AccessReason == 'PropertyUser'
+					) {
+						try {
+							_cbq.push(['_acct', 'lgdin']);
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
+							console.log(e);
+						} finally {
+							console.log('attempted to pass the lgdin status to chartbeat');
+						}
 					}
 
-					if (data.AccessReason == 'Purchase' || data.AccessReason == 'Dubscription' ) {
+					if (
+						data.AccessReason == 'Purchase'
+						|| data.AccessReason == 'Subscription'
+					) {
 						try {
 							_cbq.push(['_acct', 'paid']);
 						} catch (e) {
@@ -272,7 +281,7 @@ add_action( 'wp_head', 'current_wallit_js' );
 
 function current_chartbeat() {
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' id="current_chartbeat">
 		var _sf_async_config = _sf_async_config || {};
 
 		/** CONFIGURATION START **/
