@@ -241,19 +241,19 @@ function current_wallit_js() {
 			'0bf27215-847a-4f97-93f5-6633b76d27ff',
 			{
 				accessGranted: function(data) {
+					var maybe_anon = true;
 					_cbq = window._cbq = (window._cbq || []);
 					if (
 						data.AccessReason == 'Purchase'
 						|| data.AccessReason == 'Subscription'
 						|| data.AccessReason == 'PropertyUser'
 					) {
+						maybe_anon = false;
 						try {
 							_cbq.push(['_acct', 'lgdin']);
 						} catch (e) {
 							console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
 							console.log(e);
-						} finally {
-							console.log('attempted to pass the lgdin status to chartbeat');
 						}
 					}
 
@@ -261,13 +261,22 @@ function current_wallit_js() {
 						data.AccessReason == 'Purchase'
 						|| data.AccessReason == 'Subscription'
 					) {
+						maybe_anon = false;
 						try {
 							_cbq.push(['_acct', 'paid']);
 						} catch (e) {
 							console.log('Error when trying to pass the Wallit paid status to Chartbeat.');
 							console.log(e);
-						} finally {
-							console.log('attempted to pass the paid status to chartbeat');
+						}
+					}
+
+					if ( ! maybe_anon ) {
+						try {
+							_cbq.push(['_acct', 'anon']);
+							console.log( 'logging anonymous chartbeater' );
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit anonymous status to Chartbeat.');
+							console.log(e);
 						}
 					}
 				}
@@ -291,11 +300,14 @@ function current_chartbeat() {
 		_cbq = window._cbq = (window._cbq || []);
 		<?php
 
+		/**
+		 * not sure if they actually want to count wordpress users as logged-in
 		if ( is_user_logged_in() ) {
 			echo "_cbq.push(['_acct', 'lgdin']);";
 		} else {
 			echo "_cbq.push(['_acct', 'anon']);";
 		}
+		*/
 		?>
 		/** CONFIGURATION END **/
 
