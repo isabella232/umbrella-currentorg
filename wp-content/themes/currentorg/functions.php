@@ -247,6 +247,8 @@ function current_wallit_js() {
 					} catch (e) {
 						console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
 						console.log(e);
+					} finally {
+						console.log('attempted to pass the lgdin status to chartbeat');
 					}
 
 					if (data.AccessReason == 'Purchase' || data.AccessReason == 'Dubscription' ) {
@@ -255,6 +257,8 @@ function current_wallit_js() {
 						} catch (e) {
 							console.log('Error when trying to pass the Wallit paid status to Chartbeat.');
 							console.log(e);
+						} finally {
+							console.log('attempted to pass the paid status to chartbeat');
 						}
 					}
 				}
