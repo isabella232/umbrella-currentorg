@@ -270,7 +270,7 @@ function current_wallit_js() {
 						}
 					}
 
-					if ( ! maybe_anon ) {
+					if ( maybe_anon ) {
 						try {
 							_cbq.push(['_acct', 'anon']);
 							console.log( 'logging anonymous chartbeater' );
