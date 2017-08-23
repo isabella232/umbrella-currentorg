@@ -273,7 +273,6 @@ function current_wallit_js() {
 					if ( maybe_anon ) {
 						try {
 							_cbq.push(['_acct', 'anon']);
-							console.log( 'logging anonymous chartbeater' );
 						} catch (e) {
 							console.log('Error when trying to pass the Wallit anonymous status to Chartbeat.');
 							console.log(e);
