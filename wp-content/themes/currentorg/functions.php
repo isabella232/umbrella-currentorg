@@ -244,9 +244,9 @@ function current_wallit_js() {
 					var maybe_anon = true;
 					_cbq = window._cbq = (window._cbq || []);
 					if (
-						data.AccessReason == 'Purchase'
-						|| data.AccessReason == 'Subscription'
-						|| data.AccessReason == 'PropertyUser'
+						data.AccessReason === 'Purchase'
+						|| data.AccessReason === 'Subscription'
+						|| data.AccessReason === 'PropertyUser'
 					) {
 						maybe_anon = false;
 						try {
@@ -258,8 +258,8 @@ function current_wallit_js() {
 					}
 
 					if (
-						data.AccessReason == 'Purchase'
-						|| data.AccessReason == 'Subscription'
+						data.AccessReason === 'Purchase'
+						|| data.AccessReason === 'Subscription'
 					) {
 						maybe_anon = false;
 						try {
