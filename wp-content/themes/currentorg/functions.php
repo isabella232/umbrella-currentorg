@@ -226,6 +226,8 @@ add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area',
 /**
  * wallit paywall, with some Chartbeat logging integration
  *
+ * If user is logged in, this script does not output.
+ *
  * When a wallit user (has a wallit account) is granted access:
  * - attempt to push the 'lgdin' status to chartbeat
  * - if the reason for granting the access is because of money, try to push the 'paid' status to chartbeat
@@ -234,6 +236,8 @@ add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area',
  * @link https://wallit.github.io/api/js#resourceaccessdataquota-object
  */
 function current_wallit_js() {
+	if ( is_user_logged_in() )
+		return;
 	?>
 		<script src="https://cdn.wallit.io/paywall.min.js"></script>
 		<script type="text/javascript">
@@ -287,7 +291,15 @@ function current_wallit_js() {
 add_action( 'wp_head', 'current_wallit_js' );
 
 
+/**
+ * Chartbeat tracking script.
+ *
+ * If user is logged in, this script does not output.
+ *
+ */
 function current_chartbeat() {
+	if ( is_user_logged_in() )
+		return;
 	?>
 	<script type='text/javascript' id="current_chartbeat">
 		var _sf_async_config = _sf_async_config || {};
@@ -299,14 +311,6 @@ function current_chartbeat() {
 		_cbq = window._cbq = (window._cbq || []);
 		<?php
 
-		/**
-		 * not sure if they actually want to count wordpress users as logged-in
-		if ( is_user_logged_in() ) {
-			echo "_cbq.push(['_acct', 'lgdin']);";
-		} else {
-			echo "_cbq.push(['_acct', 'anon']);";
-		}
-		*/
 		?>
 		/** CONFIGURATION END **/
 
