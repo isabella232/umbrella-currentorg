@@ -306,8 +306,7 @@ function current_chartbeat() {
 
 		/** CONFIGURATION START **/
 		_sf_async_config.uid = 57004;
-		/** _sf_async_config.domain = 'current.org' */
-		_sf_async_config.domain = 'currentorg.staging.wpengine.com'
+		_sf_async_config.domain = 'current.org';
 		_sf_async_config.useCanonical = true;
 		_cbq = window._cbq = (window._cbq || []);
 		<?php
