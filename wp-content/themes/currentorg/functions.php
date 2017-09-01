@@ -223,28 +223,95 @@ function current_insert_home_list_widget_area($post, $query) {
 }
 add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area', 10, 2);
 
+/**
+ * wallit paywall, with some Chartbeat logging integration
+ *
+ * If user is logged in, this script does not output.
+ *
+ * When a wallit user (has a wallit account) is granted access:
+ * - attempt to push the 'lgdin' status to chartbeat
+ * - if the reason for granting the access is because of money, try to push the 'paid' status to chartbeat
+ *
+ * @link https://wallit.github.io/api/js#resourceaccessdata-object#i-need-to-replace-my-content-on-access-granted-with-the-full-content
+ * @link https://wallit.github.io/api/js#resourceaccessdataquota-object
+ */
 function current_wallit_js() {
-	echo '<script src="https://cdn.wallit.io/paywall.min.js"></script>
+	if ( is_user_logged_in() )
+		return;
+	?>
+		<script src="https://cdn.wallit.io/paywall.min.js"></script>
 		<script type="text/javascript">
-		wallit.paywall.init(\'0bf27215-847a-4f97-93f5-6633b76d27ff\');
-		</script>';
+		wallit.paywall.init(
+			'0bf27215-847a-4f97-93f5-6633b76d27ff',
+			{
+				accessGranted: function(data) {
+					var maybe_anon = true;
+					_cbq = window._cbq = (window._cbq || []);
+					if (
+						data.AccessReason === 'Purchase'
+						|| data.AccessReason === 'Subscription'
+						|| data.AccessReason === 'PropertyUser'
+					) {
+						maybe_anon = false;
+						try {
+							_cbq.push(['_acct', 'lgdin']);
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit logged-in status to Chartbeat.');
+							console.log(e);
+						}
+					}
+
+					if (
+						data.AccessReason === 'Purchase'
+						|| data.AccessReason === 'Subscription'
+					) {
+						maybe_anon = false;
+						try {
+							_cbq.push(['_acct', 'paid']);
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit paid status to Chartbeat.');
+							console.log(e);
+						}
+					}
+
+					if ( maybe_anon ) {
+						try {
+							_cbq.push(['_acct', 'anon']);
+						} catch (e) {
+							console.log('Error when trying to pass the Wallit anonymous status to Chartbeat.');
+							console.log(e);
+						}
+					}
+				}
+			}
+		);
+		</script>
+	<?php
 }
 add_action( 'wp_head', 'current_wallit_js' );
 
 
+/**
+ * Chartbeat tracking script.
+ *
+ * If user is logged in, this script does not output.
+ *
+ */
 function current_chartbeat() {
+	if ( is_user_logged_in() )
+		return;
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' id="current_chartbeat">
 		var _sf_async_config = _sf_async_config || {};
 
 		/** CONFIGURATION START **/
 		_sf_async_config.uid = 57004;
-		_sf_async_config.domain = 'current.org'
+		_sf_async_config.domain = 'current.org';
 		_sf_async_config.useCanonical = true;
 		_cbq = window._cbq = (window._cbq || []);
-		_cbq.push(['_acct', 'paid']);
-		_cbq.push(['_acct', 'lgdin']);
-		_cbq.push(['_acct', 'anon']);
+		<?php
+
+		?>
 		/** CONFIGURATION END **/
 
 		(function() {
