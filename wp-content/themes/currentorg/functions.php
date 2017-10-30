@@ -4,16 +4,31 @@ define('FEATURED_MEDIA', true);
 
 
 /**
- * Register a custom homepage layout
+ * Include theme files and register a homepage layout
  *
+ * Based off of how Largo loads files: https://github.com/INN/Largo/blob/master/functions.php#L358
+ *
+ * 1. hook function Largo() on after_setup_theme
+ * 2. function Largo() runs Largo::get_instance()
+ * 3. Largo::get_instance() runs Largo::require_files()
+ *
+ * This function is intended to be easily copied between child themes, and for that reason is not prefixed with this child theme's normal prefix.
+ *
+ * @link https://github.com/INN/Largo/blob/master/functions.php#L145
  * @see "homepages/layouts/current.php"
- */
-function current_register_custom_homepage_layout() {
+nc */
+function largo_child_require_files() {
 	// load the layout
-	include_once __DIR__ . '/homepages/layouts/current.php';
-	register_homepage_layout('CurrentHomepage');
+	$includes = array(
+		'/homepages/layouts/current.php',
+		'/inc/custom-taxonomies.php'
+	);
+	foreach ( $includes as $include ) {
+		require_once( get_stylesheet_directory() . $include );
+	}
+	register_homepage_layout( 'CurrentHomepage' );
 }
-add_action('init', 'current_register_custom_homepage_layout', 0);
+add_action( 'init', 'largo_child_require_files', 0 );
 
 
 /**
