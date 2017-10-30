@@ -47,7 +47,7 @@ function current_register_taxonomies() {
 				'search_items' => __( 'Search Cities', 'current' ),
 				'popular_items' => __( 'Popular Cities', 'current' ),
 				'not_found' => __( 'City not located.', 'current' ),
-				'add_new_item' => __( 'Add a new City', 'current' ),
+				'add_new_item' => __( 'Add new city', 'current' ),
 				'new_item_name' => __( 'New City Name', 'current' ),
 			)
 		)
@@ -80,7 +80,7 @@ function current_register_taxonomies() {
 				'search_items' => __( 'Search States', 'current' ),
 				'popular_items' => __( 'Popular States', 'current' ),
 				'not_found' => __( 'States not located.', 'current' ),
-				'add_new_item' => __( 'Add a new state', 'current' ),
+				'add_new_item' => __( 'Add new state', 'current' ),
 				'new_item_name' => __( 'New State Name', 'current' ),
 			)
 		)
@@ -112,7 +112,7 @@ function current_register_taxonomies() {
 				'search_items' => __( 'Search Mentioned Sources', 'current' ),
 				'popular_items' => __( 'Popular Mentioned Sources', 'current' ),
 				'not_found' => __( 'Mentioned Source not found.', 'current' ),
-				'add_new_item' => __( 'Add a new mentioned source', 'current' ),
+				'add_new_item' => __( 'Add new mentioned source', 'current' ),
 				'new_item_name' => __( 'New Source Name', 'current' ),
 			)
 		)
@@ -144,7 +144,7 @@ function current_register_taxonomies() {
 				'search_items' => __( 'Search Stations', 'current' ),
 				'popular_items' => __( 'Popular Stations', 'current' ),
 				'not_found' => __( 'Station not located.', 'current' ),
-				'add_new_item' => __( 'Add a new Station', 'current' ),
+				'add_new_item' => __( 'Add new station', 'current' ),
 				'new_item_name' => __( 'New Station Name', 'current' ),
 			)
 		)
@@ -176,7 +176,7 @@ function current_register_taxonomies() {
 				'search_items' => __( 'Search Sources', 'current' ),
 				'popular_items' => __( 'Popular Sources', 'current' ),
 				'not_found' => __( 'Source not found.', 'current' ),
-				'add_new_item' => __( 'Add a new Source', 'current' ),
+				'add_new_item' => __( 'Add new source', 'current' ),
 				'new_item_name' => __( 'New Source Type', 'current' ),
 			)
 		)
