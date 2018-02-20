@@ -74,6 +74,14 @@ function current_register_sidebars() {
 	);
 
 	$sidebars[] = array(
+		'name' => __('Homepage after second post', 'current'),
+		'id' => 'homepage-after-second-post',
+		'description' => __('A widget area that appears after the second post on the homepage.', 'current'),
+		'before_widget' => '<div class="hp-after-three-widget">' . "\n",
+		'after_widget' => '</div>' . "\n"
+	);
+
+	$sidebars[] = array(
 		'name' => __('Homepage next to second post', 'current'),
 		'id' => 'homepage-next-second-post',
 		'description' => __('A widget area that appears next to the second post on the homepage.', 'current'),
@@ -232,10 +240,22 @@ add_filter('widget_title', 'current_widget_title', 10, 1);
  *
  * @since 1.0
  */
-function current_insert_home_list_widget_area($post) {
-	dynamic_sidebar('homepage-after-third-post');
+function current_insert_home_list_widget_area($post, $query) {
+	if ($query->current_post == 2)
+		dynamic_sidebar('homepage-after-third-post');
 }
-add_action('largo_before_home_list_post', 'current_insert_home_list_widget_area', 10);
+add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area', 10, 2);
+
+/**
+ * Insert a widget after the third post on the homepage.
+ *
+ * @since 1.0
+ */
+function current_insert_home_list_widget_area_earlier($post, $query) {
+	if ($query->current_post == 0)
+		dynamic_sidebar('homepage-after-second-post');
+}
+add_action('largo_before_home_list_post', 'current_insert_home_list_widget_area_earlier', 10, 2);
 
 /**
  * wallit paywall, with some Chartbeat logging integration
