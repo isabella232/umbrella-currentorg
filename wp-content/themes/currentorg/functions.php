@@ -232,11 +232,10 @@ add_filter('widget_title', 'current_widget_title', 10, 1);
  *
  * @since 1.0
  */
-function current_insert_home_list_widget_area($post, $query) {
-	if ($query->current_post == 2)
-		dynamic_sidebar('homepage-after-third-post');
+function current_insert_home_list_widget_area($post) {
+	dynamic_sidebar('homepage-after-third-post');
 }
-add_action('largo_after_home_list_post', 'current_insert_home_list_widget_area', 10, 2);
+add_action('largo_before_home_list_post', 'current_insert_home_list_widget_area', 10);
 
 /**
  * wallit paywall, with some Chartbeat logging integration
