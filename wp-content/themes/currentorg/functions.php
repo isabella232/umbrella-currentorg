@@ -66,11 +66,13 @@ function current_register_sidebars() {
 	$sidebars = array();
 
 	$sidebars[] = array(
-		'name' => __('Homepage after third post', 'current'),
-		'id' => 'homepage-after-third-post',
-		'description' => __('A widget area that appears after the third post on the homepage.', 'current'),
-		'before_widget' => '<div class="hp-after-three-widget">' . "\n",
-		'after_widget' => '</div>' . "\n"
+		'name' => __('Homepage next to second post', 'current'),
+		'id' => 'homepage-next-second-post',
+		'description' => __('A widget area that appears next to the second post on the homepage.', 'current'),
+		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	);
 
 	$sidebars[] = array(
@@ -82,13 +84,11 @@ function current_register_sidebars() {
 	);
 
 	$sidebars[] = array(
-		'name' => __('Homepage next to second post', 'current'),
-		'id' => 'homepage-next-second-post',
-		'description' => __('A widget area that appears next to the second post on the homepage.', 'current'),
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
+		'name' => __('Homepage after third post', 'current'),
+		'id' => 'homepage-after-third-post',
+		'description' => __('A widget area that appears after the third post on the homepage.', 'current'),
+		'before_widget' => '<div class="hp-after-three-widget">' . "\n",
+		'after_widget' => '</div>' . "\n"
 	);
 
 	$sidebars[] = array(
