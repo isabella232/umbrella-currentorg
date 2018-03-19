@@ -52,7 +52,7 @@ function current_register_taxonomies() {
 			)
 		)
 	);
-	
+
 	register_taxonomy(
 		'current-state',
 		'post',
@@ -129,23 +129,23 @@ function current_register_taxonomies() {
 			'show_in_rest' => true,
 			'show_in_quick_edit' => true,
 			'show_admin_column' => false,
-			'description' => 'Member stations mentioned in posts.',
+			'description' => 'Member stations/orgs mentioned in posts.',
 			'hierarchical' => true,
 			'labels' => array(
-				'name' => __( 'Mentioned Station', 'current' ),
-				'singular_name' => __( 'Station', 'current' ),
-				'menu_name' => __( 'Stations', 'current' ),
-				'all_items' => __( 'All Stations', 'current' ),
-				'edit_item' => __( 'Edit Station', 'current' ),
-				'view_item' => __( 'View Station', 'current' ),
-				'update_item' => __( 'Update Station', 'current' ),
-				'parent_item' => __( 'Parent Station', 'current' ),
-				'parent_item_colon' => __( 'Parent Station:', 'current' ),
-				'search_items' => __( 'Search Stations', 'current' ),
-				'popular_items' => __( 'Popular Stations', 'current' ),
-				'not_found' => __( 'Station not located.', 'current' ),
-				'add_new_item' => __( 'Add new station', 'current' ),
-				'new_item_name' => __( 'New Station Name', 'current' ),
+				'name' => __( 'Mentioned Stations/Orgs', 'current' ),
+				'singular_name' => __( 'Station/Org', 'current' ),
+				'menu_name' => __( 'Stations/Orgs', 'current' ),
+				'all_items' => __( 'All Stations/Orgs', 'current' ),
+				'edit_item' => __( 'Edit Station/Org', 'current' ),
+				'view_item' => __( 'View Station/Org', 'current' ),
+				'update_item' => __( 'Update Station/Org', 'current' ),
+				'parent_item' => __( 'Parent Station/Org', 'current' ),
+				'parent_item_colon' => __( 'Parent Station/Org:', 'current' ),
+				'search_items' => __( 'Search Stations/Orgs', 'current' ),
+				'popular_items' => __( 'Popular Stations/Orgs', 'current' ),
+				'not_found' => __( 'Station/Org not located.', 'current' ),
+				'add_new_item' => __( 'Add new station/org', 'current' ),
+				'new_item_name' => __( 'New Station/Org Name', 'current' ),
 			)
 		)
 	);
