@@ -335,7 +335,7 @@ function current_chartbeat() {
 add_action( 'wp_footer', 'current_chartbeat' );
 
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $the_post = null, $sentence_count = 5, $use_more = null, $more_link = null, $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post = null, $sentence_count = 5, $use_more = null, $more_link = null, $echo = true, $strip_tags = false, $strip_shortcodes = true ) {
 		if (!empty($use_more))
 			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated. Please use null as the argument.');
 		if (!empty($more_link))
