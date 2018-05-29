@@ -1,7 +1,7 @@
 <header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
 	<?php largo_header(); ?>
 
-	<?php if (is_home()) { ?>
+	<?php if (is_home() or is_singular()) { ?>
 		<div class="newsletter-signup">
 			<a href="/subscribe/"><img src="/wp-content/themes/currentorg/img/subscribe.png"></a>
 		</div>

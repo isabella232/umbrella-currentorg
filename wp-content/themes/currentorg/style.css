@@ -686,10 +686,10 @@ article .entry-content p {
 
 /* 3.9 - Newsletter sign up link */
 
-.home #site-header {
+#site-header {
   position: relative;
 }
-.home #newsletter-signup-link {
+#newsletter-signup-link {
   position: absolute;
   right: 0;
   bottom: 12px;
