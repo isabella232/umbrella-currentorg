@@ -1,11 +1,11 @@
 <header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
 	<?php largo_header(); ?>
 
-	<?php if (is_home() or is_singular()) { ?>
+	<?php ?>
 		<div class="newsletter-signup">
 			<a href="/subscribe/"><img src="/wp-content/themes/currentorg/img/subscribe.png"></a>
 		</div>
-	<?php } ?>
+	<?php ?>
 
 </header>
 <header class="print-header">
