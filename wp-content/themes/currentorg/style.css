@@ -357,7 +357,7 @@ header .newsletter-signup .submit {
 
 /* 2.2 Post styles */
 
-.entry-content {
+.entry-content * {
   font-size: 22px;
 }
 .entry-content p {
