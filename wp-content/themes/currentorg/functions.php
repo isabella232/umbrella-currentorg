@@ -16,7 +16,7 @@ define('FEATURED_MEDIA', true);
  *
  * @link https://github.com/INN/Largo/blob/master/functions.php#L145
  * @see "homepages/layouts/current.php"
-nc */
+ */
 function largo_child_require_files() {
 	// load the layout
 	$includes = array(

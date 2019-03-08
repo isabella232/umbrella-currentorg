@@ -32,10 +32,11 @@ def production():
     """
     env.settings    = 'production'
     env.hosts       = [ os.environ[ 'CURRENTORG_PRODUCTION_SFTP_HOST' ], ]   # ssh host for production.
-    env.user        = os.environ[ 'CURRENTORG_PRODUCTION_SFTP_USER' ]        # ssh user for production.
-    env.password    = os.environ[ 'CURRENTORG_PRODUCTION_SFTP_PASSWORD' ]    # ssh password for production.
+    env.user        = os.environ[ 'FLYWHEEL_SFTP_USER' ]        # ssh user for production.
+    env.password    = os.environ[ 'FLYWHEEL_SFTP_PASS' ]    # ssh password for production.
+    env.path        = os.environ[ 'CURRENTORG_PRODUCTION_SFTP_PATH' ]        # sftp path
     env.domain      = 'currentorg.wpengine.com'
-    env.port        = '2222'
+    env.port        = '22'
 
 
 @task
@@ -45,10 +46,11 @@ def staging():
     """
     env.settings    = 'staging'
     env.hosts       = [ os.environ[ 'CURRENTORG_STAGING_SFTP_HOST' ], ]   # ssh host for production.
-    env.user        = os.environ[ 'CURRENTORG_STAGING_SFTP_USER' ]        # ssh user for production.
-    env.password    = os.environ[ 'CURRENTORG_STAGING_SFTP_PASSWORD' ]    # ssh password for production.
+    env.user        = os.environ[ 'FLYWHEEL_SFTP_USER' ]        # ssh user for production.
+    env.password    = os.environ[ 'FLYWHEEL_SFTP_PASS' ]    # ssh password for production.
+    env.path        = os.environ[ 'CURRENTORG_STAGING_SFTP_PATH' ]        # sftp path
     env.domain      = 'currentorg.staging.wpengine.com'
-    env.port        = '2222'
+    env.port        = '22'
 
 try:
     from local_fabfile import  *
