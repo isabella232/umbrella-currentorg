@@ -31,6 +31,15 @@ function largo_child_require_files() {
 add_action( 'init', 'largo_child_require_files', 0 );
 
 
+
+/* old Client Hosting Manager fix */
+// https://github.com/INN/client-hosting-manager
+define( 'client_hosting_manager_org_name', 'Current Public Media' );
+define( 'client_hosting_manager_support_email', 'largo@inn.org' );
+define( 'client_hosting_manager_admin_email', 'mike@current.org' );
+define( 'client_hosting_manager_domains', 'inn.org,getflywheel.com,current.org,investigativenewsnetwork.org' );
+
+
 /**
  * Add the current.js file.
  *
