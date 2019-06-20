@@ -525,25 +525,25 @@ add_filter( 'get_terms_args', 'wpbdp_tag_cloud_show_all_tags' );
 function wpbdp_tag_cloud_custom_css_js(){
 
     echo '<script>
-        jQuery(window).load(function() {
-            jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
-            jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
+		jQuery(window).load(function() {
+			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
+			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
 		});
-		
+
 		jQuery(document).ready(function(){
 			jQuery("#wpbdp_categorychecklist li").on("click", function(){
 				var wpbdp_category_id = jQuery(this).find("input").val();
-				
+
 				jQuery(".tag-cloud-link").find(`[data-wpdbp_parent_category="1"]`).toggleClass("hidden");
 			});
 		});
-	</script>
-	<style>
-        body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
-        body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
-		body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
-		body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
-    </style>';
+		</script>
+		<style>
+			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
+			body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
+		</style>';
 
 }
 add_action('admin_head', 'wpbdp_tag_cloud_custom_css_js');
