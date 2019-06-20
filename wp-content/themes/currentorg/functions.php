@@ -510,6 +510,18 @@ function wpbdp_tag_cloud_show_all_tags( $args ) {
 			unset( $args['number'] );
 			$args['hide_empty'] = 0;
 
+			echo '<script>
+				jQuery(document).ready(function(){
+
+					jQuery("#wpbdp_categorychecklist li input").each(function(){
+						var wpbdp_category_id = jQuery(this).val();
+						if(!jQuery(this).is(":checked")){
+							jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+						}
+					});
+				});
+			</script>';
+
 		}
 
 	}
@@ -526,16 +538,19 @@ function wpbdp_tag_cloud_custom_css_js(){
 
     echo '<script>
 		jQuery(window).load(function() {
+
 			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
 			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
+
 		});
 
 		jQuery(document).ready(function(){
-			jQuery("#wpbdp_categorychecklist li").on("click", function(){
-				var wpbdp_category_id = jQuery(this).find("input").val();
 
-				jQuery(".tag-cloud-link").find(`[data-wpdbp_parent_category="1"]`).toggleClass("hidden");
+			jQuery("#wpbdp_categorychecklist input").on("click", function(){
+				var wpbdp_category_id = jQuery(this).val();
+				jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
 			});
+
 		});
 		</script>
 		<style>
@@ -546,4 +561,4 @@ function wpbdp_tag_cloud_custom_css_js(){
 		</style>';
 
 }
-add_action('admin_head', 'wpbdp_tag_cloud_custom_css_js');
+add_action( 'admin_head', 'wpbdp_tag_cloud_custom_css_js' );
