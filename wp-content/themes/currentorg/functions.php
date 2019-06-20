@@ -469,3 +469,81 @@ function wpbdp_tag_form_fields_save( $term_id, $tt_id ) {
 }
 add_action( 'created_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
+
+/**
+ * Modify the wpdb_tag tag cloud to include wpbdp_category--id class
+ */
+function wpbdp_modify_tag_cloud( $tag_data ) {
+	
+    return array_map ( 
+
+        function ( $tag ){	
+
+			$term = get_term( $tag['id'] );
+
+			if( $term->taxonomy == 'wpbdp_tag' ){
+
+				$wpbdp_tag_parent_category = get_term_meta( $tag['id'] );
+				$wpbdp_tag_parent_category = $wpbdp_tag_parent_category['wpbdp_tag_parent_category'][0];
+				$tag['class'] .= ' ' . $wpbdp_tag_parent_category;
+
+			}
+
+			return $tag;
+			
+		}, (array) $tag_data 
+		
+    );
+
+}
+add_filter( 'wp_generate_tag_cloud_data', 'wpbdp_modify_tag_cloud' );
+
+/**
+ * Return all tags in a list in the wpbdp_tag tag cloud
+ */
+function wpbdp_tag_cloud_show_all_tags( $args ) {
+	
+	if($args['taxonomy'][0] == 'wpbdp_tag'){
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] === 'get-tagcloud') {
+
+			unset( $args['number'] );
+			$args['hide_empty'] = 0;
+
+		}
+
+	}
+
+	return $args;
+	
+}
+add_filter( 'get_terms_args', 'wpbdp_tag_cloud_show_all_tags' );
+
+/**
+ * Show all existing tags inside of the wpbdp_tag tag cloud
+ */
+function wpbdp_tag_cloud_custom_css_js(){
+
+    echo '<script>
+        jQuery(window).load(function() {
+            jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
+            jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
+		});
+		
+		jQuery(document).ready(function(){
+			jQuery("#wpbdp_categorychecklist li").on("click", function(){
+				var wpbdp_category_id = jQuery(this).find("input").val();
+				
+				jQuery(".tag-cloud-link").find(`[data-wpdbp_parent_category="1"]`).toggleClass("hidden");
+			});
+		});
+	</script>
+	<style>
+        body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
+        body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+		body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+		body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
+    </style>';
+
+}
+add_action('admin_head', 'wpbdp_tag_cloud_custom_css_js');
