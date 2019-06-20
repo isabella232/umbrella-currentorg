@@ -408,3 +408,63 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		return $output;
 	}
 }
+
+/**
+ * Add custom form fields to wpbdp_tag taxonomy add/edit pages
+ */
+function wpbdp_tag_edit_form_fields( $tag ){
+
+	if( $tag ){
+
+		$wpbdp_tag_meta = get_term_meta($tag->term_id);
+		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
+
+	} else {
+
+		$wpbdp_tag_parent_category = '';
+
+	}
+
+	printf( 
+		'<tr class="form-field">
+			<th scope="row" valign="top">
+				<label for="wpbdp_tag_parent_category">%1$s</label>
+			</th>
+			<td>
+				%2$s
+				<p class="description">%3$s</p>
+			</td>
+		</tr>',
+		__('Parent Category'),
+		wp_dropdown_categories(
+			array(
+				'taxonomy'         => 'wpbdp_category',
+				'id'               => 'wpbdp_tag_parent_category',
+				'name'             => 'wpbdp_tag_parent_category',
+				'show_option_none' => __( 'Select category' ),
+				'depth'            => 1,
+				'echo'			   => false,
+				'selected'		   => $wpbdp_tag_parent_category
+			)
+		),
+		__('Select the parent category for this tag.')
+	);
+
+}
+add_action('wpbdp_tag_add_form_fields', 'wpbdp_tag_edit_form_fields');
+add_action('wpbdp_tag_edit_form_fields', 'wpbdp_tag_edit_form_fields');
+
+/**
+ * Save custom form fields from wpbdp_tag taxonomy add/edit pages
+ */
+function wpbdp_tag_form_fields_save( $term_id, $tt_id ) {
+
+    if ( !empty( $_POST['wpbdp_tag_parent_category'] ) ) {
+
+        update_term_meta( $term_id, 'wpbdp_tag_parent_category', $_POST['wpbdp_tag_parent_category'] );
+
+    }
+
+}
+add_action( 'created_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
+add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
