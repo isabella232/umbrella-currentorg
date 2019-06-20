@@ -435,7 +435,7 @@ function wpbdp_tag_edit_form_fields( $tag ){
 				<p class="description">%3$s</p>
 			</td>
 		</tr>',
-		__('Parent Category'),
+		__( 'Parent Category' ),
 		wp_dropdown_categories(
 			array(
 				'taxonomy'         => 'wpbdp_category',
@@ -447,7 +447,7 @@ function wpbdp_tag_edit_form_fields( $tag ){
 				'selected'		   => $wpbdp_tag_parent_category
 			)
 		),
-		__('Select the parent category for this tag.')
+		__( 'Select the parent category for this tag.' )
 	);
 
 }
