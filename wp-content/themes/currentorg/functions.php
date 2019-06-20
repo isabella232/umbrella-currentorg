@@ -418,6 +418,7 @@ function wpbdp_tag_edit_form_fields( $tag ){
 
 		$wpbdp_tag_meta = get_term_meta($tag->term_id);
 		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
+		$wpbdp_tag_parent_category = str_replace('wpbdp_category--', '', $wpbdp_tag_parent_category);
 
 	} else {
 
@@ -461,7 +462,7 @@ function wpbdp_tag_form_fields_save( $term_id, $tt_id ) {
 
     if ( !empty( $_POST['wpbdp_tag_parent_category'] ) ) {
 
-        update_term_meta( $term_id, 'wpbdp_tag_parent_category', $_POST['wpbdp_tag_parent_category'] );
+        update_term_meta( $term_id, 'wpbdp_tag_parent_category', 'wpbdp_category--'.$_POST['wpbdp_tag_parent_category'] );
 
     }
 
