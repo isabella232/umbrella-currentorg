@@ -546,9 +546,24 @@ function wpbdp_tag_cloud_custom_css_js(){
 
 		jQuery(document).ready(function(){
 
+			// if a category is selected/deselected, do things
 			jQuery("#wpbdp_categorychecklist input").on("click", function(){
+
+				// get id of clicked category
 				var wpbdp_category_id = jQuery(this).val();
+
+				// toggle all child tags of this category
 				jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+
+				// if this categoy is unchecked, we need to remove all of its child tags that were selected
+				if(!jQuery(this).is(":checked")){
+					var wpbdp_parent_category = jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).text();
+					jQuery(".tagchecklist li").each(function(){
+						if(jQuery(this).find(".screen-reader-text").text() == "Remove term: " + wpbdp_parent_category){
+							jQuery(this).find("button").click();
+						}
+					});					
+				}
 			});
 
 		});
