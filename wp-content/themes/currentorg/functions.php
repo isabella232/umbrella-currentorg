@@ -536,44 +536,50 @@ add_filter( 'get_terms_args', 'wpbdp_tag_cloud_show_all_tags' );
  */
 function wpbdp_tag_cloud_custom_css_js(){
 
-    echo '<script>
-		jQuery(window).load(function() {
+	global $current_screen;
+	
+	if( $current_screen->post_type == 'wpbdp_listing' ){
 
-			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
-			jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
+		echo '<script>
+			jQuery(window).load(function() {
 
-		});
+				jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
+				jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").hide();
 
-		jQuery(document).ready(function(){
-
-			// if a category is selected/deselected, do things
-			jQuery("#wpbdp_categorychecklist input").on("click", function(){
-
-				// get id of clicked category
-				var wpbdp_category_id = jQuery(this).val();
-
-				// toggle all child tags of this category
-				jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
-
-				// if this categoy is unchecked, we need to remove all of its child tags that were selected
-				if(!jQuery(this).is(":checked")){
-					var wpbdp_parent_category = jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).text();
-					jQuery(".tagchecklist li").each(function(){
-						if(jQuery(this).find(".screen-reader-text").text() == "Remove term: " + wpbdp_parent_category){
-							jQuery(this).find("button").click();
-						}
-					});					
-				}
 			});
 
-		});
-		</script>
-		<style>
-			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
-			body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
-			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
-			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
-		</style>';
+			jQuery(document).ready(function(){
+
+				// if a category is selected/deselected, do things
+				jQuery("#wpbdp_categorychecklist input").on("click", function(){
+
+					// get id of clicked category
+					var wpbdp_category_id = jQuery(this).val();
+
+					// toggle all child tags of this category
+					jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+
+					// if this categoy is unchecked, we need to remove all of its child tags that were selected
+					if(!jQuery(this).is(":checked")){
+						var wpbdp_parent_category = jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).text();
+						jQuery(".tagchecklist li").each(function(){
+							if(jQuery(this).find(".screen-reader-text").text() == "Remove term: " + wpbdp_parent_category){
+								jQuery(this).find("button").click();
+							}
+						});					
+					}
+				});
+
+			});
+			</script>
+			<style>
+				body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
+				body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
+			</style>';
+	
+	}
 
 }
 add_action( 'admin_head', 'wpbdp_tag_cloud_custom_css_js' );
