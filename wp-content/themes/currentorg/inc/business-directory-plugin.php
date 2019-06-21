@@ -7,12 +7,14 @@
 
 /**
  * Add custom form fields to wpbdp_tag taxonomy add/edit pages
+ *
+ * @param Mixed $tag The term being edited
  */
-function wpbdp_tag_edit_form_fields( $tag ){
+function wpbdp_tag_edit_form_fields( $tag ) {
 
-	if( $tag ){
+	if ( $tag ) {
 
-		$wpbdp_tag_meta = get_term_meta($tag->term_id);
+		$wpbdp_tag_meta = get_term_meta( $tag->term_id );
 		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
 		$wpbdp_tag_parent_category = str_replace('wpbdp_category--', '', $wpbdp_tag_parent_category);
 
@@ -22,7 +24,7 @@ function wpbdp_tag_edit_form_fields( $tag ){
 
 	}
 
-	printf( 
+	printf(
 		'<tr class="form-field">
 			<th scope="row" valign="top">
 				<label for="wpbdp_tag_parent_category">%1$s</label>
@@ -32,7 +34,7 @@ function wpbdp_tag_edit_form_fields( $tag ){
 				<p class="description">%3$s</p>
 			</td>
 		</tr>',
-		__( 'Parent Category' ),
+		esc_html__( 'Parent Category', 'currentorg' ),
 		wp_dropdown_categories(
 			array(
 				'taxonomy'         => 'wpbdp_category',
@@ -40,44 +42,45 @@ function wpbdp_tag_edit_form_fields( $tag ){
 				'name'             => 'wpbdp_tag_parent_category',
 				'show_option_none' => __( 'Select category' ),
 				'depth'            => 1,
-				'echo'			   => false,
-				'selected'		   => $wpbdp_tag_parent_category
+				'echo'             => false,
+				'selected'         => $wpbdp_tag_parent_category,
 			)
 		),
-		__( 'Select the parent category for this tag.' )
+		__( 'Select the parent category for this tag.', 'currentorg' )
 	);
 
 }
-add_action('wpbdp_tag_add_form_fields', 'wpbdp_tag_edit_form_fields');
+add_action( 'wpbdp_tag_add_form_fields', 'wpbdp_tag_edit_form_fields' );
 add_action('wpbdp_tag_edit_form_fields', 'wpbdp_tag_edit_form_fields');
 
 /**
  * Save custom form fields from wpbdp_tag taxonomy add/edit pages
+ *
+ * @param int $term_id
+ * @param int $tt_id
  */
 function wpbdp_tag_form_fields_save( $term_id, $tt_id ) {
+	if ( ! empty( $_POST['wpbdp_tag_parent_category'] ) ) {
 
-    if ( !empty( $_POST['wpbdp_tag_parent_category'] ) ) {
+		update_term_meta( $term_id, 'wpbdp_tag_parent_category', 'wpbdp_category--' . $_POST['wpbdp_tag_parent_category'] );
 
-        update_term_meta( $term_id, 'wpbdp_tag_parent_category', 'wpbdp_category--'.$_POST['wpbdp_tag_parent_category'] );
-
-    }
-
+	}
 }
 add_action( 'created_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 
 /**
  * Modify the wpdb_tag tag cloud to include wpbdp_category--id class
+ *
+ * @param Array $tag_data
+ * @return Array the new tag data
  */
 function wpbdp_modify_tag_cloud( $tag_data ) {
-	
-    return array_map ( 
-
-        function ( $tag ){	
-
+	return array_map(
+		function ( $tag ) {
 			$term = get_term( $tag['id'] );
 
-			if( $term->taxonomy == 'wpbdp_tag' ){
+			if ( 'wpbdp_tag' === $term->taxonomy ) {
 
 				$wpbdp_tag_parent_category = get_term_meta( $tag['id'] );
 				$wpbdp_tag_parent_category = $wpbdp_tag_parent_category['wpbdp_tag_parent_category'][0];
@@ -86,20 +89,22 @@ function wpbdp_modify_tag_cloud( $tag_data ) {
 			}
 
 			return $tag;
-			
-		}, (array) $tag_data 
-		
-    );
-
+		},
+		(array) $tag_data
+	);
 }
 add_filter( 'wp_generate_tag_cloud_data', 'wpbdp_modify_tag_cloud' );
 
 /**
- * Return all tags in a list in the wpbdp_tag tag cloud
+ * Return all tags in a list in the wpbdp_tag tag cloud.
+ *
+ * Runs during an AJAX call to get the tags in the list.
+ *
+ * @param Array $args
  */
 function wpbdp_tag_cloud_show_all_tags( $args ) {
-	
-	if($args['taxonomy'][0] == 'wpbdp_tag'){
+
+	if( $args['taxonomy'][0] == 'wpbdp_tag' ) {
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] === 'get-tagcloud') {
 
@@ -123,7 +128,6 @@ function wpbdp_tag_cloud_show_all_tags( $args ) {
 	}
 
 	return $args;
-	
 }
 add_filter( 'get_terms_args', 'wpbdp_tag_cloud_show_all_tags' );
 
@@ -133,10 +137,10 @@ add_filter( 'get_terms_args', 'wpbdp_tag_cloud_show_all_tags' );
 function wpbdp_tag_cloud_custom_css_js(){
 
 	global $current_screen;
-	
-	if( $current_screen->post_type == 'wpbdp_listing' ){
 
-		echo '<script>
+	if( 'wpbdp_listing' === $current_screen->post_type ) {
+		?>
+		<script type="text/javascript">
 			jQuery(window).load(function() {
 
 				jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
@@ -166,7 +170,7 @@ function wpbdp_tag_cloud_custom_css_js(){
 							if(jQuery(this).find(".screen-reader-text").text().replace("Remove term: ", "") == wpbdp_parent_category_child_tag){
 								jQuery(this).find("button").click();
 							}
-						});					
+						});
 					}
 
 				});
@@ -174,12 +178,14 @@ function wpbdp_tag_cloud_custom_css_js(){
 			});
 			</script>
 			<style>
+				/* hide the show/hide button */
 				body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
-				body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+				body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;}
+				/* make the tag cloud not a tag cloud */
 				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
 				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
-			</style>';
-	
+			</style>
+		<?php
 	}
 
 }
