@@ -561,13 +561,18 @@ function wpbdp_tag_cloud_custom_css_js(){
 
 					// if this categoy is unchecked, we need to remove all of its child tags that were selected
 					if(!jQuery(this).is(":checked")){
-						var wpbdp_parent_category = jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).text();
+
+						// grab text name of child tag
+						var wpbdp_parent_category_child_tag = jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).text();
+
+						// loop through all selected tags and remove if it matches the name of one with an unchecked parent category
 						jQuery(".tagchecklist li").each(function(){
-							if(jQuery(this).find(".screen-reader-text").text() == "Remove term: " + wpbdp_parent_category){
+							if(jQuery(this).find(".screen-reader-text").text().replace("Remove term: ", "") == wpbdp_parent_category_child_tag){
 								jQuery(this).find("button").click();
 							}
 						});					
 					}
+
 				});
 
 			});
