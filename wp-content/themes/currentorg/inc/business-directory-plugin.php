@@ -136,7 +136,8 @@ function wpbdp_tag_cloud_custom_css_js(){
 	
 	if( $current_screen->post_type == 'wpbdp_listing' ){
 
-		echo '<script>
+		?>
+		<script>
 			jQuery(window).load(function() {
 
 				jQuery("body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag").trigger("click");
@@ -172,14 +173,14 @@ function wpbdp_tag_cloud_custom_css_js(){
 				});
 
 			});
-			</script>
-			<style>
-				body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
-				body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
-				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
-				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
-			</style>';
-	
+		</script>
+		<style>
+			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
+			body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
+		</style>';
+		<?php
 	}
 
 }
