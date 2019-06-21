@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     path = path.replace(/^[\s\S]+\/wp-content/, "\/wp-content");
 
     var CSS_LESS_FILES = {
-        'css/wpbdp.css.css': 'less/wpbdp.css.less'
+        'css/wpbdp.css': 'less/wpbdp.less'
     };
 
     grunt.initConfig({
