@@ -176,15 +176,15 @@ function wpbdp_tag_cloud_custom_css_js(){
 				});
 
 			});
-			</script>
-			<style>
-				/* hide the show/hide button */
-				body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
-				body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;}
-				/* make the tag cloud not a tag cloud */
-				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
-				body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
-			</style>
+		</script>
+		<style>
+			/* hide the show/hide button */
+			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
+			body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
+			/* make the tag cloud not a tag cloud */
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
+		</style>
 		<?php
 	}
 
