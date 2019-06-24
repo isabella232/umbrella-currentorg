@@ -49,9 +49,11 @@ function wpbdp_tag_edit_form_fields( $tag ) {
 		__( 'Select the parent category for this tag.', 'currentorg' )
 	);
 
+	wp_nonce_field( 'wpbdp_tag_parent_category_update', 'wpbdp_tag_parent_category_nonce' );
+
 }
 add_action( 'wpbdp_tag_add_form_fields', 'wpbdp_tag_edit_form_fields' );
-add_action('wpbdp_tag_edit_form_fields', 'wpbdp_tag_edit_form_fields');
+add_action( 'wpbdp_tag_edit_form_fields', 'wpbdp_tag_edit_form_fields' );
 
 /**
  * Save custom form fields from wpbdp_tag taxonomy add/edit pages
@@ -60,11 +62,17 @@ add_action('wpbdp_tag_edit_form_fields', 'wpbdp_tag_edit_form_fields');
  * @param int $tt_id
  */
 function wpbdp_tag_form_fields_save( $term_id, $tt_id ) {
-	if ( ! empty( $_POST['wpbdp_tag_parent_category'] ) ) {
 
-		update_term_meta( $term_id, 'wpbdp_tag_parent_category', 'wpbdp_category--' . $_POST['wpbdp_tag_parent_category'] );
+	if( isset( $_POST['wpbdp_tag_parent_category_nonce'] ) && wp_verify_nonce( $_POST['wpbdp_tag_parent_category_nonce'], 'wpbdp_tag_parent_category_update' ) ) {
+
+		if ( ! empty( $_POST['wpbdp_tag_parent_category'] ) ) {
+
+			update_term_meta( $term_id, 'wpbdp_tag_parent_category', 'wpbdp_category--' . $_POST['wpbdp_tag_parent_category'] );
+
+		}
 
 	}
+
 }
 add_action( 'created_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
