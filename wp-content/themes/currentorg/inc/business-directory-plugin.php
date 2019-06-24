@@ -99,24 +99,12 @@ add_filter( 'wp_generate_tag_cloud_data', 'wpbdp_modify_tag_cloud' );
  */
 function wpbdp_tag_cloud_show_all_tags( $args ) {
 	
-	if($args['taxonomy'][0] == 'wpbdp_tag'){
+	if( in_array( 'wpbdp_tag', $args['taxonomy'] ) ){
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['action'] ) && $_POST['action'] === 'get-tagcloud') {
 
 			unset( $args['number'] );
 			$args['hide_empty'] = 0;
-
-			echo '<script>
-				jQuery(document).ready(function(){
-
-					jQuery("#wpbdp_categorychecklist li input").each(function(){
-						var wpbdp_category_id = jQuery(this).val();
-						if(!jQuery(this).is(":checked")){
-							jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
-						}
-					});
-				});
-			</script>';
 
 		}
 
@@ -173,6 +161,22 @@ function wpbdp_tag_cloud_custom_css_js(){
 				});
 
 			});
+
+			jQuery(document).ajaxStop(function() {
+
+				// loop through all selected categories and hide any tags without active parent categories
+				jQuery("#wpbdp_categorychecklist li input").each(function(){
+
+					var wpbdp_category_id = jQuery(this).val();
+
+					if(!jQuery(this).is(":checked")){
+						jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+					}
+					
+				});
+
+			});
+
 		</script>
 		<style>
 			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
