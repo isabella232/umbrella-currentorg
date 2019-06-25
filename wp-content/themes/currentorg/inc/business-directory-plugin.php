@@ -86,11 +86,11 @@ add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 function wpbdp_modify_tag_cloud( $tag_data ) {
 	return array_map(
 		function ( $tag ) {
-			$term = get_term( $tag['id'] );
+			$term = get_term_by( 'slug', $tag[ 'slug' ], 'wpbdp_tag' );
 
 			if ( 'wpbdp_tag' === $term->taxonomy ) {
 
-				$wpbdp_tag_parent_category = get_term_meta( $tag['id'] );
+				$wpbdp_tag_parent_category = get_term_meta( $term->term_id );
 				$wpbdp_tag_parent_category = $wpbdp_tag_parent_category['wpbdp_tag_parent_category'][0];
 				$tag['class'] .= ' ' . $wpbdp_tag_parent_category;
 
