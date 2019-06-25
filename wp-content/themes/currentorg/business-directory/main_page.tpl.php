@@ -67,11 +67,43 @@
 		// At this point $terms is full of WP_Term objects for the terms on this page.
 		// And now is the point where this code deviates from WPBDP's code to render our own templates.
 
-		// debug code tiem
-		printf(
-			'<pre><code>%1$s</code></pre>',
-			var_export( $terms, true)
-		);
+		foreach ( $terms as $term ) {
+			?>
+				<div class="cat-item cat-item-<?php esc_attr_e( $term->term_id ); ?>">
+					<?php
+						printf(
+							'<h2>%1$s</h2>',
+							wp_kses_post( $term->name, true)
+						);
+
+						printf(
+							'<p class="category-description">%1$s</p>',
+							wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
+						);
+
+						// this is the permissions level that the plugin uses. &shrug;.
+						if ( current_user_can( 'administrator' ) ) {
+							printf(
+								'<a href="%1$s" class="edit-category-link">%2$s</a>',
+								get_edit_term_link( $term->term_id, WPBDP_CATEGORY_TAX, WPBDP_POST_TYPE ),
+								__( 'Edit Listing Category', 'currentorg' )
+							);
+						}
+
+						printf(
+							'<a href="%1$s">%2$s</a>',
+							esc_attr( apply_filters( 'wpbdp_categories_term_link', esc_url( get_term_link( $term ) ) ) ),
+							sprintf(
+								// translators: %1$s is a whole number
+								__( '%1$s listings in category', 'currentorg' ),
+								wp_kses_post( $term->count, true)
+							)
+						);
+					?>
+				</div>
+			<?php
+		}
+
 	?>
 </div>
 
