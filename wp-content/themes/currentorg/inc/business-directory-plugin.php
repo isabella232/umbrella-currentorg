@@ -12,7 +12,7 @@
  */
 function wpbdp_tag_edit_form_fields( $tag ) {
 
-	if ( $tag ) {
+	if ( is_object( $tag ) ){
 
 		$wpbdp_tag_meta = get_term_meta( $tag->term_id );
 		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
