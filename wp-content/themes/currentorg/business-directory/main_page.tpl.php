@@ -32,8 +32,6 @@
 		 * The following copies code from the function _wpbdp_list_categories_walk
 		 */
 
-		$categories = _wpbdp_list_categories_walk( 0, 0, $args );
-
 		$term_ids = get_terms(
 			WPBDP_CATEGORY_TAX,
 			array(
@@ -46,10 +44,33 @@
 			)
 		);
 
+		$term_ids = apply_filters( 'wpbdp_category_terms_order', $term_ids );
+
+		$terms = array(); // Now we're cooking with Crisco!
+
+		foreach ( $term_ids as $term_id ) {
+			$t = get_term( $term_id, WPBDP_CATEGORY_TAX );
+			// 'pad_counts' doesn't work because of WP bug #15626 (see http://core.trac.wordpress.org/ticket/15626).
+			// we need a workaround until the bug is fixed.
+			_wpbdp_padded_count( $t );
+
+			$terms[] = $t;
+		}
+
+		// filter empty terms
+		if ( $args['hide_empty'] ) {
+			$terms = array_filter( $terms, function( $x ) {
+				return $x->count > 0;
+			} );
+		}
+
+		// At this point $terms is full of WP_Term objects for the terms on this page.
+		// And now is the point where this code deviates from WPBDP's code to render our own templates.
+
 		// debug code tiem
 		printf(
 			'<pre><code>%1$s</code></pre>',
-			var_export( $categories, true)
+			var_export( $terms, true)
 		);
 	?>
 </div>
