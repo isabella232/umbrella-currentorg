@@ -210,3 +210,52 @@ function wpbdp_tag_cloud_custom_css_js(){
 
 }
 add_action( 'admin_head', 'wpbdp_tag_cloud_custom_css_js' );
+
+/**
+ * Loop through all saved wpbdp_tags and remove any that don't
+ * have any active parent category.
+ *
+ * Runs during save_post hook
+ *
+ * @param int $post_id
+ */
+function wpbdp_verify_tags_on_post_save( $post_id ){
+
+	// grab the current listing categories and tags
+	$wpbdp_listing_categories = get_the_terms( $post_id, 'wpbdp_category' );
+	$wpbdp_listing_tags = get_the_terms( $post_id, 'wpbdp_tag' );
+
+	// loop through each saved tag
+	foreach( $wpbdp_listing_tags as $wpbdp_listing_tag ){
+
+		$wpbdp_tag_meta = get_term_meta( $wpbdp_listing_tag->term_id );
+		
+		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
+		$wpbdp_tag_parent_category = str_replace( 'wpbdp_category--', '', $wpbdp_tag_parent_category );
+
+		$wpbdp_tag_parent_category_selected = false;
+
+		// loop through each saved listing category and if a parent category is found
+		// with an id that matches the tag parent id, set $wpbdp_tag_parent_category_selected = true
+		foreach( $wpbdp_listing_categories as $key => $wpbdp_listing_category ){
+
+			if( $wpbdp_listing_category->term_id == $wpbdp_tag_parent_category ){
+
+				$wpbdp_tag_parent_category_selected = true;
+
+			}
+
+		}
+
+		// if no parent category has been found with a matching id, 
+		// let's go ahead and remove the tag that shouldn't be there
+		if( !$wpbdp_tag_parent_category_selected ){
+
+			wp_remove_object_terms( $post_id, $wpbdp_listing_tag->term_id, 'wpbdp_tag' );
+
+		}
+
+	}
+
+}
+add_action( 'save_post', 'wpbdp_verify_tags_on_post_save' );
