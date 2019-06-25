@@ -71,6 +71,12 @@
 			?>
 				<div class="cat-item cat-item-<?php esc_attr_e( $term->term_id ); ?>">
 					<?php
+						// this depends on Largo's term meta shims and term meta featured images
+						if ( function_exists( 'largo_get_term_meta_post' ) ) {
+							$thumbnail_post = largo_get_term_meta_post( WPBDP_CATEGORY_TAX, $term->term_id );
+							echo get_the_post_thumbnail( $thumbnail_post );
+						}
+
 						printf(
 							'<h2>%1$s</h2>',
 							wp_kses_post( $term->name, true)
