@@ -102,7 +102,12 @@
 							esc_attr( apply_filters( 'wpbdp_categories_term_link', esc_url( get_term_link( $term ) ) ) ),
 							sprintf(
 								// translators: %1$s is a whole number
-								__( '%1$s listings in category', 'currentorg' ),
+								_n(
+									'<b>%1$s</b> listing in category',
+									'<b>%1$s</b> listings in category',
+									$term->count,
+									'currentorg'
+								),
 								wp_kses_post( $term->count, true)
 							)
 						);
