@@ -21,6 +21,7 @@
   box-sizing: border-box;
 }
 #wpbdp-categories .cat-item {
+  font-size: 0.8em;
   justify-self: stretch;
   position: relative;
   padding-bottom: 3rem;
