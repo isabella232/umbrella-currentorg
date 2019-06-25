@@ -152,8 +152,13 @@ function wpbdp_tag_cloud_custom_css_js(){
 					// get id of clicked category
 					var wpbdp_category_id = jQuery(this).val();
 
-					// toggle all child tags of this category
-					jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+					if(jQuery(this).is(":checked")){
+						// show all child tags of this category
+						jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).removeClass("hidden");
+					} else {
+						// hide all child tags of this category
+						jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).addClass("hidden");
+					}
 
 					// if this categoy is unchecked, we need to remove all of its child tags that were selected
 					if(!jQuery(this).is(":checked")){
@@ -181,7 +186,7 @@ function wpbdp_tag_cloud_custom_css_js(){
 					var wpbdp_category_id = jQuery(this).val();
 
 					if(!jQuery(this).is(":checked")){
-						jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).toggleClass("hidden");
+						jQuery("#tagsdiv-wpbdp_tag .wpbdp_category--"+wpbdp_category_id).addClass("hidden");
 					}
 					
 				});
