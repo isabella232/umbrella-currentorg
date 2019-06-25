@@ -146,6 +146,9 @@ function wpbdp_tag_cloud_custom_css_js(){
 
 			jQuery(document).ready(function(){
 
+				jQuery('#tagsdiv-wpbdp_tag .inside').prepend('<label>Selected Tags:</label>');
+				jQuery('<label>Available Tags:</label>').insertAfter('#tagsdiv-wpbdp_tag .tagsdiv');
+
 				// if a category is selected/deselected, do things
 				jQuery("#wpbdp_categorychecklist input").on("click", function(){
 
@@ -199,7 +202,7 @@ function wpbdp_tag_cloud_custom_css_js(){
 			body.wp-admin #tagsdiv-wpbdp_tag #link-wpbdp_tag{visibility:hidden;}
 			body.wp-admin #tagsdiv-wpbdp_tag #wpbdp_tag .jaxtag{display:none;} 
 			/* make the tag cloud not a tag cloud */
-			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;}
+			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li{display:block;margin-bottom:0;}
 			body.wp-admin #tagsdiv-wpbdp_tag #tagcloud-wpbdp_tag.the-tagcloud ul li a{font-size:13px!important;}
 		</style>
 		<?php
