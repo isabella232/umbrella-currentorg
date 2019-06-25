@@ -82,11 +82,6 @@
 							wp_kses_post( $term->name, true)
 						);
 
-						printf(
-							'<p class="category-description">%1$s</p>',
-							wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
-						);
-
 						// this is the permissions level that the plugin uses. &shrug;.
 						if ( current_user_can( 'administrator' ) ) {
 							printf(
@@ -96,8 +91,14 @@
 							);
 						}
 
+
 						printf(
-							'<a href="%1$s">%2$s</a>',
+							'<p class="category-description">%1$s</p>',
+							wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
+						);
+
+						printf(
+							'<a class="listing-link" href="%1$s">%2$s</a>',
 							esc_attr( apply_filters( 'wpbdp_categories_term_link', esc_url( get_term_link( $term ) ) ) ),
 							sprintf(
 								// translators: %1$s is a whole number

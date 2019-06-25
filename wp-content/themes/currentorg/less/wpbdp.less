@@ -1,1 +1,85 @@
 @import "vars.less";
+
+#wpbdp-categories {
+  display: grid;
+  grid-gap: 1em;
+  justify-items: stretch;
+
+  grid-template-columns: 1fr;
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .cat-item {
+    // this sets common values for a lot of padding and margins in this element;
+    @common-whitespace: 1.5rem;
+
+    justify-self: stretch;
+    position: relative;
+    padding-bottom: 2 * @common-whitespace;
+
+    background-color: @grey-l;
+
+    img.attachment-post-thumbnail {
+      display: block;
+      float: none;
+      clear: both;
+      max-width: 20%;
+      background-color: @brand;
+      margin-bottom: @common-whitespace;
+    }
+    h2 {
+      font-weight: 400;
+      padding: 0 @common-whitespace;
+      margin-top: @common-whitespace;
+    }
+
+    .edit-category-link {
+      clear: both;
+      display: block;
+      padding: 0 @common-whitespace;
+      font-size: 0.75em;
+    }
+
+    .category-description {
+      padding: 0 @common-whitespace;
+      margin-bottom: @common-whitespace;
+      line-height: 1.3
+    }
+
+    .listing-link {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+
+      line-height: 2 * @common-whitespace;
+      padding: 0 @common-whitespace;
+
+      color: white;
+      background-color: @highlight;
+
+      &:hover {
+        background-color: darken( @highlight, 10% );
+      }
+
+      &::after {
+        content: "\2192";
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        border-left: 1px solid hsla( 0, 0, 100%, 0.5 );
+        padding: 0 1rem;
+      }
+    }
+  }
+}
