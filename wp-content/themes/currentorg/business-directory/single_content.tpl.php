@@ -27,7 +27,9 @@
                         get_term_link( $category )
                     );
     
-                    if( $index != array_key_last( $listing_categories ) ){
+                    $number_of_categories = count( $listing_categories );
+    
+                    if( $index != ( $number_of_categories - 1 ) ){
                         echo '<span> | </span>';
                     }
 
