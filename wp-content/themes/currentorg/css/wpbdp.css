@@ -1,6 +1,40 @@
 /**
  * Variables
  */
+#wpbdp-main-box {
+  background: transparent;
+  padding: 0;
+}
+#wpbdp-main-box .bg-grey {
+  background-color: #eeeeee;
+}
+#wpbdp-main-box .padding-1 {
+  padding: 1.5rem;
+}
+#wpbdp-main-box .main-links {
+  margin-bottom: 1.5rem;
+}
+#wpbdp-main-box .main-fields {
+  margin-bottom: 1.5rem;
+}
+#wpbdp-main-box .main-links .wpbdp-main-links {
+  text-align: left;
+}
+#wpbdp-main-box .main-links .wpbdp-main-links input.button,
+#wpbdp-main-box .main-links .wpbdp-main-links input[type="button"] {
+  border: none;
+  background: none;
+  color: #1c819e;
+  font-size: 1.25em;
+  padding: 0;
+}
+#wpbdp-main-box .main-links .wpbdp-main-links input.button + .button,
+#wpbdp-main-box .main-links .wpbdp-main-links input[type="button"] + .button {
+  margin-left: 1em;
+}
+#wpbdp-main-box .button {
+  line-height: 3rem;
+}
 #wpbdp-categories {
   display: grid;
   grid-gap: 1em;
@@ -21,7 +55,6 @@
   box-sizing: border-box;
 }
 #wpbdp-categories .cat-item {
-  font-size: 0.8em;
   justify-self: stretch;
   position: relative;
   padding-bottom: 3rem;
@@ -39,6 +72,7 @@
   font-weight: 400;
   padding: 0 1.5rem;
   margin-top: 1.5rem;
+  font-size: 22px;
 }
 #wpbdp-categories .cat-item .edit-category-link {
   clear: both;
@@ -50,6 +84,7 @@
   padding: 0 1.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.3;
+  font-size: 16px;
 }
 #wpbdp-categories .cat-item .listing-link {
   display: block;
