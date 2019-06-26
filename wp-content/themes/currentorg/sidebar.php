@@ -12,12 +12,12 @@ do_action('largo_before_sidebar'); ?>
 		<?php
             do_action('largo_before_sidebar_widgets');
             
-            if( array_key_exists( '_wpbdp_listing', $wp_query->query_vars ) )
-                get_template_part('partials/sidebar', 'wpbdp-listing-sidebar');
+			if( array_key_exists( '_wpbdp_listing', $wp_query->query_vars ) )
+				get_template_part('partials/sidebar', 'wpbdp-listing-sidebar');
 			else if (is_archive() && !is_date())
 				get_template_part('partials/sidebar', 'archive');
 			else if (is_single() || is_singular())
-                get_template_part('partials/sidebar', 'single');
+				get_template_part('partials/sidebar', 'single');
 			else
 				get_template_part('partials/sidebar');
 
