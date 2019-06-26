@@ -119,6 +119,7 @@
 	?>
 </div>
 
-<?php if ( $listings ): ?>
-	<?php echo $listings; ?>
-<?php endif; ?>
+<?php
+	if ( $listings ) {
+		echo $listings;
+	}
