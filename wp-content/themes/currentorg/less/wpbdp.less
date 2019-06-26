@@ -216,3 +216,83 @@
     }
   }
 }
+
+// detailed listing page
+.wpbdp-listing-single {
+  .listing-title {
+    background: transparent;
+    padding: 0;
+    border: none;
+    h2 {
+      font-size: 52px;
+    }
+  }
+  .listing-categories {
+      font-size: 16px;
+    a {
+      color: @grey-m-blue;
+      text-transform: uppercase;
+    }
+  }
+  .extra-images {
+    margin-bottom: 30px;
+  }
+  .listing-contact-details {
+    background: #F6F5F6;
+    border: 1px solid #ddd;
+    padding: 30px;
+    h5 {
+      margin-bottom: 10px;
+    }
+    .dashicons {
+      vertical-align: middle;
+      color: @azure;
+      margin-right: 10px;
+    }
+    .listing-contact-detail {
+      margin-bottom: 5px;
+      a {
+        color: @azure;
+        text-decoration: none;
+      }
+      &:last-of-type {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+.listing-sidebar {
+  .listing-main-image {
+    img {
+      width: 100%;
+    }
+  }
+  .listing-services {
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    hr {
+      width: 15%;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      border: 3px solid #000;
+    }
+    .listing-services-list {
+      list-style: none;
+      margin-left: 0;
+      li {
+        padding: 15px;
+        margin-bottom: 0;
+        &:nth-child( even ) {
+          background: #E9F3FB;
+        }
+        a {
+          color: @azure;
+          font-weight: bold;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}

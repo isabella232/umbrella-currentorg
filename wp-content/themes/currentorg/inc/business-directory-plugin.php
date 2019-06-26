@@ -259,3 +259,29 @@ function wpbdp_verify_tags_on_post_save( $post_id ){
 
 }
 add_action( 'save_post', 'wpbdp_verify_tags_on_post_save' );
+
+/**
+ * Switches default template for single wpbdp listing pages
+ * since by default they inherit the parent directory page template
+ */
+function wpbdp_single_listing_page_template( $page_template ) {
+
+    global $post;
+    global $wp_query;
+
+    if( $post->post_type == 'page' ){ 
+    
+        $query_vars = $wp_query->query_vars;
+
+        if( array_key_exists( '_wpbdp_listing', $query_vars ) ){
+            
+            $page_template = get_template_directory() . '/single-two-column.php'; 
+
+        }
+
+    }
+    
+    return $page_template;
+
+}
+add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
