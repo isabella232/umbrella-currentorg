@@ -1,7 +1,5 @@
 <?php
-
 define('FEATURED_MEDIA', true);
-
 
 /**
  * Include theme files and register a homepage layout
@@ -21,10 +19,13 @@ function largo_child_require_files() {
 	// load the layout
 	$includes = array(
 		'/homepages/layouts/current.php',
-		'/inc/custom-taxonomies.php'
+		'/inc/custom-taxonomies.php',
+		'/inc/business-directory-plugin.php',
 	);
 	foreach ( $includes as $include ) {
-		require_once( get_stylesheet_directory() . $include );
+		if ( 0 === validate_file( get_stylesheet_directory() . $include ) ) {
+			require_once( get_stylesheet_directory() . $include );
+		}
 	}
 	register_homepage_layout( 'CurrentHomepage' );
 }
