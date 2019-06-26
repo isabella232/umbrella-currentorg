@@ -12,20 +12,20 @@
 	<?php if ( wpbdp_get_option( 'show-search-listings' ) ) : ?>
 		<div class="main-fields clearfix">
 			<form action="<?php echo esc_url( $search_url ); ?>" method="get" class="row-fluid">
-				<div class="span10 row-fluid bg-grey padding-1">
+				<div class="span9 row-fluid bg-grey padding-1">
 
-					<div class="span10">
+					<div class="span9 the-search-box">
 						<label for="wpbdp-main-box-keyword-field"><?php esc_html_e( 'Search for listings' ); ?></label>
 						<input type="text" id="wpbdp-main-box-keyword-field" class="keywords-field" name="kw" placeholder="<?php echo esc_attr( _x( 'Find listings for <keywords>', 'main box', 'WPBDM' ) ); ?>" />
 						<?php echo $extra_fields; ?>
 					</div>
-					<div class="span2">
+					<div class="span3">
 						<input id="main-search" type="submit" class="button" value="<?php echo esc_attr_x( 'Find Listings', 'main box', 'WPBDM' ); ?>" /><br />
-						<a class="advanced-search-link" href="<?php echo $search_url; ?>"><?php echo esc_attr_x( 'Advanced Search', 'main box', 'WPBDM' ); ?></a>
+						<a class="advanced" href="<?php echo $search_url; ?>"><?php echo esc_attr_x( 'Advanced Search', 'main box', 'WPBDM' ); ?></a>
 					</div>
 				</div>
 
-				<div class="create-btn span2 padding-1">
+				<div class="create-btn span3 padding-1">
 					<?php echo wpbdp_main_links( array( 'create' ) ); ?>
 				</div>
 
