@@ -20,6 +20,8 @@
             ), false
         );
 
+        echo wpbdp_main_links( array( 'create' ) );
+
     ?>
     <div class="listing-title">
         <h2><?php echo $title; ?></h2>
