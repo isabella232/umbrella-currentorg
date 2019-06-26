@@ -1,6 +1,6 @@
 <?php
 /**
- * Listing detail view rendering template
+ * Customized listing detail view rendering template
  *
  * @package BDP/Templates/Single Content
  */

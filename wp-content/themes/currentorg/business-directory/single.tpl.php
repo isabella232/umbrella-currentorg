@@ -1,6 +1,6 @@
 <?php
 /**
- * Template listing single view.
+ * Customized template for listing single view.
  *
  * @package BDP/Templates/Single
  */
@@ -9,7 +9,8 @@
 ?>
 <div id="<?php echo $listing_css_id; ?>" class="<?php echo $listing_css_class; ?>">
     <?php 
-    
+
+        // return to directory link
         wpbdp_get_return_link();
         
         echo wpbdp_render(
