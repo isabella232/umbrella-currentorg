@@ -47,6 +47,7 @@
   border: 1px solid #666666;
   background-color: #eeeeee;
   box-sizing: border-box;
+  height: 3rem;
 }
 #wpbdp-main-box .advanced {
   float: left;
@@ -74,6 +75,7 @@
 }
 #wpbdp-main-box .main-links .wpbdp-main-links input.button,
 #wpbdp-main-box .main-links .wpbdp-main-links input[type="button"] {
+  width: auto;
   border: none;
   background: none;
   color: #1c819e;
@@ -87,6 +89,38 @@
 #wpbdp-main-box .main-links .wpbdp-main-links input.button:hover,
 #wpbdp-main-box .main-links .wpbdp-main-links input[type="button"]:hover {
   text-decoration: underline;
+}
+@media (max-width: 1000px) {
+  #wpbdp-main-box .the-search-box label {
+    display: none;
+  }
+}
+@media (max-width: 750px) {
+  #wpbdp-main-box form.row-fluid > .span9,
+  #wpbdp-main-box form.row-fluid > .span3 {
+    clear: both;
+    margin: 0 auto;
+    float: none;
+    width: 100%;
+  }
+  #wpbdp-main-box .wpbdp-main-links {
+    text-align: center;
+  }
+  #wpbdp-main-box .wpbdp-main-links input.button {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  #wpbdp-main-box .create-btn {
+    padding-bottom: 0;
+  }
+  #wpbdp-main-box .advanced {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  #wpbdp-main-box .main-links .wpbdp-main-links {
+    text-align: center;
+  }
 }
 #wpbdp-categories {
   display: grid;

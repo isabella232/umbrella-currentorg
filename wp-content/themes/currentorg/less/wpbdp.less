@@ -51,6 +51,7 @@
     border: 1px solid @grey-m;
     background-color: @grey-l;
     box-sizing: border-box;
+    height: 2 * @common-whitespace;
   }
 
   // the advanced-search link
@@ -84,6 +85,7 @@
     text-align: left;
     input.button,
     input[type="button"] {
+      width: auto;
       border: none;
       background: none;
       color: @brand;
@@ -95,6 +97,40 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+
+  @media ( max-width: 1000px ) {
+    .the-search-box label {
+      display: none;
+    }
+  }
+  @media ( max-width: 750px ) {
+    form.row-fluid > .span9,
+    form.row-fluid > .span3 {
+      clear: both;
+      margin: 0 auto;
+      float: none;
+      width: 100%;
+    }
+    .wpbdp-main-links {
+      text-align: center;
+      input.button {
+        padding-left: 2 * @common-whitespace;
+        padding-right: 2 * @common-whitespace;
+      }
+    }
+    .create-btn {
+      padding-bottom: 0;
+    }
+    .advanced {
+      display: none; // sigh
+    }
+  }
+  @media ( max-width: 640px ) {
+    // this breakpoint chosen to match some other stuff on the page
+    .main-links .wpbdp-main-links {
+      text-align: center;
     }
   }
 }

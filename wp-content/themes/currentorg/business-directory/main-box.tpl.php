@@ -20,7 +20,7 @@
 						<?php echo $extra_fields; ?>
 					</div>
 					<div class="span3">
-						<input id="main-search" type="submit" class="button" value="<?php echo esc_attr_x( 'Find Listings', 'main box', 'WPBDM' ); ?>" /><br />
+						<input id="main-search" type="submit" class="button" value="<?php echo esc_attr_x( 'Search', 'main box', 'WPBDM' ); ?>" /><br />
 						<a class="advanced" href="<?php echo $search_url; ?>"><?php echo esc_attr_x( 'Advanced Search', 'main box', 'WPBDM' ); ?></a>
 					</div>
 				</div>
