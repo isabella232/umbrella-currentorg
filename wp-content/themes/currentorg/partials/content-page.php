@@ -8,7 +8,7 @@
 	
 	<?php do_action('largo_before_page_header'); ?>
     
-    <?php if( ! ( $post->post_type == 'page' && array_key_exists( '_wpbdp_listing', $wp_query->query_vars ) ) ): ?>
+    <?php if( ! ( $post->post_type == 'page' && ( function_exists( 'wpbdp_check_if_specific_page_type' ) && wpbdp_check_if_specific_page_type( '_wpbdp_listing' ) ) ) ): ?>
                 
         <header class="entry-header">
             <h1 class="entry-title"><?php the_title(); ?></h1>
