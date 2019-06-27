@@ -231,17 +231,19 @@
 }
 
 #wpbdp-page-category {
-  .category-tags-list {
-    padding: 0;
-    margin-left: 0;
+  @media (min-width: 900px) {
+    .category-tags-list {
+      padding: 0;
+      margin-left: 0;
 
-    li {
-      display: inline-block;
-      border: 1px solid @grey-m;
-      padding: 0.5em;
+      li {
+        display: inline-block;
+        border: 1px solid @grey-m;
+        padding: 0.5em;
 
-      & + li {
-        margin-left: 1 * @common-whitespace;
+        & + li {
+          margin-left: 1 * @common-whitespace;
+        }
       }
     }
   }
@@ -251,7 +253,7 @@
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 1 * @common-whitespace;
-  @media (min-width: 600px) {
+  @media (min-width: 900px) {
     grid-template-columns: 1fr 1fr;
   }
 
