@@ -300,8 +300,6 @@ add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
  * Output flavor text and a list of tags on the category page
  *
  * This is for a hook in /plugins/business-directory-plugin/templates/page.tpl.php
- *
- * @param string $context The WPBDP page child ID, where "ID" is "category", "main_page", "all_listings",  or something like that
  */
 function wpbdp_category_preface_matter() {
 
