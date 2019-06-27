@@ -78,6 +78,24 @@ add_action( 'created_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
 
 /**
+ * Helper to get the tags for a given category by their meta
+ *
+ * @param WP_Term 
+ * @return Arrray of WP_Term objects
+ */
+function wpbdp_get_tags_by_category( $term ) {
+	$args = array(
+		'taxonomy' => $term->taxonomy,
+		'hide_empty' => false,
+		'meta_key' => 'wpbdp_tag_parent_category',
+		'meta_value' => 'wpbdp_category--' . $term->term_id,
+	);
+	$tags_query = new WP_Term_Query( $args );
+	echo var_export( $tags_query, true );
+	return $tags_query->terms;
+}
+
+/**
  * Modify the wpdb_tag tag cloud to include wpbdp_category--id class
  *
  * @param Array $tag_data

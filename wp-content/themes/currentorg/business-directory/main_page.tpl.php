@@ -1,4 +1,4 @@
-<div id="wpbdp-categories">
+<iv id="wpbdp-categories">
 	<?php
 		/**
 		 * The following copies code from the function wpbdp_directory_categories()
@@ -91,6 +91,13 @@
 							);
 						}
 
+						/**
+						 * Get the term's tags and output them
+						 *
+						 */
+						$tags = wpbdp_get_tags_by_category( $term );
+						echo var_export( $tags, true);
+						unset( $tags );
 
 						printf(
 							'<p class="category-description">%1$s</p>',
