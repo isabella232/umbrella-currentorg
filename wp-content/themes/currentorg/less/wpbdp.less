@@ -1,0 +1,310 @@
+@import "vars.less";
+
+// this sets common values for a lot of padding and margins in this file
+@common-whitespace: 1.5rem;
+
+#wpbdp-main-box {
+  background: transparent;
+  padding: 0;
+
+  .bg-grey {
+    background-color: @grey-l;
+  }
+  .padding-1 {
+    padding: 1 * @common-whitespace;
+  }
+  .main-links{
+    margin-bottom: 1 * @common-whitespace;
+  }
+  .main-fields {
+    margin-bottom: 1 * @common-whitespace;
+  }
+
+  .the-search-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    line-height: 2 * @common-whitespace;
+
+    label {
+      flex: 1 1 auto;
+      display: inline-block;
+      text-align: right;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding-right: 1em;
+      margin: 0;
+    }
+    input {
+      flex: 1 0 40%;
+      display: inline-block;
+      height: 2 * @common-whitespace;
+      box-sizing: border-box;
+      margin: 0;
+    }
+  }
+  #main-search {
+    width: 100%;
+    border: 1px solid @grey-m;
+    background-color: @grey-l;
+    box-sizing: border-box;
+    height: 2 * @common-whitespace;
+  }
+
+  // the advanced-search link
+  .advanced {
+    float: left;
+    width: 100%;
+    text-align: center;
+    height: 0;
+    font-size: 1rem;
+  }
+
+  .wpbdp-main-links .button {
+    padding: 0;
+  }
+  .button {
+    line-height: 2 * @common-whitespace; 
+  }
+
+  // the red one
+  #wpbdp-bar-submit-listing-button {
+    background-color: @highlight;
+    color: white;
+    border: none;
+    &:hover {
+      background-color: darken( @highlight, 10% );
+    }
+  }
+
+  // the things under the search box
+  .main-links .wpbdp-main-links {
+    text-align: left;
+    input.button,
+    input[type="button"] {
+      width: auto;
+      border: none;
+      background: none;
+      color: @brand;
+      font-size: 1.25em;
+      padding: 0;
+      & + .button {
+        margin-left: 1em;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media ( max-width: 1000px ) {
+    .the-search-box label {
+      display: none;
+    }
+  }
+  @media ( max-width: 750px ) {
+    form.row-fluid > .span9,
+    form.row-fluid > .span3 {
+      clear: both;
+      margin: 0 auto;
+      float: none;
+      width: 100%;
+    }
+    .wpbdp-main-links {
+      text-align: center;
+      input.button {
+        padding-left: 2 * @common-whitespace;
+        padding-right: 2 * @common-whitespace;
+      }
+    }
+    .create-btn {
+      padding-bottom: 0;
+    }
+    .advanced {
+      display: none; // sigh
+    }
+  }
+  @media ( max-width: 640px ) {
+    // this breakpoint chosen to match some other stuff on the page
+    .main-links .wpbdp-main-links {
+      text-align: center;
+    }
+  }
+}
+#wpbdp-categories {
+  display: grid;
+  grid-gap: 1em;
+  justify-items: stretch;
+
+  grid-template-columns: 1fr;
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .cat-item {
+    justify-self: stretch;
+    position: relative;
+    padding-bottom: 2 * @common-whitespace;
+
+    background-color: @grey-l;
+
+    img.attachment-post-thumbnail {
+      display: block;
+      float: none;
+      clear: both;
+      max-width: 20%;
+      background-color: @brand;
+      margin-bottom: @common-whitespace;
+    }
+    h2 {
+      font-weight: 400;
+      padding: 0 @common-whitespace;
+      margin-top: @common-whitespace;
+      font-size: 22px;
+    }
+
+    .edit-category-link {
+      clear: both;
+      display: block;
+      padding: 0 @common-whitespace;
+      font-size: 0.75em;
+    }
+
+    ul {
+      padding: 0 @common-whitespace;
+    }
+
+    .category-description {
+      padding: 0 @common-whitespace;
+      margin-bottom: @common-whitespace;
+    }
+    .category-description,
+    li {
+      font-family: @font-serif;
+      color: @text;
+      line-height: 1.3;
+      font-size: 16px;
+    }
+    li a {
+      color: @text;
+    }
+
+    .listing-link {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+
+      line-height: 2 * @common-whitespace;
+      padding: 0 @common-whitespace;
+
+      color: white;
+      background-color: @highlight;
+
+      &:hover {
+        background-color: darken( @highlight, 10% );
+      }
+
+      &::after {
+        content: "\2192";
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        border-left: 1px solid hsla( 0, 0, 100%, 0.5 );
+        padding: 0 1rem;
+      }
+    }
+  }
+}
+
+// detailed listing page
+.wpbdp-listing-single {
+  .listing-title {
+    background: transparent;
+    padding: 0;
+    border: none;
+    h2 {
+      font-size: 52px;
+    }
+  }
+  .listing-categories {
+      font-size: 16px;
+    a {
+      color: @grey-m-blue;
+      text-transform: uppercase;
+    }
+  }
+  .extra-images {
+    margin-bottom: 30px;
+  }
+  .listing-contact-details {
+    background: #F6F5F6;
+    border: 1px solid #ddd;
+    padding: 30px;
+    h5 {
+      margin-bottom: 10px;
+    }
+    .dashicons {
+      vertical-align: middle;
+      color: @azure;
+      margin-right: 10px;
+    }
+    .listing-contact-detail {
+      margin-bottom: 5px;
+      a {
+        color: @azure;
+        text-decoration: none;
+      }
+      &:last-of-type {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+.listing-sidebar {
+  .listing-main-image {
+    img {
+      width: 100%;
+    }
+  }
+  .listing-services {
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    hr {
+      width: 15%;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      border: 3px solid #000;
+    }
+    .listing-services-list {
+      list-style: none;
+      margin-left: 0;
+      li {
+        padding: 15px;
+        margin-bottom: 0;
+        &:nth-child( even ) {
+          background: #E9F3FB;
+        }
+        a {
+          color: @azure;
+          font-weight: bold;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
