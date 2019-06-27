@@ -302,3 +302,39 @@ function wpbdp_single_listing_page_template( $page_template ) {
 
 }
 add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
+
+/**
+ * Output flavor text and a list of tags on the category page
+ *
+ * This is for a hook in /plugins/business-directory-plugin/templates/page.tpl.php
+ *
+ * @param string $context The WPBDP page child ID, where "ID" is "category", "main_page", "all_listings",  or something like that
+ */
+function wpbdp_category_preface_matter() {
+
+	$term = get_queried_object();
+
+	/**
+	 * Get the term's tags and output them
+	 *
+	 * Same logic is used in business-directory/main_page.tpl.php
+	 */
+	$tags = wpbdp_get_tags_by_category( $term );
+	if ( ! empty ( $tags ) ) {
+		printf(
+			'<p class="category-description">%1$s</p>',
+			esc_html__( 'The companies featured here offer the following services to public media:', 'currentorg' )
+		);
+		echo '<ul class="category-tags-list">';
+		foreach ( $tags as $tag ) {
+			printf(
+				'<li class="%1$s"><a href="%2$s">%3$s</a></li>',
+				WPBDP_TAGS_TAX . '-' . $tag->term_id,
+				get_term_link( $tag ),
+				esc_html( $tag->name )
+			);
+		}
+		echo '</ul>';
+	}
+}
+add_action( 'wpbdp_before_category_page', 'wpbdp_category_preface_matter' );
