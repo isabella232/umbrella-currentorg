@@ -180,11 +180,23 @@
       font-size: 0.75em;
     }
 
+    ul {
+      padding: 0 @common-whitespace;
+    }
+
     .category-description {
       padding: 0 @common-whitespace;
       margin-bottom: @common-whitespace;
+    }
+    .category-description,
+    li {
+      font-family: @font-serif;
+      color: @text;
       line-height: 1.3;
       font-size: 16px;
+    }
+    li a {
+      color: @text;
     }
 
     .listing-link {
