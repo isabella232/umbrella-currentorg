@@ -96,13 +96,28 @@
 						 *
 						 */
 						$tags = wpbdp_get_tags_by_category( $term );
-						echo var_export( $tags, true);
+						if ( ! empty ( $tags ) ) {
+							printf(
+								'<p class="category-description">%1$s</p>',
+								esc_html_e( 'The companies featured here offer the following services to public media:', 'currentorg' )
+							);
+							echo '<ul>';
+							foreach ( $tags as $tag ) {
+								printf(
+									'<li class="%1$s"><a href="%2$s">%3$s</a></li>',
+									WPBDP_TAGS_TAX . '-' . $tag->term_id,
+									get_term_link( $tag ),
+									esc_html( $tag->name )
+								);
+							}
+							echo '</ul>';
+						} else {
+							printf(
+								'<p class="category-description">%1$s</p>',
+								wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
+							);
+						}
 						unset( $tags );
-
-						printf(
-							'<p class="category-description">%1$s</p>',
-							wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
-						);
 
 						printf(
 							'<a class="listing-link" href="%1$s">%2$s</a>',
