@@ -99,7 +99,7 @@
 						if ( ! empty ( $tags ) ) {
 							printf(
 								'<p class="category-description">%1$s</p>',
-								esc_html_e( 'The companies featured here offer the following services to public media:', 'currentorg' )
+								esc_html__( 'The companies featured here offer the following services to public media:', 'currentorg' )
 							);
 							echo '<ul>';
 							foreach ( $tags as $tag ) {
