@@ -1,4 +1,4 @@
-<iv id="wpbdp-categories">
+<div id="wpbdp-categories">
 	<?php
 		/**
 		 * The following copies code from the function wpbdp_directory_categories()
