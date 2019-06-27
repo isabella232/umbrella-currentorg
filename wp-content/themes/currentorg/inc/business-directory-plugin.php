@@ -263,25 +263,82 @@ add_action( 'save_post', 'wpbdp_verify_tags_on_post_save' );
 /**
  * Switches default template for single wpbdp listing pages
  * since by default they inherit the parent directory page template
+ * 
+ * @return String of the current page/post template
  */
 function wpbdp_single_listing_page_template( $page_template ) {
 
-    global $post;
-    global $wp_query;
-
-    if( $post->post_type == 'page' ){ 
-    
-        $query_vars = $wp_query->query_vars;
-
-        if( array_key_exists( '_wpbdp_listing', $query_vars ) ){
+    if( wpbdp_check_if_specific_page_type( '_wpbdp_listing' ) ){
             
             $page_template = get_template_directory() . '/single-two-column.php'; 
 
-        }
-
-    }
+	}
     
     return $page_template;
 
 }
 add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
+
+/**
+ * If we are on a single wpbdp listing or category page,
+ * let's remove the parent post content from the $post obj
+ * 
+ * @return Object of the current post
+ */
+function wpbdp_filter_the_content(){
+
+	global $post;
+
+	if( wpbdp_check_if_specific_page_type( array( '_wpbdp_listing', '_wpbdp_category' ) ) ){
+
+		$post->post_content = '[businessdirectory]';
+
+	}
+
+	return $post;
+
+}
+add_filter( 'wp', 'wpbdp_filter_the_content' );
+
+/**
+ * Find out if a specific post/page is a wpbdp specific page type
+ * 
+ * Useful if you need to see if you're on a single listing or category page
+ * 
+ * @param Mixed $wpbdp_array_keys The keys to check in the query_vars array; should
+ * be something such as _wpbdp_listing, _wpbdp_category, etc.
+ */
+function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
+
+	global $post;
+	global $wp_query;
+
+	$wpbdp_specific_page_type = false;
+
+	if( $post->post_type == 'page' ){ 
+    
+		$query_vars = $wp_query->query_vars;
+		
+		if( is_array( $wpbdp_array_keys ) ) {
+
+			foreach( $wpbdp_array_keys as $wpbdp_array_key ){
+
+				if( array_key_exists( $wpbdp_array_key, $query_vars ) ){
+
+					$wpbdp_specific_page_type = true;
+					
+				}
+
+			}
+
+		} else if( array_key_exists( $wpbdp_array_keys, $query_vars ) ){
+
+			$wpbdp_specific_page_type = true;
+			
+		}
+
+	}
+
+	return $wpbdp_specific_page_type;
+
+}
