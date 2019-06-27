@@ -85,7 +85,7 @@ add_action( 'edited_wpbdp_tag', 'wpbdp_tag_form_fields_save', 10, 2 );
  */
 function wpbdp_get_tags_by_category( $term ) {
 	$args = array(
-		'taxonomy' => $term->taxonomy,
+		'taxonomy' => WPBDP_TAGS_TAX,
 		'hide_empty' => false,
 		'meta_key' => 'wpbdp_tag_parent_category',
 		'meta_value' => 'wpbdp_category--' . $term->term_id,
