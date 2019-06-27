@@ -44,6 +44,7 @@ function wpbdp_tag_edit_form_fields( $tag ) {
 				'depth'            => 1,
 				'echo'             => false,
 				'selected'         => $wpbdp_tag_parent_category,
+				'hide_empty'	   => 0
 			)
 		),
 		__( 'Select the parent category for this tag.', 'currentorg' )
