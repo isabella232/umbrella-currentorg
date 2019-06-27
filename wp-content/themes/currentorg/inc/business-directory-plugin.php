@@ -299,7 +299,7 @@ add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
 /**
  * Output flavor text and a list of tags on the category page
  *
- * This is for a hook in /plugins/business-directory-plugin/templates/page.tpl.php
+ * This is for a hook in /plugins/business-directory-plugin/templates/category.tpl.php
  */
 function wpbdp_category_preface_matter() {
 
