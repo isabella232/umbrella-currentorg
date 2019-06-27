@@ -44,7 +44,9 @@ function wpbdp_tag_edit_form_fields( $tag ) {
 				'depth'            => 1,
 				'echo'             => false,
 				'selected'         => $wpbdp_tag_parent_category,
-				'hide_empty'	   => 0
+				'hide_empty'	   => 0,
+				'orderby'		   => 'title',
+				'order'			   => 'ASC'
 			)
 		),
 		__( 'Select the parent category for this tag.', 'currentorg' )
