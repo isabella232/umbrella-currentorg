@@ -167,11 +167,22 @@
   padding: 0 1.5rem;
   font-size: 0.75em;
 }
+#wpbdp-categories .cat-item ul {
+  padding: 0 1.5rem;
+}
 #wpbdp-categories .cat-item .category-description {
   padding: 0 1.5rem;
   margin-bottom: 1.5rem;
+}
+#wpbdp-categories .cat-item .category-description,
+#wpbdp-categories .cat-item li {
+  font-family: "freight-text-pro", Georgia, Cambria, "Times New Roman", Times, serif;
+  color: #343434;
   line-height: 1.3;
   font-size: 16px;
+}
+#wpbdp-categories .cat-item li a {
+  color: #343434;
 }
 #wpbdp-categories .cat-item .listing-link {
   display: block;
