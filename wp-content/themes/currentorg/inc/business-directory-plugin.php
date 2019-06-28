@@ -407,11 +407,11 @@ function wpbdp_page_specific_css() {
 	 * On the assumption that the page the directory is displayed on will always be post 5909
 	 */
 	$qo = get_queried_object();
-	if ( ! is_object( $qo) || 5909 !== (int) $qo->ID ) {
+	if ( ! is_object( $qo ) || 5909 !== (int) $qo->ID ) {
 		return;
 	}
 
-	// this URL param is how WPBDP distinguishes the 'all listings' page
+	// this URL param is how WPBDP distinguishes the 'all listings' page.
 	if ( isset( $_GET['wpbdp_view'] ) && 'all_listings' === $_GET['wpbdp_view'] ) {
 		?>
 			<style type="text/css">
@@ -427,8 +427,8 @@ function wpbdp_page_specific_css() {
 		global $wp;
 
 		// check by exclusion that this page is just the main directory listing page
-		// and not any other page in the directory listing that isn't the main page
-		if ( isset( $wp->request ) && 'directory-of-services' === $wp->request) {
+		// and not any other page in the directory listing that isn't the main page.
+		if ( isset( $wp->request ) && 'directory-of-services' === $wp->request ) {
 			?>
 				<style type="text/css">
 					#wpbdp-main-box #wpbdp-bar-show-directory-button.button.wpbdp-button {
