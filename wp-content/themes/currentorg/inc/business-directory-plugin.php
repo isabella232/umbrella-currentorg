@@ -395,3 +395,34 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 	return $wpbdp_specific_page_type;
 }
+
+/**
+ * Add underline CSS to the directory/listings buttons
+ *
+ * @link https://github.com/INN/umbrella-currentorg/issues/38#issuecomment-506518715
+ */
+function wpbdp_page_specific_css() {
+	$qo = get_queried_object();
+
+	/**
+	 * On the assumption that the page the directory isdisplayed on will always be post 5909
+	 */
+	if ( 5909 !== (int) $qo->ID ) {
+		return;
+	}
+
+	// this URL param is how WPBDP distinguishes the 'all listings' page
+	if ( isset( $_GET['wpbdp_view'] ) && 'all_listings' === $_GET['wpbdp_view'] ) {
+		?>
+			<style type="text/css">
+				#wpbdp-main-box #wpbdp-bar-view-listings-button.button.wpbdp-button {
+					border-bottom-color: #1c819e;
+				}
+				#wpbdp-main-box:hover #wpbdp-bar-view-listings-button.button.wpbdp-button:not(:hover) {
+					border-bottom-color: transparent;
+				}
+			</style>
+		<?php
+	}
+}
+add_action( 'wp_head', 'wpbdp_page_specific_css', 10, 0 );

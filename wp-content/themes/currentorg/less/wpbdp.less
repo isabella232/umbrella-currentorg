@@ -91,11 +91,13 @@
       color: @brand;
       font-size: 1.25em;
       padding: 0;
+      border-bottom: 0.1em solid transparent;
       & + .button {
         margin-left: 1em;
       }
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom-color: @brand;
       }
     }
   }
