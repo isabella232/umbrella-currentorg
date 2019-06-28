@@ -369,7 +369,7 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 	$wpbdp_specific_page_type = false;
 
-	if( $post->post_type == 'page' ){ 
+	if ( is_a( $post, 'WP_Post' ) && $post->post_type == 'page' ){
 
 		$query_vars = $wp_query->query_vars;
 
