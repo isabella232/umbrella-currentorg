@@ -402,12 +402,12 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
  * @link https://github.com/INN/umbrella-currentorg/issues/38#issuecomment-506518715
  */
 function wpbdp_page_specific_css() {
-	$qo = get_queried_object();
 
 	/**
-	 * On the assumption that the page the directory isdisplayed on will always be post 5909
+	 * On the assumption that the page the directory is displayed on will always be post 5909
 	 */
-	if ( 5909 !== (int) $qo->ID ) {
+	$qo = get_queried_object();
+	if ( ! is_object( $qo) || 5909 !== (int) $qo->ID ) {
 		return;
 	}
 
@@ -423,6 +423,23 @@ function wpbdp_page_specific_css() {
 				}
 			</style>
 		<?php
+	} else if ( isset( $_GET ) && empty( $_GET ) ) {
+		global $wp;
+
+		// check by exclusion that this page is just the main directory listing page
+		// and not any other page in the directory listing that isn't the main page
+		if ( isset( $wp->request ) && 'directory-of-services' === $wp->request) {
+			?>
+				<style type="text/css">
+					#wpbdp-main-box #wpbdp-bar-show-directory-button.button.wpbdp-button {
+						border-bottom-color: #1c819e;
+					}
+					#wpbdp-main-box:hover #wpbdp-bar-show-directory-button.button.wpbdp-button:not(:hover) {
+						border-bottom-color: transparent;
+					}
+				</style>
+			<?php
+		}
 	}
 }
 add_action( 'wp_head', 'wpbdp_page_specific_css', 10, 0 );
