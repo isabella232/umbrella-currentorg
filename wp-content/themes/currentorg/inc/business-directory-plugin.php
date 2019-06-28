@@ -369,7 +369,7 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 	$wpbdp_specific_page_type = false;
 
-	if( $post->post_type == 'page' ){ 
+	if ( is_a( $post, 'WP_Post' ) && $post->post_type == 'page' ){
 
 		$query_vars = $wp_query->query_vars;
 
@@ -395,3 +395,51 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 	return $wpbdp_specific_page_type;
 }
+
+/**
+ * Add underline CSS to the directory/listings buttons
+ *
+ * @link https://github.com/INN/umbrella-currentorg/issues/38#issuecomment-506518715
+ */
+function wpbdp_page_specific_css() {
+
+	/**
+	 * On the assumption that the page the directory is displayed on will always be post 5909
+	 */
+	$qo = get_queried_object();
+	if ( ! is_object( $qo ) || 5909 !== (int) $qo->ID ) {
+		return;
+	}
+
+	// this URL param is how WPBDP distinguishes the 'all listings' page.
+	if ( isset( $_GET['wpbdp_view'] ) && 'all_listings' === $_GET['wpbdp_view'] ) {
+		?>
+			<style type="text/css">
+				#wpbdp-main-box #wpbdp-bar-view-listings-button.button.wpbdp-button {
+					border-bottom-color: #1c819e;
+				}
+				#wpbdp-main-box:hover #wpbdp-bar-view-listings-button.button.wpbdp-button:not(:hover) {
+					border-bottom-color: transparent;
+				}
+			</style>
+		<?php
+	} else if ( isset( $_GET ) && empty( $_GET ) ) {
+		global $wp;
+
+		// check by exclusion that this page is just the main directory listing page
+		// and not any other page in the directory listing that isn't the main page.
+		if ( isset( $wp->request ) && 'directory-of-services' === $wp->request ) {
+			?>
+				<style type="text/css">
+					#wpbdp-main-box #wpbdp-bar-show-directory-button.button.wpbdp-button {
+						border-bottom-color: #1c819e;
+					}
+					#wpbdp-main-box:hover #wpbdp-bar-show-directory-button.button.wpbdp-button:not(:hover) {
+						border-bottom-color: transparent;
+					}
+				</style>
+			<?php
+		}
+	}
+}
+add_action( 'wp_head', 'wpbdp_page_specific_css', 10, 0 );
