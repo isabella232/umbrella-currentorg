@@ -44,6 +44,9 @@ function wpbdp_tag_edit_form_fields( $tag ) {
 				'depth'            => 1,
 				'echo'             => false,
 				'selected'         => $wpbdp_tag_parent_category,
+				'hide_empty'	   => 0,
+				'orderby'		   => 'title',
+				'order'			   => 'ASC'
 			)
 		),
 		__( 'Select the parent category for this tag.', 'currentorg' )
@@ -238,37 +241,48 @@ add_action( 'admin_head', 'wpbdp_tag_cloud_custom_css_js' );
  */
 function wpbdp_verify_tags_on_post_save( $post_id ){
 
-	// grab the current listing categories and tags
-	$wpbdp_listing_categories = get_the_terms( $post_id, 'wpbdp_category' );
-	$wpbdp_listing_tags = get_the_terms( $post_id, 'wpbdp_tag' );
+	$post = get_post( $post_id );
+	$post_type = $post->post_type;
+	
+	if( $post_type == 'wpbdp_listing' && is_admin() ){
 
-	// loop through each saved tag
-	foreach( $wpbdp_listing_tags as $wpbdp_listing_tag ){
+		// grab the current listing categories and tags
+		$wpbdp_listing_categories = get_the_terms( $post_id, 'wpbdp_category' );
+		$wpbdp_listing_tags = get_the_terms( $post_id, 'wpbdp_tag' );
 
-		$wpbdp_tag_meta = get_term_meta( $wpbdp_listing_tag->term_id );
-		
-		$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
-		$wpbdp_tag_parent_category = str_replace( 'wpbdp_category--', '', $wpbdp_tag_parent_category );
+		if( $wpbdp_listing_tags ){
 
-		$wpbdp_tag_parent_category_selected = false;
+			// loop through each saved tag
+			foreach( $wpbdp_listing_tags as $wpbdp_listing_tag ){
 
-		// loop through each saved listing category and if a parent category is found
-		// with an id that matches the tag parent id, set $wpbdp_tag_parent_category_selected = true
-		foreach( $wpbdp_listing_categories as $key => $wpbdp_listing_category ){
+				$wpbdp_tag_meta = get_term_meta( $wpbdp_listing_tag->term_id );
+				
+				$wpbdp_tag_parent_category = $wpbdp_tag_meta['wpbdp_tag_parent_category'][0];
+				$wpbdp_tag_parent_category = str_replace( 'wpbdp_category--', '', $wpbdp_tag_parent_category );
 
-			if( $wpbdp_listing_category->term_id == $wpbdp_tag_parent_category ){
+				$wpbdp_tag_parent_category_selected = false;
 
-				$wpbdp_tag_parent_category_selected = true;
+				// loop through each saved listing category and if a parent category is found
+				// with an id that matches the tag parent id, set $wpbdp_tag_parent_category_selected = true
+				foreach( $wpbdp_listing_categories as $key => $wpbdp_listing_category ){
+
+					if( $wpbdp_listing_category->term_id == $wpbdp_tag_parent_category ){
+
+						$wpbdp_tag_parent_category_selected = true;
+
+					}
+
+				}
+
+				// if no parent category has been found with a matching id, 
+				// let's go ahead and remove the tag that shouldn't be there
+				if( !$wpbdp_tag_parent_category_selected ){
+
+					wp_remove_object_terms( $post_id, $wpbdp_listing_tag->term_id, 'wpbdp_tag' );
+
+				}
 
 			}
-
-		}
-
-		// if no parent category has been found with a matching id, 
-		// let's go ahead and remove the tag that shouldn't be there
-		if( !$wpbdp_tag_parent_category_selected ){
-
-			wp_remove_object_terms( $post_id, $wpbdp_listing_tag->term_id, 'wpbdp_tag' );
 
 		}
 
@@ -295,6 +309,40 @@ function wpbdp_single_listing_page_template( $page_template ) {
 
 }
 add_filter( 'page_template', 'wpbdp_single_listing_page_template' );
+
+/**
+ * Output flavor text and a list of tags on the category page
+ *
+ * This is for a hook in /plugins/business-directory-plugin/templates/category.tpl.php
+ */
+function wpbdp_category_preface_matter() {
+
+	$term = get_queried_object();
+
+	/**
+	 * Get the term's tags and output them
+	 *
+	 * Same logic is used in business-directory/main_page.tpl.php
+	 */
+	$tags = wpbdp_get_tags_by_category( $term );
+	if ( ! empty ( $tags ) ) {
+		printf(
+			'<p class="category-description">%1$s</p>',
+			esc_html__( 'The companies featured here offer the following services to public media:', 'currentorg' )
+		);
+		echo '<ul class="category-tags-list">';
+		foreach ( $tags as $tag ) {
+			printf(
+				'<li class="%1$s"><a href="%2$s">%3$s</a></li>',
+				WPBDP_TAGS_TAX . '-' . $tag->term_id,
+				get_term_link( $tag ),
+				esc_html( $tag->name )
+			);
+		}
+		echo '</ul>';
+	}
+}
+add_action( 'wpbdp_before_category_page', 'wpbdp_category_preface_matter' );
 
 /**
  * If we are on a single wpbdp listing or category page,
@@ -332,10 +380,10 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 	$wpbdp_specific_page_type = false;
 
-	if( $post->post_type == 'page' ){ 
-    
+	if ( is_a( $post, 'WP_Post' ) && $post->post_type == 'page' ){
+
 		$query_vars = $wp_query->query_vars;
-		
+
 		if( is_array( $wpbdp_array_keys ) ) {
 
 			foreach( $wpbdp_array_keys as $wpbdp_array_key ){
@@ -343,7 +391,7 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 				if( array_key_exists( $wpbdp_array_key, $query_vars ) ){
 
 					$wpbdp_specific_page_type = true;
-					
+
 				}
 
 			}
@@ -351,11 +399,58 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 		} else if( array_key_exists( $wpbdp_array_keys, $query_vars ) ){
 
 			$wpbdp_specific_page_type = true;
-			
+
 		}
 
 	}
 
 	return $wpbdp_specific_page_type;
-
 }
+
+/**
+ * Add underline CSS to the directory/listings buttons
+ *
+ * @link https://github.com/INN/umbrella-currentorg/issues/38#issuecomment-506518715
+ */
+function wpbdp_page_specific_css() {
+
+	/**
+	 * On the assumption that the page the directory is displayed on will always be post 5909
+	 */
+	$qo = get_queried_object();
+	if ( ! is_object( $qo ) || 5909 !== (int) $qo->ID ) {
+		return;
+	}
+
+	// this URL param is how WPBDP distinguishes the 'all listings' page.
+	if ( isset( $_GET['wpbdp_view'] ) && 'all_listings' === $_GET['wpbdp_view'] ) {
+		?>
+			<style type="text/css">
+				#wpbdp-main-box #wpbdp-bar-view-listings-button.button.wpbdp-button {
+					border-bottom-color: #1c819e;
+				}
+				#wpbdp-main-box:hover #wpbdp-bar-view-listings-button.button.wpbdp-button:not(:hover) {
+					border-bottom-color: transparent;
+				}
+			</style>
+		<?php
+	} else if ( isset( $_GET ) && empty( $_GET ) ) {
+		global $wp;
+
+		// check by exclusion that this page is just the main directory listing page
+		// and not any other page in the directory listing that isn't the main page.
+		if ( isset( $wp->request ) && 'directory-of-services' === $wp->request ) {
+			?>
+				<style type="text/css">
+					#wpbdp-main-box #wpbdp-bar-show-directory-button.button.wpbdp-button {
+						border-bottom-color: #1c819e;
+					}
+					#wpbdp-main-box:hover #wpbdp-bar-show-directory-button.button.wpbdp-button:not(:hover) {
+						border-bottom-color: transparent;
+					}
+				</style>
+			<?php
+		}
+	}
+}
+add_action( 'wp_head', 'wpbdp_page_specific_css', 10, 0 );

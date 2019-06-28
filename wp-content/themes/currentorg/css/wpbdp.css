@@ -27,7 +27,7 @@
   line-height: 3rem;
 }
 #wpbdp-main-box .the-search-box label {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   display: inline-block;
   text-align: right;
   font-size: 1.2em;
@@ -81,6 +81,7 @@
   color: #1c819e;
   font-size: 1.25em;
   padding: 0;
+  border-bottom: 0.1em solid transparent;
 }
 #wpbdp-main-box .main-links .wpbdp-main-links input.button + .button,
 #wpbdp-main-box .main-links .wpbdp-main-links input[type="button"] + .button {
@@ -88,7 +89,8 @@
 }
 #wpbdp-main-box .main-links .wpbdp-main-links input.button:hover,
 #wpbdp-main-box .main-links .wpbdp-main-links input[type="button"]:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom-color: #1c819e;
 }
 @media (max-width: 1000px) {
   #wpbdp-main-box .the-search-box label {
@@ -206,6 +208,86 @@
   right: 0;
   border-left: 1px solid hsla(0, 0%, 100%, 0.5);
   padding: 0 1rem;
+}
+@media (min-width: 900px) {
+  #wpbdp-page-category .category-tags-list {
+    padding: 0;
+    margin-left: 0;
+  }
+  #wpbdp-page-category .category-tags-list li {
+    display: inline-block;
+    border: 1px solid #666666;
+    padding: 0.5em;
+  }
+  #wpbdp-page-category .category-tags-list li + li {
+    margin-left: 1.5rem;
+  }
+}
+#wpbdp-listings-list {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 1.5rem;
+}
+@media (min-width: 900px) {
+  #wpbdp-listings-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+#wpbdp-listings-list .wpbdp-listing {
+  place-self: stretch;
+  border: 1px solid #eeeeee;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 3rem;
+  background-color: white;
+  box-sizing: border-box;
+  position: relative;
+}
+#wpbdp-listings-list .listing-thumbnail {
+  float: none;
+  margin: 1.5rem;
+}
+#wpbdp-listings-list .listing-details {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+#wpbdp-listings-list .listing-actions {
+  margin-top: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#wpbdp-listings-list .listing-actions .view-listing.button {
+  width: 100%;
+  display: block;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 0 0 1.5rem;
+  box-sizing: border-box;
+  border-top: 1px solid #eeeeee;
+  background: none;
+  color: inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+#wpbdp-listings-list .listing-actions .view-listing.button::after {
+  content: "\2192";
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  border-left: 1px solid hsla(0, 0%, 100%, 0.5);
+  padding: 0 1rem;
+  background-color: #e86059;
+  color: white;
+}
+#wpbdp-listings-list .listing-actions .delete-listing,
+#wpbdp-listings-list .listing-actions .edit-listing {
+  display: none;
 }
 .wpbdp-listing-single .listing-title {
   background: transparent;
