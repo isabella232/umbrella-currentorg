@@ -345,20 +345,43 @@ function wpbdp_category_preface_matter() {
 add_action( 'wpbdp_before_category_page', 'wpbdp_category_preface_matter' );
 
 /**
- * If we are on a single wpbdp listing or category page,
- * let's remove the parent post content from the $post obj
- * 
+ * Modify the post_content in response to specific WPBDP conditions.
+ *
+ * This function exists because all WPBDP views are different outputs from the
+ * [businessdirectory] shortcode in response to URL parameters.
+ *
  * @return Object of the current post
+ * @uses wpbdp_check_if_specific_wpbdp_view
+ * @uses wpbdp_check_if_specific_page_type
  */
 function wpbdp_filter_the_content(){
 
 	global $post;
 
+	/*
+	 * If we are on a single wpbdp listing or category page,
+	 * let's remove the parent post content from the $post obj
+	 *
+	 * For https://github.com/INN/umbrella-currentorg/pull/35
+	 */
 	if( wpbdp_check_if_specific_page_type( array( '_wpbdp_listing', '_wpbdp_category' ) ) ){
 
 		$post->post_content = '[businessdirectory]';
 
 	}
+
+	/*
+	 * Add a specific message to the top of the submit-listing page.
+	 *
+	 * For https://github.com/INN/umbrella-currentorg/issues/48 .
+	 */
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing' ) ) ){
+
+		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of services that will help their stations succeed. Current is where they connect with you.</p>', 'currentorg');
+		$post->post_content .= '[businessdirectory]';
+
+	}
+
 
 	return $post;
 
@@ -372,8 +395,10 @@ add_filter( 'wp', 'wpbdp_filter_the_content' );
  * 
  * @param Mixed $wpbdp_array_keys The keys to check in the query_vars array; should
  * be something such as _wpbdp_listing, _wpbdp_category, etc.
+ * @return Boolean
+ * @see wpbdp_filter_the_content
  */
-function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
+function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ) {
 
 	global $post;
 	global $wp_query;
@@ -396,15 +421,53 @@ function wpbdp_check_if_specific_page_type( $wpbdp_array_keys ){
 
 			}
 
-		} else if( array_key_exists( $wpbdp_array_keys, $query_vars ) ){
+		} else if ( array_key_exists( $wpbdp_array_keys, $query_vars ) ){
 
 			$wpbdp_specific_page_type = true;
 
-		}
+		} 
 
 	}
 
 	return $wpbdp_specific_page_type;
+}
+
+/**
+ * Find out if a specific WPBDP view is being displayed
+ *
+ * Differs from wpbdp_check_if_specific_page_type() in that
+ * this is not checking whether this page is a form of WPBDP page,
+ * but instead checks whether this page is outputting a given view
+ *
+ * @param Array $wpbdp_views Array of query parameter values to check whether this page is one of those views.
+ * @return Boolean
+ * @see wpbdp_filter_the_content
+ */
+function wpbdp_check_if_specific_wpbdp_view( $wpbdp_views = array() ) {
+	if ( ! is_array( $wpbdp_views ) ) {
+		// not using _doing_it_wrong 'cos that's not a public WP function;
+		// see https://developer.wordpress.org/reference/functions/_doing_it_wrong/
+		error_log( 'wpbdp_check_if_specific_wpbdp_view must be passed an array!' );
+		return false;
+	}
+
+	$return = false;
+
+	global $wp_query;
+	$query_vars = $wp_query->query_vars;
+
+	if ( ! isset( $query_vars['wpbdp_view'] ) ) {
+		return false;
+	}
+
+	foreach ( $wpbdp_views as $wpbdp_view ) {
+		if ( in_array( $wpbdp_view, $query_vars, true ) ) {
+			$return = true;
+			break;
+		}
+	}
+
+	return $return;
 }
 
 /**
