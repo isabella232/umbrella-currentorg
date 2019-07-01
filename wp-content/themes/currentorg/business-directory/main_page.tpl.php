@@ -101,16 +101,6 @@
 								'<p class="category-description">%1$s</p>',
 								esc_html__( 'The companies featured here offer the following services to public media:', 'currentorg' )
 							);
-							echo '<ul>';
-							foreach ( $tags as $tag ) {
-								printf(
-									'<li class="%1$s"><a href="%2$s">%3$s</a></li>',
-									WPBDP_TAGS_TAX . '-' . $tag->term_id,
-									get_term_link( $tag ),
-									esc_html( $tag->name )
-								);
-							}
-							echo '</ul>';
 						} else {
 							printf(
 								'<p class="category-description">%1$s</p>',
