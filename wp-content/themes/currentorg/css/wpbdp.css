@@ -359,4 +359,16 @@
   font-weight: bold;
   text-transform: capitalize;
 }
+.wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price label {
+  background: #fff;
+}
+.wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price label:after {
+  content: "Select";
+}
+.wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price .wpbdp-plan-price-amount {
+  display: none;
+}
+.wpbdp-submit-listing-section .wpbdp-plan.display-only .wpbdp-plan-price {
+  display: none;
+}
 /*# sourceMappingURL=css/wpbdp.css.map */
