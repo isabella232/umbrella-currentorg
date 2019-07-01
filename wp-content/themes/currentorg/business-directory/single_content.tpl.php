@@ -59,7 +59,6 @@
             $contact_name = wpbdp_get_form_field( 10 );
             $contact_email = wpbdp_get_form_field( 8 );
             $contact_phone = wpbdp_get_form_field( 6 );
-            $contact_fax = wpbdp_get_form_field( 7 );
             $contact_website = wpbdp_get_form_field( 5 );
 
             if( $contact_name->value( $listing_id ) ){
@@ -95,18 +94,6 @@
                         %1$s
                     </div>',
                     $contact_phone->value( $listing_id )
-                );
-
-            }
-
-            if( $contact_fax->value( $listing_id ) ){
-
-                printf(
-                    '<div class="listing-contact-detail contact-fax">
-                        <span class="dashicons dashicons-welcome-write-blog"></span>
-                        %1$s
-                    </div>',
-                    $contact_fax->value( $listing_id )
                 );
 
             }
