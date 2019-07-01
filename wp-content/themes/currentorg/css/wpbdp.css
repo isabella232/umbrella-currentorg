@@ -297,6 +297,20 @@
 .wpbdp-listing-single .listing-title h2 {
   font-size: 52px;
 }
+.wpbdp-listing-single #wpbdp-bar-submit-listing-button,
+.wpbdp-listing-single .back-to-dir {
+  min-width: 30%;
+  width: fit-content;
+  font-size: 16px;
+  line-height: 3rem;
+  background-color: #e86059;
+  color: white;
+  border: none;
+}
+.wpbdp-listing-single #wpbdp-bar-submit-listing-button:hover,
+.wpbdp-listing-single .back-to-dir:hover {
+  background-color: #e2352c;
+}
 .wpbdp-listing-single .listing-categories {
   font-size: 16px;
 }
