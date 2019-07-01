@@ -422,3 +422,25 @@
     }
   }
 }
+
+// submit a listing page
+.wpbdp-submit-listing-section {
+  .wpbdp-plan {
+    .wpbdp-plan-price {
+      label {
+        background: #fff;
+        &:after {
+          content: "Select";
+        }
+      }
+      .wpbdp-plan-price-amount {
+        display: none;
+      }
+    }
+    &.display-only {
+      .wpbdp-plan-price {
+        display: none;
+      }
+    }
+  }
+}
