@@ -517,3 +517,22 @@ function wpbdp_page_specific_css() {
 	}
 }
 add_action( 'wp_head', 'wpbdp_page_specific_css', 10, 0 );
+
+/**
+ * Dequeue specific scripts or styles that are conflicting
+ * with the WPBDP plugin.
+ * 
+ * @param String $hook Name of the current hook
+ * @link https://github.com/INN/umbrella-currentorg/issues/57
+ */
+function wpbdp_dequeue_conflicts( $hook ) {
+
+	if( 'post.php' == $hook && 'wpbdp_listing' == get_post_type() ) {
+
+		// Broadstreet was causing the WPBDP listing image uploader to break
+		wp_dequeue_script( 'Broadstreet-main' );
+
+	}
+
+}
+add_action( 'admin_enqueue_scripts', 'wpbdp_dequeue_conflicts', 10 );
