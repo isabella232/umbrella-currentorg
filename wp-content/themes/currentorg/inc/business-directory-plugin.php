@@ -375,7 +375,7 @@ function wpbdp_filter_the_content(){
 	 *
 	 * For https://github.com/INN/umbrella-currentorg/issues/48 .
 	 */
-	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing' ) ) ){
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing', 'login' ) ) ){
 
 		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of services that will help their stations succeed. Current is where they connect with you.</p>', 'currentorg');
 		$post->post_content .= '[businessdirectory]';
