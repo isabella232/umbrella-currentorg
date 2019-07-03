@@ -398,6 +398,13 @@
 .wpbdp-submit-listing-section .wpbdp-form-field-id-5.wpbdp-form-field-type-url .wpbdp-url-field-col:nth-child(2) {
   display: none;
 }
+.wpbdp-submit-listing-section .wpbdp-form-field-id-5.wpbdp-form-field-type-url .wpbdp-url-field-col:nth-child(1) {
+  width: 100%;
+  padding-right: 0;
+}
+.wpbdp-submit-listing-section .wpbdp-form-field-id-5.wpbdp-form-field-type-url .wpbdp-form-field-description {
+  display: none;
+}
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content h4,
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content #no-images-message {
   display: none;

@@ -462,6 +462,15 @@
     .wpbdp-url-field-col:nth-child(2) {
       display: none;
     }
+    // make the preceding field full-width
+    .wpbdp-url-field-col:nth-child(1) {
+      width: 100%;
+      padding-right: 0;
+    }
+    // and hide the uneditable text that references the link text field
+    .wpbdp-form-field-description {
+      display: none;
+    }
   }
   &.wpbdp-submit-listing-section-listing_images {
     // for https://github.com/INN/umbrella-currentorg/issues/62
