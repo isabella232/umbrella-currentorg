@@ -158,7 +158,7 @@
   margin-bottom: 1.5rem;
 }
 #wpbdp-categories .cat-item h2 {
-  font-weight: 400;
+  font-weight: bold;
   padding: 0 1.5rem;
   margin-top: 1.5rem;
   font-size: 22px;
@@ -181,7 +181,7 @@
   font-family: "freight-text-pro", Georgia, Cambria, "Times New Roman", Times, serif;
   color: #343434;
   line-height: 1.3;
-  font-size: 16px;
+  font-size: 18px;
 }
 #wpbdp-categories .cat-item li a {
   color: #343434;
@@ -269,9 +269,9 @@
   line-height: 3rem;
   padding: 0 0 0 1.5rem;
   box-sizing: border-box;
-  border-top: 1px solid #eeeeee;
-  background: none;
-  color: inherit;
+  border-radius: 0;
+  background: #e86059;
+  color: white;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -296,20 +296,6 @@
 }
 .wpbdp-listing-single .listing-title h2 {
   font-size: 52px;
-}
-.wpbdp-listing-single #wpbdp-bar-submit-listing-button,
-.wpbdp-listing-single .back-to-dir {
-  min-width: 30%;
-  width: fit-content;
-  font-size: 16px;
-  line-height: 3rem;
-  background-color: #e86059;
-  color: white;
-  border: none;
-}
-.wpbdp-listing-single #wpbdp-bar-submit-listing-button:hover,
-.wpbdp-listing-single .back-to-dir:hover {
-  background-color: #e2352c;
 }
 .wpbdp-listing-single .listing-categories {
   font-size: 16px;
@@ -372,6 +358,30 @@
   color: #1c819e;
   font-weight: bold;
   text-transform: capitalize;
+}
+.listing-sidebar .listing-actions input.delete-listing {
+  margin-left: 0;
+  color: white!important;
+}
+.listing-sidebar .edit-listing,
+.listing-sidebar .delete-listing,
+.listing-sidebar #wpbdp-bar-submit-listing-button,
+.listing-sidebar .back-to-dir {
+  min-width: 30%;
+  width: 100%;
+  font-size: 16px;
+  line-height: 3rem;
+  background-color: #e86059;
+  color: white;
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.listing-sidebar .edit-listing:hover,
+.listing-sidebar .delete-listing:hover,
+.listing-sidebar #wpbdp-bar-submit-listing-button:hover,
+.listing-sidebar .back-to-dir:hover {
+  background-color: #e2352c;
 }
 .wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price label {
   background: #fff;

@@ -169,7 +169,7 @@
       margin-bottom: @common-whitespace;
     }
     h2 {
-      font-weight: 400;
+      font-weight: bold;
       padding: 0 @common-whitespace;
       margin-top: @common-whitespace;
       font-size: 22px;
@@ -195,7 +195,7 @@
       font-family: @font-serif;
       color: @text;
       line-height: 1.3;
-      font-size: 16px;
+      font-size: 18px;
     }
     li a {
       color: @text;
@@ -300,11 +300,11 @@
       line-height: 2 * @common-whitespace;
       padding: 0 0 0 @common-whitespace;
       box-sizing: border-box;
+      border-radius: 0;
 
-      border-top: 1px solid @grey-l;
-      background: none;
+      background: @highlight;
 
-      color: inherit;
+      color: white;
       font-weight: bold;
       font-size: @common-whitespace;
 
@@ -337,20 +337,6 @@
     border: none;
     h2 {
       font-size: 52px;
-    }
-  }
-  // the red one
-  #wpbdp-bar-submit-listing-button,
-  .back-to-dir {
-    min-width: 30%;
-    width: fit-content;
-    font-size: 16px;
-    line-height: 3rem;
-    background-color: @highlight;
-    color: white;
-    border: none;
-    &:hover {
-      background-color: darken( @highlight, 10% );
     }
   }
   .listing-categories {
@@ -419,6 +405,32 @@
           text-transform: capitalize;
         }
       }
+    }
+  }
+  .listing-actions {
+    input {
+      &.delete-listing {
+        margin-left: 0;
+        color: white!important;
+      }
+    }
+  }
+  // the red one
+  .edit-listing,
+  .delete-listing,
+  #wpbdp-bar-submit-listing-button,
+  .back-to-dir {
+    min-width: 30%;
+    width: 100%;
+    font-size: 16px;
+    line-height: 3rem;
+    background-color: @highlight;
+    color: white;
+    border: none;
+    padding: 0;
+    margin-bottom:10px;
+    &:hover {
+      background-color: darken( @highlight, 10% );
     }
   }
 }
