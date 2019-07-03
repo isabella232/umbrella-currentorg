@@ -88,7 +88,7 @@
         ?>
     </div>
 
-	<?php if ( $images->extra ) : ?>
+	<?php if ( is_object( $images ) && $images->extra ) : ?>
 		<div class="extra-images">
 			<ul>
 				<?php foreach ( $images->extra as $img ) : ?>
@@ -101,7 +101,7 @@
 
 	<?php
 		$social_fields = $fields->filter( 'social' );
-		if ( $social_fields ) {
+		if ( is_object( $social_fields ) ) {
 			printf(
 				'<div class="social-fields cf">%1$s</div>',
 				$social_fields->html
