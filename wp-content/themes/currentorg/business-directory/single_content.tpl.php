@@ -9,6 +9,7 @@
 <div class="listing-details cf">
 
     <?php
+        // This loop handles the normal listing fields in the order they are configured to be output
         foreach ( $fields->not( 'social' ) as $field ){
             if($field->id == 2){
 
@@ -43,7 +44,7 @@
     <div class="listing-contact-details">
         <h3>Get In Touch</h3>
         <?php
-
+            // Specific contact fields
             $contact_email = wpbdp_get_form_field( 8 );
             $contact_phone = wpbdp_get_form_field( 6 );
             $contact_website = wpbdp_get_form_field( 5 );
