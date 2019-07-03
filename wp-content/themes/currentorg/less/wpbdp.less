@@ -458,7 +458,15 @@
   .wpbdp-form-field-id-5.wpbdp-form-field-type-url {
     // there is not a good selector for the "Link text: (optional)" label's containing span,
     // so we just hide the column that should contain it.
+    // for https://github.com/INN/umbrella-currentorg/issues/62
     .wpbdp-url-field-col:nth-child(2) {
+      display: none;
+    }
+  }
+  &.wpbdp-submit-listing-section-listing_images {
+    // for https://github.com/INN/umbrella-currentorg/issues/62
+    .wpbdp-submit-listing-section-content h4,
+    .wpbdp-submit-listing-section-content #no-images-message {
       display: none;
     }
   }
