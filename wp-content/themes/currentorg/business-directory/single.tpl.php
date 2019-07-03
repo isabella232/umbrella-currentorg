@@ -12,9 +12,10 @@
 
         // return to directory link
         wpbdp_get_return_link();
-        
+
         echo wpbdp_render(
-            'parts/listing-buttons', array(
+            'parts/listing-buttons',
+            array(
                 'listing_id' => $listing_id,
                 'view'       => 'single',
             ), false

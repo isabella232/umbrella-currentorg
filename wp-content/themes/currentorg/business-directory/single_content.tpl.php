@@ -4,19 +4,17 @@
  *
  * @package BDP/Templates/Single Content
  */
-
-// phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
 ?>
 
 <div class="listing-details cf">
-    
-    <?php 
+
+    <?php
         foreach ( $fields->not( 'social' ) as $field ){
             if($field->id == 2){
-                
+
                 echo '<div class="listing-categories">';
                 $listing_categories = $field->raw;
-                
+
                 foreach( $listing_categories as $index => $category ){
 
                     $category = get_term( $category );
@@ -26,9 +24,9 @@
                         $category->name,
                         get_term_link( $category )
                     );
-    
+
                     $number_of_categories = count( $listing_categories );
-    
+
                     if( $index != ( $number_of_categories - 1 ) ){
                         echo '<span> | </span>';
                     }
@@ -42,26 +40,16 @@
         }
     ?>
 
-    <?php if ( $images->extra ) : ?>
-    <div class="extra-images">
-        <ul>
-            <?php foreach ( $images->extra as $img ) : ?>
-                <li><?php echo $img->html; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <?php endif; ?>
-
     <div class="listing-contact-details">
         <h3>Get In Touch</h3>
-        <?php 
+        <?php
 
             $contact_name = wpbdp_get_form_field( 10 );
             $contact_email = wpbdp_get_form_field( 8 );
             $contact_phone = wpbdp_get_form_field( 6 );
             $contact_website = wpbdp_get_form_field( 5 );
 
-            if( $contact_name->value( $listing_id ) ){
+            if ( is_object( $contact_name) && $contact_name->value( $listing_id ) ){
 
                 printf(
                     '<div class="contact-name">
@@ -74,7 +62,7 @@
 
             }
 
-            if( $contact_email->value( $listing_id ) ){
+            if ( is_object( $contact_email ) && $contact_email->value( $listing_id ) ){
 
                 printf(
                     '<div class="listing-contact-detail contact-email">
@@ -86,7 +74,7 @@
 
             }
 
-            if( $contact_phone->value( $listing_id ) ){
+            if ( is_object( $contact_phone) && $contact_phone->value( $listing_id ) ){
 
                 printf(
                     '<div class="listing-contact-detail contact-phone">
@@ -98,7 +86,7 @@
 
             }
 
-            if( $contact_website->value( $listing_id ) ){
+            if ( is_object( $contact_phone ) && $contact_website->value( $listing_id ) ){
 
                 printf(
                     '<div class="listing-contact-detail contact-website">
@@ -113,8 +101,24 @@
         ?>
     </div>
 
-    <?php $social_fields = $fields->filter( 'social' ); ?>
-    <?php if ( $social_fields ) : ?>
-        <div class="social-fields cf"><?php echo $social_fields->html; ?></div>
-    <?php endif; ?>
+	<?php if ( $images->extra ) : ?>
+		<div class="extra-images">
+			<ul>
+				<?php foreach ( $images->extra as $img ) : ?>
+					<li><?php echo $img->html; ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?>
+
+
+	<?php
+		$social_fields = $fields->filter( 'social' );
+		if ( $social_fields ) {
+			printf(
+				'<div class="social-fields cf">%1$s</div>',
+				$social_fields->html
+			);
+		}
+	?>
 </div>
