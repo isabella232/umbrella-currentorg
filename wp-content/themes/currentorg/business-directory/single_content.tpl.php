@@ -44,23 +44,9 @@
         <h3>Get In Touch</h3>
         <?php
 
-            $contact_name = wpbdp_get_form_field( 10 );
             $contact_email = wpbdp_get_form_field( 8 );
             $contact_phone = wpbdp_get_form_field( 6 );
             $contact_website = wpbdp_get_form_field( 5 );
-
-            if ( is_object( $contact_name) && $contact_name->value( $listing_id ) ){
-
-                printf(
-                    '<div class="contact-name">
-                        <h5>
-                            %1$s
-                        </h5>
-                    </div>',
-                    $contact_name->value( $listing_id )
-                );
-
-            }
 
             if ( is_object( $contact_email ) && $contact_email->value( $listing_id ) ){
 
