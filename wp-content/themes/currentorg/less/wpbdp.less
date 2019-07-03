@@ -455,4 +455,11 @@
       }
     }
   }
+  .wpbdp-form-field-id-5.wpbdp-form-field-type-url {
+    // there is not a good selector for the "Link text: (optional)" label's containing span,
+    // so we just hide the column that should contain it.
+    .wpbdp-url-field-col:nth-child(2) {
+      display: none;
+    }
+  }
 }
