@@ -242,10 +242,7 @@
         display: inline-block;
         border: 1px solid @grey-m;
         padding: 0.5em;
-
-        & + li {
-          margin-left: 1 * @common-whitespace;
-        }
+        margin-right: 1 * @common-whitespace;
       }
     }
   }
@@ -507,6 +504,15 @@
     .wpbdp-submit-listing-section-content h4,
     .wpbdp-submit-listing-section-content #no-images-message {
       display: none;
+    }
+  }
+  #wpbdp-uploaded-images {
+    .wpbdp-image {
+      .wpbdp-image-extra {
+        label {
+          display: none;
+        }
+      }
     }
   }
 }
