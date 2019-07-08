@@ -218,9 +218,7 @@
     display: inline-block;
     border: 1px solid #666666;
     padding: 0.5em;
-  }
-  #wpbdp-page-category .category-tags-list li + li {
-    margin-left: 1.5rem;
+    margin-right: 1.5rem;
   }
 }
 #wpbdp-listings-list {
@@ -443,6 +441,9 @@
 }
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content h4,
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content #no-images-message {
+  display: none;
+}
+.wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
   display: none;
 }
 /*# sourceMappingURL=css/wpbdp.css.map */
