@@ -347,7 +347,15 @@
     }
   }
   .extra-images {
-    margin-bottom: 30px;
+    margin-top: @common-whitespace;
+    margin-bottom: @common-whitespace;
+    img + img {
+      margin-top: @common-whitespace;
+      clear: both;
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
   .listing-contact-details {
     background: #F6F5F6;
