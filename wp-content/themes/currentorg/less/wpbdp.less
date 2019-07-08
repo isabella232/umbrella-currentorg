@@ -30,7 +30,7 @@
     line-height: 2 * @common-whitespace;
 
     label {
-      flex: 1 1 auto;
+      flex: 0 1 auto;
       display: inline-block;
       text-align: right;
       font-size: 1.2em;
@@ -91,11 +91,13 @@
       color: @brand;
       font-size: 1.25em;
       padding: 0;
+      border-bottom: 0.1em solid transparent;
       & + .button {
         margin-left: 1em;
       }
       &:hover {
-        text-decoration: underline;
+        text-decoration: none;
+        border-bottom-color: @brand;
       }
     }
   }
@@ -167,7 +169,7 @@
       margin-bottom: @common-whitespace;
     }
     h2 {
-      font-weight: 400;
+      font-weight: bold;
       padding: 0 @common-whitespace;
       margin-top: @common-whitespace;
       font-size: 22px;
@@ -180,11 +182,23 @@
       font-size: 0.75em;
     }
 
+    ul {
+      padding: 0 @common-whitespace;
+    }
+
     .category-description {
       padding: 0 @common-whitespace;
       margin-bottom: @common-whitespace;
+    }
+    .category-description,
+    li {
+      font-family: @font-serif;
+      color: @text;
       line-height: 1.3;
-      font-size: 16px;
+      font-size: 18px;
+    }
+    li a {
+      color: @text;
     }
 
     .listing-link {
@@ -205,6 +219,7 @@
         background-color: darken( @highlight, 10% );
       }
 
+      // also elsewhere in this file
       &::after {
         content: "\2192";
         display: inline-block;
@@ -212,6 +227,264 @@
         right: 0;
         border-left: 1px solid hsla( 0, 0, 100%, 0.5 );
         padding: 0 1rem;
+      }
+    }
+  }
+}
+
+#wpbdp-page-category {
+  @media (min-width: 900px) {
+    .category-tags-list {
+      padding: 0;
+      margin-left: 0;
+
+      li {
+        display: inline-block;
+        border: 1px solid @grey-m;
+        padding: 0.5em;
+
+        & + li {
+          margin-left: 1 * @common-whitespace;
+        }
+      }
+    }
+  }
+}
+
+#wpbdp-listings-list {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 1 * @common-whitespace;
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wpbdp-listing {
+    place-self: stretch;
+    border: 1px solid @grey-l;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 2 * @common-whitespace; // to allow space for the absolutely-positioned .listing-actions.
+    background-color: white;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .listing-thumbnail {
+    float: none;
+    margin: @common-whitespace;
+  }
+  .listing-details {
+    padding-left: @common-whitespace;
+    padding-right: @common-whitespace;
+  }
+  .listing-actions {
+
+    margin-top: 0;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .view-listing.button {
+
+      width: 100%;
+
+      display: block;
+      margin: 0;
+      border: none;
+      box-shadow: none;
+
+      height: 2 * @common-whitespace;
+      line-height: 2 * @common-whitespace;
+      padding: 0 0 0 @common-whitespace;
+      box-sizing: border-box;
+      border-radius: 0;
+
+      background: @highlight;
+
+      color: white;
+      font-weight: bold;
+      font-size: @common-whitespace;
+
+      // also elsewhere in this file
+      &::after {
+        content: "\2192";
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        border-left: 1px solid hsla( 0, 0, 100%, 0.5 );
+        padding: 0 1rem;
+
+        background-color: @highlight;
+        color: white;
+      }
+    }
+
+    .delete-listing,
+    .edit-listing {
+      display: none;
+    }
+  }
+}
+
+// detailed listing page
+.wpbdp-listing-single {
+  .listing-title {
+    background: transparent;
+    padding: 0;
+    border: none;
+    h2 {
+      font-size: 52px;
+    }
+  }
+  .listing-categories {
+      font-size: 16px;
+    a {
+      color: @grey-m-blue;
+      text-transform: uppercase;
+    }
+  }
+  .extra-images {
+    margin-bottom: 30px;
+  }
+  .listing-contact-details {
+    background: #F6F5F6;
+    border: 1px solid #ddd;
+    padding: 30px;
+    h5 {
+      margin-bottom: 10px;
+    }
+    .dashicons {
+      vertical-align: middle;
+      color: @azure;
+      margin-right: 10px;
+    }
+    .listing-contact-detail {
+      margin-bottom: 5px;
+      a {
+        color: @azure;
+        text-decoration: none;
+      }
+      &:last-of-type {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+.listing-sidebar {
+  .listing-main-image {
+    img {
+      width: 100%;
+    }
+  }
+  .listing-services {
+    h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    hr {
+      width: 15%;
+      margin: 0 auto;
+      margin-bottom: 30px;
+      border: 3px solid #000;
+    }
+    .listing-services-list {
+      list-style: none;
+      margin-left: 0;
+      li {
+        padding: 15px;
+        margin-bottom: 0;
+        &:nth-child( even ) {
+          background: #E9F3FB;
+        }
+        a {
+          color: @azure;
+          font-weight: bold;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+  .listing-actions {
+    input {
+      &.delete-listing {
+        margin-left: 0;
+        color: white!important;
+      }
+    }
+  }
+  // the red one
+  .edit-listing,
+  .delete-listing,
+  #wpbdp-bar-submit-listing-button,
+  .back-to-dir {
+    min-width: 30%;
+    width: 100%;
+    font-size: 16px;
+    line-height: 3rem;
+    background-color: @highlight;
+    color: white;
+    border: none;
+    padding: 0;
+    margin-bottom:10px;
+    &:hover {
+      background-color: darken( @highlight, 10% );
+    }
+  }
+}
+
+// submit a listing page
+.wpbdp-submit-listing-section {
+  .wpbdp-plan {
+    .wpbdp-plan-price {
+      label {
+        background: #fff;
+        &:after {
+          content: "Select";
+        }
+      }
+      .wpbdp-plan-price-amount {
+        display: none;
+      }
+    }
+    &.display-only {
+      .wpbdp-plan-price {
+        display: none;
+      }
+    }
+  }
+  .wpbdp-form-field-id-5.wpbdp-form-field-type-url {
+    // there is not a good selector for the "Link text: (optional)" label's containing span,
+    // so we just hide the column that should contain it.
+    // for https://github.com/INN/umbrella-currentorg/issues/62
+    .wpbdp-url-field-col:nth-child(2) {
+      display: none;
+    }
+    // make the preceding field full-width
+    .wpbdp-url-field-col:nth-child(1) {
+      width: 100%;
+      padding-right: 0;
+    }
+    // and hide the uneditable text that references the link text field
+    .wpbdp-form-field-description {
+      display: none;
+    }
+  }
+  &.wpbdp-submit-listing-section-listing_images {
+    // for https://github.com/INN/umbrella-currentorg/issues/62
+    .wpbdp-submit-listing-section-content h4,
+    .wpbdp-submit-listing-section-content #no-images-message {
+      display: none;
+    }
+  }
+  #wpbdp-uploaded-images {
+    .wpbdp-image {
+      .wpbdp-image-extra {
+        label {
+          display: none;
+        }
       }
     }
   }

@@ -91,7 +91,6 @@
 							);
 						}
 
-
 						printf(
 							'<p class="category-description">%1$s</p>',
 							wp_kses_post( apply_filters( 'category_description', $term->description, $term ), true)
