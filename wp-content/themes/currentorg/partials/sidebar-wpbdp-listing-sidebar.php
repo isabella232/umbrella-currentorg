@@ -5,6 +5,7 @@
         <hr/>
         <?php
 
+            $listing_id = $wp_query->query_vars['_wpbdp_listing'];
             $wpbdp_listing_tags = wp_get_post_terms( $listing_id, 'wpbdp_tag' );
 
         ?>
