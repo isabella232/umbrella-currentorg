@@ -402,17 +402,17 @@
   max-width: 95%;
   max-height: 515px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img img {
     max-height: 100%;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img {
     margin-bottom: 10px;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .wpbdp-submit-listing-flex-grid {
     display: block;
   }
