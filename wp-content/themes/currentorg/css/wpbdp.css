@@ -305,7 +305,15 @@
   text-transform: uppercase;
 }
 .wpbdp-listing-single .extra-images {
-  margin-bottom: 30px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.wpbdp-listing-single .extra-images img + img {
+  margin-top: 1.5rem;
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 .wpbdp-listing-single .listing-contact-details {
   background: #F6F5F6;
@@ -383,6 +391,32 @@
 .listing-sidebar .back-to-dir:hover {
   background-color: #e2352c;
 }
+.wpbdp-submit-listing-flex-grid {
+  display: flex;
+}
+.wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img {
+  flex: 1;
+  text-align: center;
+}
+.wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img img {
+  max-width: 95%;
+  max-height: 515px;
+}
+@media (max-width: 800px) {
+  .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img img {
+    max-height: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 800px) {
+  .wpbdp-submit-listing-flex-grid {
+    display: block;
+  }
+}
 .wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price label {
   background: #fff;
 }
@@ -407,9 +441,6 @@
 }
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content h4,
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content #no-images-message {
-  display: none;
-}
-.wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
   display: none;
 }
 /*# sourceMappingURL=css/wpbdp.css.map */
