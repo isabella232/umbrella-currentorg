@@ -88,15 +88,32 @@
         ?>
     </div>
 
-	<?php if ( is_object( $images ) && $images->extra ) : ?>
-		<div class="extra-images">
-			<ul>
-				<?php foreach ( $images->extra as $img ) : ?>
-					<li><?php echo $img->html; ?></li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	<?php endif; ?>
+	<?php
+		if ( is_object( $images ) ) {
+			$img_ids = array();
+
+			if ( isset( $images->main ) && is_object( $images->main ) && is_numeric( $images->main->id ) ) {
+				$img_ids[] = $images->main->id;
+			}
+			
+			if ( isset( $images->extra ) && is_array( $images->extra ) ) {
+				foreach ( $images->extra as $image ) {
+					if ( isset( $image->id ) && is_numeric( $image->id ) ) {
+						$img_ids[] = $image->id;
+					}
+				}
+			}
+		}
+
+		if ( ! empty( $img_ids ) ) {
+			echo '<div class="extra-images">';
+
+			foreach ( $img_ids as $img_id ) {
+				echo wp_get_attachment_image( $img_id, 'full', false );
+			}
+			echo '</div>';
+		}
+	?>
 
 
 	<?php
