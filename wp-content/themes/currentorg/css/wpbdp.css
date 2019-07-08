@@ -308,12 +308,14 @@
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
-.wpbdp-listing-single .extra-images img + img {
-  margin-top: 1.5rem;
+.wpbdp-listing-single .extra-images img {
   clear: both;
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+.wpbdp-listing-single .extra-images img + img {
+  margin-top: 1.5rem;
 }
 .wpbdp-listing-single .listing-contact-details {
   background: #F6F5F6;

@@ -349,12 +349,14 @@
   .extra-images {
     margin-top: @common-whitespace;
     margin-bottom: @common-whitespace;
-    img + img {
-      margin-top: @common-whitespace;
+    img {
       clear: both;
       display: block;
       margin-right: auto;
       margin-left: auto;
+    }
+    img + img {
+      margin-top: @common-whitespace;
     }
   }
   .listing-contact-details {
