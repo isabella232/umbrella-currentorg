@@ -383,6 +383,18 @@
 .listing-sidebar .back-to-dir:hover {
   background-color: #e2352c;
 }
+.wpbdp-submit-listing-flex-grid {
+  display: flex;
+}
+.wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img {
+  flex: 1;
+  text-align: center;
+}
+@media (max-width: 1000px) {
+  .wpbdp-submit-listing-flex-grid {
+    display: block;
+  }
+}
 .wpbdp-submit-listing-section .wpbdp-plan .wpbdp-plan-price label {
   background: #fff;
 }
@@ -407,9 +419,6 @@
 }
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content h4,
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content #no-images-message {
-  display: none;
-}
-.wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
   display: none;
 }
 /*# sourceMappingURL=css/wpbdp.css.map */
