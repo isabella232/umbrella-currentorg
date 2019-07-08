@@ -409,4 +409,7 @@
 .wpbdp-submit-listing-section.wpbdp-submit-listing-section-listing_images .wpbdp-submit-listing-section-content #no-images-message {
   display: none;
 }
+.wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
+  display: none;
+}
 /*# sourceMappingURL=css/wpbdp.css.map */
