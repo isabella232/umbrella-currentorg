@@ -444,6 +444,26 @@
 }
 
 // submit a listing page
+.wpbdp-submit-listing-flex-grid {
+  display: flex;
+  .wpbdp-fee-plan-img {
+    flex: 1;
+    text-align: center;
+    img {
+      max-width: 95%;
+      max-height: 515px;
+      @media (max-width:800px) {
+        max-height: 100%;
+      }
+    }
+    @media (max-width:800px) {
+      margin-bottom: 10px;
+    }
+  }
+  @media (max-width:800px) {
+    display: block;   
+  }
+}
 .wpbdp-submit-listing-section {
   .wpbdp-plan {
     .wpbdp-plan-price {
@@ -485,15 +505,6 @@
     .wpbdp-submit-listing-section-content h4,
     .wpbdp-submit-listing-section-content #no-images-message {
       display: none;
-    }
-  }
-  #wpbdp-uploaded-images {
-    .wpbdp-image {
-      .wpbdp-image-extra {
-        label {
-          display: none;
-        }
-      }
     }
   }
 }
