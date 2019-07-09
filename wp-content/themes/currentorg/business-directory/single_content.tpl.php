@@ -92,9 +92,11 @@
 		if ( is_object( $images ) ) {
 			$img_ids = array();
 
-			if ( isset( $images->main ) && is_object( $images->main ) && is_numeric( $images->main->id ) ) {
-				$img_ids[] = $images->main->id;
-			}
+            // this is commented out for now because the main (logo) image should be above the sidebar
+            // but maybe one day we'll need to add this back
+			// if ( isset( $images->main ) && is_object( $images->main ) && is_numeric( $images->main->id ) ) {
+			// 	$img_ids[] = $images->main->id;
+			// }
 			
 			if ( isset( $images->extra ) && is_array( $images->extra ) ) {
 				foreach ( $images->extra as $image ) {
