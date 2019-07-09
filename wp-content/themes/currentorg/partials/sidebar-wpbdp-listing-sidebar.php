@@ -17,14 +17,12 @@
 				printf(
 					'<div class="listing-main-image">
 						%1$s
-					</div>',
+					</div>
+					<hr/>',
 					wp_get_attachment_image( $img_data[0], 'full', false )
 				);
 			}
-
-
 		}
-
 	?>
     <div class="listing-services">
         <h3>Services</h3>
