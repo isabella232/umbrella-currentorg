@@ -1,19 +1,21 @@
 <div class="listing-sidebar">
 
     <?php
+
         $listing_id = $wp_query->query_vars['_wpbdp_listing'];
-        $wpbdp_listings_api = wpbdp_listings_api();
-        $listing_thumbnail_id = wpbdp_listings_api()->get_thumbnail_id( $listing_id );
-        $listing_thumbnail_url = wp_get_attachment_url( $listing_thumbnail_id );
-        
-        if ( $listing_thumbnail_id && $listing_thumbnail_url ){
+        $listing_logo = wpbdp_get_form_field( 11 );
+
+        if ( is_object( $listing_logo ) && $listing_logo->value( $listing_id ) ){
+
             printf(
                 '<div class="listing-main-image">
                     <img src="%1$s">
                 </div>',
-                $listing_thumbnail_url
+                $listing_logo->value( $listing_id )
             );
+
         }
+
     ?>
     <hr/>
     <div class="listing-services">
