@@ -377,7 +377,7 @@ function wpbdp_filter_the_content(){
 	 */
 	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing', 'login' ) ) ){
 
-		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of services that will help their stations succeed. Current is where they connect with you.</p>', 'currentorg');
+		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of noncommercial radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of products and services that will help their companies succeed. Current is where they connect with you.</p><p>Have questions or need assistance? Contact Kathy Bybee Hartzell - <a href="mailto:kathy@current.org">kathy@current.org</a></p>', 'currentorg');
 		
 		// display images for each fee plan
 		$post->post_content .= '<div class="wpbdp-submit-listing-flex-grid">';
