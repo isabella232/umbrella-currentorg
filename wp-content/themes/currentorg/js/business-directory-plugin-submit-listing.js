@@ -9,6 +9,13 @@ jQuery(function($) {
         $('.wpbdp-plan-price input').removeAttr("disabled");
     });
 
+    // when the listing plan input is selected, create a custom "continue" button
+    $('input[name="listing_plan"]').on('click', function(){
+        if($('.wpbdp-custom-continue').length == 0){
+            $('.wpbdp-submit-listing-section-content').append('<button class="wpbdp-custom-continue">Continue</button>');
+        }
+    });
+
     var wpbdp = window.wpbdp || {};
     wpbdp.submit_listing = wpbdp.submit_listing || {};
 
@@ -23,14 +30,10 @@ jQuery(function($) {
             this.field_type = '';
             this.plan_autoselect = false;
 
-            if ( $( '.wpbdp-js-select2', this.field_wrapper ).length > 0 ) {
-                this.field_type = 'select2';
-            } else if ( this.field_wrapper.hasClass( 'wpbdp-form-field-type-checkbox' ) ) {
-                this.field_type = 'checkbox';
-            } else if ( this.field_wrapper.hasClass( 'wpbdp-form-field-type-radio' ) ) {
-                this.field_type = 'radio';
-            }
+            $('.wpbdp-plan-selection-wrapper').append($('.wpbdp-category-selection-with-tip'));
 
+            this.field_type = 'select2';
+    
             this.field = this.field_wrapper.find( 'select, input[type="checkbox"], input[type="radio"]' );
 
             if ( ! this.field_type ) {
@@ -76,7 +79,13 @@ jQuery(function($) {
             this.maybe_limit_category_options();
             this.field.first().trigger('change');
 
-            // this.field.select2();
+            this.field.select2();
+
+            $('input[name="listing_plan"]').on('click', function(){
+                if($('.wpbdp-custom-continue').length == 0){
+                    $('.wpbdp-submit-listing-section-content').append('<button class="wpbdp-custom-continue">Continue</button>');
+                }
+            });
         },
 
         categories_changed: function() {
@@ -386,7 +395,6 @@ jQuery(function($) {
             this.$submit.on( 'change, click', 'input[name="listing_plan"], input[name="continue-to-fields"]', function( e ) {
 
                 $('.wpbdp-category-selection-with-tip').show();
-                $('.wpbdp-submit-listing-section-content').append('<button class="wpbdp-custom-continue">Continue</button>');
 
             } );
 
