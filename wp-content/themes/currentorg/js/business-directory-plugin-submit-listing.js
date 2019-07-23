@@ -398,6 +398,41 @@ jQuery(function($) {
 
                 $('.wpbdp-category-selection-with-tip').show();
 
+                // grab the selected plan
+                var selected_plan = $(this).closest('.wpbdp-plan-info-box').index();
+                
+                // determine the maximum number of allowed categories for the selected plan
+                if(selected_plan == 1){
+                    max_categories = 2;
+                } else if(selected_plan == 2){
+                    max_categories = 3;
+                } else {
+                    max_categories = 1;
+                }
+
+                // update the select2 with the new maximum number of categories
+                $('#wpbdp-field-2').select2({
+                    width: '100%',
+                    maximumSelectionLength: max_categories
+                });
+
+                // grab selected categories and count how many currently are selected
+                var selected_categories = $('#wpbdp-field-2').select2('data');
+                var count_selected_categories = selected_categories.length;
+
+                // if there are more selected categories than allowed, we need to remove some
+                if(count_selected_categories > max_categories){
+                    
+                    // determine how many to remove
+                    var remove_categories = count_selected_categories - max_categories;
+
+                    // if excess categories still exist, remove them
+                    for(remove_categories > 0; remove_categories--;){
+                        $('.select2-selection__choice__remove:last-of-type').trigger('click');
+                    }
+
+                }
+
             } );
 
             // this is our custom "continue" button
