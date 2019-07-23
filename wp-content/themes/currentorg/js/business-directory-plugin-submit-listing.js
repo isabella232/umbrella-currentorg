@@ -1,3 +1,5 @@
+// this is a CUSTOMIZED copy of /plugins/business-directory-plugin/assets/js/submit-listing.js
+// we needed to be able to mess with the form interactions, hence the copied file
 jQuery(function($) {
 
     $(document).ready(function(){
