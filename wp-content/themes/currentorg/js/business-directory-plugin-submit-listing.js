@@ -1,11 +1,13 @@
 jQuery(function($) {
 
-    $('.wpbdp-category-selection-with-tip').hide();
-    $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
-    $('.wpbdp-plan-selection-wrapper').addClass('display-block-important');
-    $('.wpbdp-plan-selection.wpbdp-plan-selection-with-tip').addClass('display-block-important');
-    $('.wpbdp-plan-selection-wrapper').append($('.wpbdp-category-selection-with-tip'));
-    $('.wpbdp-plan-price input').removeAttr("disabled");
+    $(document).ready(function(){
+        $('.wpbdp-category-selection-with-tip').hide();
+        $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
+        $('.wpbdp-plan-selection-wrapper').addClass('display-block-important');
+        $('.wpbdp-plan-selection.wpbdp-plan-selection-with-tip').addClass('display-block-important');
+        $('.wpbdp-plan-selection-wrapper').append($('.wpbdp-category-selection-with-tip'));
+        $('.wpbdp-plan-price input').removeAttr("disabled");
+    });
 
     var wpbdp = window.wpbdp || {};
     wpbdp.submit_listing = wpbdp.submit_listing || {};
