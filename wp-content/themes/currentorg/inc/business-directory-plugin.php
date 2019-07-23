@@ -390,6 +390,11 @@ function wpbdp_filter_the_content(){
 
 	}
 
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing') ) ){
+
+		wp_enqueue_script( 'business-directory-plugin-submit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-submit-listing.js' ), $deps, '1.0', true );
+
+	}
 
 	return $post;
 
@@ -544,3 +549,12 @@ function wpbdp_dequeue_conflicts( $hook ) {
 
 }
 add_action( 'admin_enqueue_scripts', 'wpbdp_dequeue_conflicts', 10 );
+
+/**
+ * Dequeue scripts that are interferring with customizations
+ * such as the wpbdp-submit-listing js
+ */
+function wpbdp_dequeue_scripts() {
+	wp_dequeue_script( 'wpbdp-submit-listing' );
+ }
+ add_action( 'wp_print_scripts', 'wpbdp_dequeue_scripts', 100 );

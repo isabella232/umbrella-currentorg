@@ -446,4 +446,11 @@
 .wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
   display: none;
 }
+.wpbdp-plan-selection-wrapper.display-block-important,
+.wpbdp-plan-selection {
+  display: block!important;
+}
+.display-none-important {
+  display: none!important;
+}
 /*# sourceMappingURL=css/wpbdp.css.map */
