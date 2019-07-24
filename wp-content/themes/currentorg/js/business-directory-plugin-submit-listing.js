@@ -2,6 +2,68 @@
 // we needed to be able to mess with the form interactions, hence the copied file
 jQuery(function($) {
 
+    // grab all wpbdp_category terms with the child tags from our rest endpoint
+    var category_child_tags = $.get("/wp-json/currentorg/v1/wpbdp_categories", function(data, status){
+        return data;
+    });
+
+    // empty arr of allowed tags
+    var allowed_tags = [];
+
+    // grab selected category
+    $('#wpbdp-field-2').on('select2:select', function (e) {
+        
+        // grab category data and id
+        var selected_category = e.params.data;
+        var category_id = e.params.data.id;
+
+        // find the index in our category_child_tags response that matches the id of the selected category
+        var category_with_child_tags_index = category_child_tags.responseJSON.findIndex(function(category){
+            return category.wpbdp_category_id == category_id;
+        });
+
+        // loop through each of the category child tags and add their names to the `allowed_tags` arr
+        $.each(category_child_tags.responseJSON[category_with_child_tags_index]['wpbdp_category_child_tags'], function(index, tag){
+            allowed_tags.push(tag.name);
+        });
+
+    });
+
+    // when a category is removed, remove its child tags from `allowed_tags` arr
+    $('#wpbdp-field-2').on('select2:unselect', function (e) {
+        
+        // grab category data and id
+        var removed_category = e.params.data;
+        var removed_category_id = e.params.data.id;
+
+        // find the index in our category_child_tags response that matches the id of the selected category
+        var category_with_child_tags_index = category_child_tags.responseJSON.findIndex(function(category){
+            return category.wpbdp_category_id == removed_category_id;
+        });
+
+        // loop through each of the category child tags and remove their names to the `allowed_tags` arr
+        $.each(category_child_tags.responseJSON[category_with_child_tags_index]['wpbdp_category_child_tags'], function(index, tag){
+            allowed_tags.splice($.inArray(tag['name'], allowed_tags), 1);
+        });
+
+    });
+
+    var last_valid_selected_tag = null;
+
+    // when tags are selected, limit how many can selected based on
+    // the selected fee plan, where -1 is unlimited
+    $('body').on('change', '#wpbdp-field-9', function(event){
+
+        if($(this).val().length > max_tags && max_tags != -1){
+            $(this).val(last_valid_selected_tag);
+            alert('You cannot select more than ' +max_tags+' tags. If you would like more, select a different plan.');
+        } else {
+            last_valid_selected_tag = $(this).val();
+        }
+
+    });
+
+
     $(document).ready(function(){
         $('.wpbdp-category-selection-with-tip').hide();
         $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
@@ -404,10 +466,13 @@ jQuery(function($) {
                 // determine the maximum number of allowed categories for the selected plan
                 if(selected_plan == 1){
                     max_categories = 2;
+                    max_tags = 6;
                 } else if(selected_plan == 2){
                     max_categories = 3;
+                    max_tags = -1;
                 } else {
                     max_categories = 1;
+                    max_tags = 3;
                 }
 
                 // update the select2 with the new maximum number of categories
@@ -506,6 +571,15 @@ jQuery(function($) {
                     } );
 
                     $( window ).trigger( 'wpbdp_submit_refresh', [self, section_id, $section] );
+
+                    // loop through each available tag and remove any
+                    // not present in `allowed_tags`
+                    $('#wpbdp-field-9 option').each(function(){
+                        if(!allowed_tags.includes($(this).val())){
+                            $(this).hide();
+                        }
+                    });
+
                 } );
             } );
         },
