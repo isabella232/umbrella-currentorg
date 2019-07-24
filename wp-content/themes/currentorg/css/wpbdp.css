@@ -450,6 +450,9 @@
 #wpbdp-submit-listing .wpbdp-submit-listing-section-header {
   font-size: 16px;
 }
+#wpbdp-submit-listing .wpbdp-submit-listing-section-plan_selection ul.category-list li {
+  font-size: 14px;
+}
 .select2-results {
   font-size: 14px;
 }
