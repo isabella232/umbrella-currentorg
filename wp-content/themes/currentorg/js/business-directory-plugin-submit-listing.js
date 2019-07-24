@@ -439,7 +439,13 @@ jQuery(function($) {
             this.$submit.on( 'change, click', '.wpbdp-custom-continue', function( e ) {
 
                 e.preventDefault();
+
                  if ( $( this ).parents( '.wpbdp-plan' ).attr( 'data-disabled' ) == 1 ) {
+                    return false;
+                }
+
+                if( $('#wpbdp-field-2').select2('data') == '' ){
+                    alert('You must select at least 1 category before continuing.');
                     return false;
                 }
 
