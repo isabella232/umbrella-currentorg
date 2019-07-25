@@ -397,6 +397,7 @@
 .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img {
   flex: 1;
   text-align: center;
+  margin-bottom: 20px;
 }
 .wpbdp-submit-listing-flex-grid .wpbdp-fee-plan-img img {
   max-width: 95%;
@@ -445,6 +446,15 @@
 }
 .wpbdp-submit-listing-section #wpbdp-uploaded-images .wpbdp-image .wpbdp-image-extra label {
   display: none;
+}
+#wpbdp-submit-listing .wpbdp-submit-listing-section-header {
+  font-size: 16px;
+}
+#wpbdp-submit-listing .wpbdp-submit-listing-section-plan_selection ul.category-list li {
+  font-size: 14px;
+}
+.select2-results {
+  font-size: 14px;
 }
 .wpbdp-plan-selection-wrapper.display-block-important,
 .wpbdp-plan-selection {
