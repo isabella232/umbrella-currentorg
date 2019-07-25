@@ -50,20 +50,6 @@ jQuery(function($) {
 
     var last_valid_selected_tag = null;
 
-    // when tags are selected, limit how many can selected based on
-    // the selected fee plan, where -1 is unlimited
-    $('body').on('change', '#wpbdp-field-9', function(event){
-
-        if($(this).val().length > max_tags && max_tags != -1){
-            $(this).val(last_valid_selected_tag);
-            alert('You cannot select more than ' +max_tags+' tags. If you would like more, select a different plan.');
-        } else {
-            last_valid_selected_tag = $(this).val();
-        }
-
-    });
-
-
     $(document).ready(function(){
         $('.wpbdp-category-selection-with-tip').hide();
         $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
@@ -576,8 +562,15 @@ jQuery(function($) {
                     // not present in `allowed_tags`
                     $('#wpbdp-field-9 option').each(function(){
                         if(!allowed_tags.includes($(this).val())){
-                            $(this).hide();
+                            $(this).remove();
                         }
+                    });
+                    
+                    // turn the tags field into a select2 dropdown
+                    $('#wpbdp-field-9').select2({
+                        width: '100%',
+                        containerCssClass: 'wpbdp-field-9-dropdown',
+                        maximumSelectionLength: max_tags
                     });
 
                 } );

@@ -453,4 +453,12 @@
 .display-none-important {
   display: none!important;
 }
+.wpbdp-field-9-dropdown {
+  height: 50px;
+  border-radius: 0!important;
+  border: 1px solid #ccc !important;
+}
+.wpbdp-field-9-dropdown .select2-selection__choice {
+  font-size: 12px;
+}
 /*# sourceMappingURL=css/wpbdp.css.map */
