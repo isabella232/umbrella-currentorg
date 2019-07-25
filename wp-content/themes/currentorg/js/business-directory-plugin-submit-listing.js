@@ -2,6 +2,16 @@
 // we needed to be able to mess with the form interactions, hence the copied file
 jQuery(function($) {
 
+    $(document).ready(function(){
+        $('.wpbdp-category-selection-with-tip').hide();
+        $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
+        $('.wpbdp-plan-selection-wrapper').addClass('display-block-important');
+        $('.wpbdp-plan-selection.wpbdp-plan-selection-with-tip').addClass('display-block-important');
+        $('.wpbdp-plan-selection-wrapper').append($('.wpbdp-category-selection-with-tip'));
+        $('.wpbdp-plan-price input').removeAttr("disabled");
+        $('#wpbdp-submit-listing h2').text('Create a Listing').show();
+    });
+
     // grab all wpbdp_category terms with the child tags from our rest endpoint
     var category_child_tags = $.get("/wp-json/currentorg/v1/wpbdp_categories", function(data, status){
         return data;
@@ -49,15 +59,6 @@ jQuery(function($) {
     });
 
     var last_valid_selected_tag = null;
-
-    $(document).ready(function(){
-        $('.wpbdp-category-selection-with-tip').hide();
-        $('.wpbdp-category-selection-with-tip .wpbdp-msg').hide();
-        $('.wpbdp-plan-selection-wrapper').addClass('display-block-important');
-        $('.wpbdp-plan-selection.wpbdp-plan-selection-with-tip').addClass('display-block-important');
-        $('.wpbdp-plan-selection-wrapper').append($('.wpbdp-category-selection-with-tip'));
-        $('.wpbdp-plan-price input').removeAttr("disabled");
-    });
 
     // when the listing plan input is selected, create a custom "continue" button
     $('input[name="listing_plan"]').on('click', function(){

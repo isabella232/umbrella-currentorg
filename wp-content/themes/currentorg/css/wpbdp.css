@@ -471,4 +471,7 @@
 .wpbdp-field-9-dropdown .select2-selection__choice {
   font-size: 12px;
 }
+#wpbdp-submit-listing h2 {
+  display: none;
+}
 /*# sourceMappingURL=css/wpbdp.css.map */

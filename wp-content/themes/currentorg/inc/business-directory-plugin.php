@@ -396,6 +396,12 @@ function wpbdp_filter_the_content(){
 
 	}
 
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'edit_listing' ) ) ){
+
+		wp_enqueue_script( 'business-directory-plugin-edit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-edit-listing.js' ), $deps, '1.0', true );
+
+	}
+
 	return $post;
 
 }
