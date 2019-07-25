@@ -390,6 +390,11 @@ function wpbdp_filter_the_content(){
 
 	}
 
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing') ) ){
+
+		wp_enqueue_script( 'business-directory-plugin-submit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-submit-listing.js' ), $deps, '1.0', true );
+
+	}
 
 	return $post;
 
@@ -544,3 +549,68 @@ function wpbdp_dequeue_conflicts( $hook ) {
 
 }
 add_action( 'admin_enqueue_scripts', 'wpbdp_dequeue_conflicts', 10 );
+
+/**
+ * Dequeue scripts that are interferring with customizations
+ * such as the wpbdp-submit-listing js
+ */
+function wpbdp_dequeue_scripts() {
+	wp_dequeue_script( 'wpbdp-submit-listing' );
+ }
+ add_action( 'wp_print_scripts', 'wpbdp_dequeue_scripts', 100 );
+
+/**
+ * Grab all wpbdp_categories and find the child tags of each one
+ * 
+ * @param Array $request The request object if it's provided
+ * @return Array $wpbdp_categories_with_children All of the wpbdp_categories with their child tags
+ */
+function wpbdp_display_categories_with_child_tags( $request ) {
+
+	// get all wpbdp categories
+	$wpbdp_categories = get_terms([
+		'taxonomy' => 'wpbdp_category',
+		'hide_empty' => false
+	]);
+
+	$wpbdp_categories_with_children = array();
+
+	foreach( $wpbdp_categories as $wpbdp_category ){
+
+		$wpbdp_category_id = $wpbdp_category->term_id;
+		$wpbdp_category_name = $wpbdp_category->name;
+
+		$wpbdp_category_child_tags = get_terms([
+			'taxonomy'   => 'wpbdp_tag',
+			'hide_empty' => false,
+			'meta_key'   => 'wpbdp_tag_parent_category',
+			'meta_value' => 'wpbdp_category--'.$wpbdp_category_id,
+		]);
+
+		$wpbdp_category_with_child_tags = array(
+			'wpbdp_category_name' => $wpbdp_category_name,
+			'wpbdp_category_id'   => $wpbdp_category_id,
+			'wpbdp_category_child_tags' => $wpbdp_category_child_tags
+		);
+
+		array_push( $wpbdp_categories_with_children, $wpbdp_category_with_child_tags );
+
+	}
+
+	return $wpbdp_categories_with_children;
+	
+}
+
+/**
+ * Add new route to REST API for wpbdp_categories
+ * so we can view wpbdp_categories with their child tags
+**/
+function wpbdp_register_custom_category_rest_route(){
+
+	register_rest_route( 'currentorg/v1', 'wpbdp_categories', array(
+		'methods'  => 'GET',
+		'callback' => 'wpbdp_display_categories_with_child_tags'
+	));
+
+};
+add_action( 'rest_api_init', 'wpbdp_register_custom_category_rest_route' );
