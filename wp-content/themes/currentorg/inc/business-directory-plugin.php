@@ -394,6 +394,17 @@ function wpbdp_filter_the_content(){
 
 		wp_enqueue_script( 'business-directory-plugin-submit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-submit-listing.js' ), $deps, '1.0', true );
 
+		wp_localize_script(
+            'business-directory-plugin-submit-listing', 'wpbdpSubmitListingL10n', array(
+				'categoriesPlaceholderTxt' => _x( 'Click this field to add categories', 'submit listing', 'WPBDM' ),
+				'completeListingTxt'       => _x( 'Complete Listing', 'submit listing', 'WPBDM' ),
+				'continueToPaymentTxt'     => _x( 'Continue to Payment', 'submit listing', 'WPBDM' ),
+				'isAdmin'                  => current_user_can( 'administrator' ),
+				'waitAMoment'              => _x( 'Please wait a moment!', 'submit listing', 'WPBDM' ),
+				'somethingWentWrong'       => _x( 'Something went wrong!', 'submit listing', 'WPBDM' ),
+            )
+		);
+		
 	}
 
 	if( wpbdp_check_if_specific_wpbdp_view( array( 'edit_listing' ) ) ){
