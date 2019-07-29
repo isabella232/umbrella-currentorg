@@ -375,7 +375,7 @@ function wpbdp_filter_the_content(){
 	 *
 	 * For https://github.com/INN/umbrella-currentorg/issues/48 .
 	 */
-	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing', 'login' ) ) ){
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing' ) ) ){
 
 		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of noncommercial radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of products and services that will help their companies succeed. Current is where they connect with you.</p><p>Have questions or need assistance? Contact Kathy Bybee Hartzell - <a href="mailto:kathy@current.org">kathy@current.org</a></p>', 'currentorg');
 		
@@ -387,10 +387,6 @@ function wpbdp_filter_the_content(){
 		$post->post_content .= '</div>';
 
 		$post->post_content .= '[businessdirectory]';
-
-	}
-
-	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing') ) ){
 
 		wp_enqueue_script( 'business-directory-plugin-submit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-submit-listing.js' ), $deps, '1.0', true );
 
@@ -405,6 +401,21 @@ function wpbdp_filter_the_content(){
             )
 		);
 		
+	}
+
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'login' ) ) ){
+
+		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of noncommercial radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of products and services that will help their companies succeed. Current is where they connect with you.</p><p>Have questions or need assistance? Contact Kathy Bybee Hartzell - <a href="mailto:kathy@current.org">kathy@current.org</a></p>', 'currentorg');
+		
+		// display images for each fee plan
+		$post->post_content .= '<div class="wpbdp-submit-listing-flex-grid">';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/basic-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/enhanced-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/leading-fee-plan.png' ).'"></div>';
+		$post->post_content .= '</div>';
+
+		$post->post_content .= '[businessdirectory]';
+
 	}
 
 	if( wpbdp_check_if_specific_wpbdp_view( array( 'edit_listing' ) ) ){
