@@ -381,9 +381,9 @@ function wpbdp_filter_the_content(){
 		
 		// display images for each fee plan
 		$post->post_content .= '<div class="wpbdp-submit-listing-flex-grid">';
-			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/basic-fee-plan.png' ).'"></div>';
-			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/enhanced-fee-plan.png' ).'"></div>';
-			$post->post_content .= '<div class="wpbdp-fee-plan-img"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/leading-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/basic-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/enhanced-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/leading-fee-plan.png' ).'"></div>';
 		$post->post_content .= '</div>';
 
 		$post->post_content .= '[businessdirectory]';
@@ -631,3 +631,19 @@ function wpbdp_register_custom_category_rest_route(){
 
 };
 add_action( 'rest_api_init', 'wpbdp_register_custom_category_rest_route' );
+
+/**
+ * Echo out custom css that applies specifically to the submit listing page
+ * Only used for the submit listing page, not the submission received page
+ * 
+ * @param Object $listing An object with information about the current listing being submitted or edited.
+ */
+function wpbdp_submit_listing_page_css( $listing ){
+	echo 
+	'<style>
+		.wpbdp-fee-plan-img {
+			display: block!important;
+		}
+	</style>';
+}
+add_action( 'wpbdp_before_submit_listing_page', 'wpbdp_submit_listing_page_css', 99, 1 );
