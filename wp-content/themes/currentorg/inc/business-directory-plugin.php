@@ -375,9 +375,37 @@ function wpbdp_filter_the_content(){
 	 *
 	 * For https://github.com/INN/umbrella-currentorg/issues/48 .
 	 */
-	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing', 'login' ) ) ){
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing' ) ) ){
 
-		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of services that will help their stations succeed. Current is where they connect with you.</p>', 'currentorg');
+		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of noncommercial radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of products and services that will help their companies succeed. Current is where they connect with you.</p><p>Have questions or need assistance? Contact Kathy Bybee Hartzell - <a href="mailto:kathy@current.org">kathy@current.org</a></p>', 'currentorg');
+		
+		// display images for each fee plan
+		$post->post_content .= '<div class="wpbdp-submit-listing-flex-grid">';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/basic-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/enhanced-fee-plan.png' ).'"></div>';
+			$post->post_content .= '<div class="wpbdp-fee-plan-img display-none-important"><img src="'.esc_attr( get_stylesheet_directory_uri() . '/business-directory/img/leading-fee-plan.png' ).'"></div>';
+		$post->post_content .= '</div>';
+
+		$post->post_content .= '[businessdirectory]';
+
+		wp_enqueue_script( 'business-directory-plugin-submit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-submit-listing.js' ), $deps, '1.0', true );
+
+		wp_localize_script(
+            'business-directory-plugin-submit-listing', 'wpbdpSubmitListingL10n', array(
+				'categoriesPlaceholderTxt' => _x( 'Click this field to add categories', 'submit listing', 'WPBDM' ),
+				'completeListingTxt'       => _x( 'Complete Listing', 'submit listing', 'WPBDM' ),
+				'continueToPaymentTxt'     => _x( 'Continue to Payment', 'submit listing', 'WPBDM' ),
+				'isAdmin'                  => current_user_can( 'administrator' ),
+				'waitAMoment'              => _x( 'Please wait a moment!', 'submit listing', 'WPBDM' ),
+				'somethingWentWrong'       => _x( 'Something went wrong!', 'submit listing', 'WPBDM' ),
+            )
+		);
+		
+	}
+
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'login' ) ) ){
+
+		$post->post_content = __( '<p>Public media is a $3.5 billion industry comprised of hundreds of noncommercial radio and TV stations that serve nearly every community in the U.S. Public broadcasters seek trusted vendors for a wide range of products and services that will help their companies succeed. Current is where they connect with you.</p><p>Have questions or need assistance? Contact Kathy Bybee Hartzell - <a href="mailto:kathy@current.org">kathy@current.org</a></p>', 'currentorg');
 		
 		// display images for each fee plan
 		$post->post_content .= '<div class="wpbdp-submit-listing-flex-grid">';
@@ -390,9 +418,9 @@ function wpbdp_filter_the_content(){
 
 	}
 
-	if( wpbdp_check_if_specific_wpbdp_view( array( 'submit_listing') ) ){
+	if( wpbdp_check_if_specific_wpbdp_view( array( 'edit_listing' ) ) ){
 
-		wp_enqueue_script( 'business-directory-plugin-submit-listing-customizations', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin.js' ), $deps, '1.0', true );
+		wp_enqueue_script( 'business-directory-plugin-edit-listing', esc_attr( get_stylesheet_directory_uri() . '/js/business-directory-plugin-edit-listing.js' ), $deps, '1.0', true );
 
 	}
 
@@ -551,6 +579,15 @@ function wpbdp_dequeue_conflicts( $hook ) {
 add_action( 'admin_enqueue_scripts', 'wpbdp_dequeue_conflicts', 10 );
 
 /**
+ * Dequeue scripts that are interferring with customizations
+ * such as the wpbdp-submit-listing js
+ */
+function wpbdp_dequeue_scripts() {
+	wp_dequeue_script( 'wpbdp-submit-listing' );
+ }
+ add_action( 'wp_print_scripts', 'wpbdp_dequeue_scripts', 100 );
+
+/**
  * Grab all wpbdp_categories and find the child tags of each one
  * 
  * @param Array $request The request object if it's provided
@@ -605,3 +642,19 @@ function wpbdp_register_custom_category_rest_route(){
 
 };
 add_action( 'rest_api_init', 'wpbdp_register_custom_category_rest_route' );
+
+/**
+ * Echo out custom css that applies specifically to the submit listing page
+ * Only used for the submit listing page, not the submission received page
+ * 
+ * @param Object $listing An object with information about the current listing being submitted or edited.
+ */
+function wpbdp_submit_listing_page_css( $listing ){
+	echo 
+	'<style>
+		.wpbdp-fee-plan-img {
+			display: block!important;
+		}
+	</style>';
+}
+add_action( 'wpbdp_before_submit_listing_page', 'wpbdp_submit_listing_page_css', 99, 1 );
