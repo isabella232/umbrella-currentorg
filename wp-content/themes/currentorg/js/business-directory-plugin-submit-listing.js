@@ -132,6 +132,13 @@ jQuery(function($) {
 
             this.field.select2();
 
+            // turn the tags field into a select2 dropdown
+            $('#wpbdp-field-9').select2({
+                width: '100%',
+                containerCssClass: 'wpbdp-field-9-dropdown',
+                maximumSelectionLength: localStorage.getItem("max_tags")
+            });
+
             $('input[name="listing_plan"]').on('click', function(){
                 if($('.wpbdp-custom-continue').length == 0){
                     $('.wpbdp-submit-listing-section-content').append('<button class="wpbdp-custom-continue">Continue</button>');
@@ -461,6 +468,9 @@ jQuery(function($) {
                     max_categories = 1;
                     max_tags = 3;
                 }
+
+                // set max tags as a local item so we can use it later once the page refreshes if there's an error
+                localStorage.setItem("max_tags", max_tags);
 
                 // update the select2 with the new maximum number of categories
                 $('#wpbdp-field-2').select2({
