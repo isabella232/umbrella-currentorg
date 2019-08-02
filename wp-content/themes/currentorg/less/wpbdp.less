@@ -351,6 +351,7 @@
       display: block;
       margin-right: auto;
       margin-left: auto;
+      max-width: 300px;
     }
     img + img {
       margin-top: @common-whitespace;
@@ -376,6 +377,15 @@
       }
       &:last-of-type {
         margin-bottom: 30px;
+      }
+    }
+  }
+}
+article {
+  .entry-content {
+    .wpbdp-field-content {
+      p {
+        font-family: @font-sans;
       }
     }
   }
