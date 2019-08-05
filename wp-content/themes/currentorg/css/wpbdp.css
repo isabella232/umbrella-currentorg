@@ -342,7 +342,11 @@
 article .entry-content .wpbdp-field-content p {
   font-family: "freight-sans-pro", "Helvetica Neue", Arial, sans-serif;
 }
+.listing-sidebar .listing-main-image {
+  text-align: center;
+}
 .listing-sidebar .listing-main-image img {
+  max-width: 300px;
   width: 100%;
 }
 .listing-sidebar .listing-services h3 {
