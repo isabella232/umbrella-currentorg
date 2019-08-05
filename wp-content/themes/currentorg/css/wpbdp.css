@@ -311,6 +311,7 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
+  max-width: 300px;
 }
 .wpbdp-listing-single .extra-images img + img {
   margin-top: 1.5rem;
@@ -337,6 +338,9 @@
 }
 .wpbdp-listing-single .listing-contact-details .listing-contact-detail:last-of-type {
   margin-bottom: 30px;
+}
+article .entry-content .wpbdp-field-content p {
+  font-family: "freight-sans-pro", "Helvetica Neue", Arial, sans-serif;
 }
 .listing-sidebar .listing-main-image img {
   width: 100%;
