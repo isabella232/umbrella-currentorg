@@ -12,4 +12,11 @@
  * @package         Current_Ltw_Projects
  */
 
-// Your code starts here.
+$includes = array(
+	'/post-types/projects.php',
+);
+foreach ( $includes as $include ) {
+	if ( 0 === validate_file( $include ) ) {
+		require_once( dirname( __FILE__ ) . $include );
+	}
+}
