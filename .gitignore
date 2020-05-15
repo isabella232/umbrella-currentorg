@@ -119,3 +119,4 @@ wp-content/debug.log
 # add a line here that looks like this:
 # !/wp-content/themes/currentorg
 !/wp-content/themes/currentorg
+!/wp-content/plugins/current-ltw-projects
