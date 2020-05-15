@@ -1,4 +1,7 @@
 <?php
+/**
+ * Regster the projects post type and associated metadata
+ */
 
 /**
  * Registers the `projects` post type.
@@ -6,14 +9,14 @@
 function projects_init() {
 	register_post_type( 'projects', array(
 		'labels'                => array(
-			'name'                  => __( 'Projects', 'current-ltw-projects' ),
+			'name'                  => __( 'Local That Works Projects', 'current-ltw-projects' ),
 			'singular_name'         => __( 'Project', 'current-ltw-projects' ),
-			'all_items'             => __( 'All Projects', 'current-ltw-projects' ),
-			'archives'              => __( 'Project Archives', 'current-ltw-projects' ),
-			'attributes'            => __( 'Project Attributes', 'current-ltw-projects' ),
+			'all_items'             => __( 'All LTW Projects', 'current-ltw-projects' ),
+			'archives'              => __( 'LTW Project Archives', 'current-ltw-projects' ),
+			'attributes'            => __( 'LTW Project Attributes', 'current-ltw-projects' ),
 			'insert_into_item'      => __( 'Insert into Project', 'current-ltw-projects' ),
 			'uploaded_to_this_item' => __( 'Uploaded to this Project', 'current-ltw-projects' ),
-			'featured_image'        => _x( 'Featured Image', 'projects', 'current-ltw-projects' ),
+			'featured_image'        => _x( 'Project Featured Image', 'projects', 'current-ltw-projects' ),
 			'set_featured_image'    => _x( 'Set featured image', 'projects', 'current-ltw-projects' ),
 			'remove_featured_image' => _x( 'Remove featured image', 'projects', 'current-ltw-projects' ),
 			'use_featured_image'    => _x( 'Use as featured image', 'projects', 'current-ltw-projects' ),
@@ -25,8 +28,8 @@ function projects_init() {
 			'add_new_item'          => __( 'Add New Project', 'current-ltw-projects' ),
 			'edit_item'             => __( 'Edit Project', 'current-ltw-projects' ),
 			'view_item'             => __( 'View Project', 'current-ltw-projects' ),
-			'view_items'            => __( 'View Projects', 'current-ltw-projects' ),
-			'search_items'          => __( 'Search Projects', 'current-ltw-projects' ),
+			'view_items'            => __( 'View LTW Projects', 'current-ltw-projects' ),
+			'search_items'          => __( 'Search LTW Projects', 'current-ltw-projects' ),
 			'not_found'             => __( 'No Projects found', 'current-ltw-projects' ),
 			'not_found_in_trash'    => __( 'No Projects found in trash', 'current-ltw-projects' ),
 			'parent_item_colon'     => __( 'Parent Project:', 'current-ltw-projects' ),
@@ -85,3 +88,65 @@ function projects_updated_messages( $messages ) {
 	return $messages;
 }
 add_filter( 'post_updated_messages', 'projects_updated_messages' );
+
+/**
+ * Register the custom post meta for Local That Works projects
+ *
+ * @link https://developer.wordpress.org/reference/functions/register_meta/
+ * @link https://developer.wordpress.org/block-editor/tutorials/plugin-sidebar-0/
+ */
+function projects_register_post_meta() {
+	register_post_meta(
+		'projects',
+		'project-contact-name',
+		array(
+			'object_subtype' => 'post',
+			'type' => 'string',
+			'description' => 'The contact human for this project.',
+			'single' => true,
+			'sanitize_callback' => 'sanitize_text_field',
+			// 'auth_callback' => .... I don't know the answer to this question.
+			'show_in_rest' => true,
+		)
+	);
+	register_post_meta(
+		'projects',
+		'project-contact-email',
+		array(
+			'object_subtype' => 'post',
+			'type' => 'string',
+			'description' => 'The contact email for this project.',
+			'single' => true,
+			'sanitize_callback' => 'sanitize_text_field',
+			// 'auth_callback' => .... I don't know the answer to this question.
+			'show_in_rest' => true,
+		)
+	);
+	register_post_meta(
+		'projects',
+		'project-organization',
+		array(
+			'object_subtype' => 'post',
+			'type' => 'string',
+			'description' => 'The organization responsible for this project.',
+			'single' => true,
+			'sanitize_callback' => 'sanitize_text_field',
+			// 'auth_callback' => .... I don't know the answer to this question.
+			'show_in_rest' => true,
+		)
+	);
+	register_post_meta(
+		'projects',
+		'project-video',
+		array(
+			'object_subtype' => 'post',
+			'type' => 'string',
+			'description' => 'Link to video URL for this project',
+			'single' => true,
+			'sanitize_callback' => 'esc_url_raw',
+			// 'auth_callback' => .... I don't know the answer to this question.
+			'show_in_rest' => true,
+		)
+	);
+}
+add_action( 'init', 'projects_register_post_meta' );
