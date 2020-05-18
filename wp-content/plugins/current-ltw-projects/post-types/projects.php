@@ -48,6 +48,18 @@ function projects_init() {
 		'show_in_rest'          => true,
 		'rest_base'             => 'projects',
 		'rest_controller_class' => 'WP_REST_Posts_Controller',
+		'supports'              => array(
+			'title',
+			'editor',
+			// 'author',
+			'thumbnail',
+			// 'excerpt',
+			'custom-fields',
+			// 'comments',
+			// 'revisions',
+			// 'page-attributes',
+			// 'post-formats',
+		),
 	) );
 
 }
@@ -150,3 +162,38 @@ function projects_register_post_meta() {
 	);
 }
 add_action( 'init', 'projects_register_post_meta' );
+
+/**
+ * Add the meta boxes for the projects meta fields 
+ *
+ */
+function projects_add_meta_box() {
+	add_meta_box(
+		'current-ltw-project',
+		__( 'Project Metadata', 'current-ltw-projects' ),
+		'projects_meta_box',
+		'projects', // post type
+		'advanced',
+		'high',
+		array(
+			'__block_editor_compatible_meta_box' => true,
+			'__back_compat_meta_box'             => false,
+		)
+	);
+}
+add_action( 'add_meta_boxes', 'projects_add_meta_box' );
+
+/*
+ * Save callback for the project meta fields
+ */
+
+
+/**
+ * The meta box for the project meta fields
+ */
+function projects_meta_box( $post ) {
+	// project-contact-name - text
+	// project-contact-email - email
+	// project-organization - text
+	// project-video - url
+}
