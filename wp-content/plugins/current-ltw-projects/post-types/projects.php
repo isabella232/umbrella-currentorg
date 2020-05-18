@@ -41,7 +41,7 @@ function projects_init() {
 		'show_in_nav_menus'     => true,
 		'supports'              => array( 'title', 'editor' ),
 		'has_archive'           => true,
-		'rewrite'               => true,
+		'rewrite'               => array( 'slug' => 'local-that-works' ),
 		'query_var'             => true,
 		'menu_position'         => null,
 		'menu_icon'             => 'dashicons-awards',
