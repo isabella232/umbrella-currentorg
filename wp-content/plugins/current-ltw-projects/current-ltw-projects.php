@@ -14,6 +14,9 @@
 
 $includes = array(
 	'/post-types/projects.php',
+	'/taxonomies/project-status.php',
+	'/taxonomies/project-org-type.php',
+	'/taxonomies/project-category.php',
 );
 foreach ( $includes as $include ) {
 	if ( 0 === validate_file( $include ) ) {
