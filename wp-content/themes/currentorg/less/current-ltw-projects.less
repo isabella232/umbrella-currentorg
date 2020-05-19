@@ -3,3 +3,29 @@
 // this sets common values for a lot of padding and margins in this file
 @common-whitespace: 1.5rem;
 
+.current-ltw-shortcode {
+	@supports( display: grid ) {
+		@media ( min-width: 771px ) {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-areas:
+				"search search"
+				"list single"
+			;
+		}
+		.projects-search-form {
+			grid-area: search;
+		}
+		.projects-list {
+			grid-area: list;
+		}
+		.projects-single-holder {
+			grid-area: single;
+		}
+	}
+}
+
+.projects-search-form {
+	padding: @common-whitespace 0;
+	border-bottom: 1px solid @grey-d;
+}

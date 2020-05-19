@@ -1,4 +1,26 @@
 /**
  * Variables
  */
+@supports ( display: grid ) {
+  @media (min-width: 771px) {
+    .current-ltw-shortcode {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "search search" "list single";
+    }
+  }
+  .current-ltw-shortcode .projects-search-form {
+    grid-area: search;
+  }
+  .current-ltw-shortcode .projects-list {
+    grid-area: list;
+  }
+  .current-ltw-shortcode .projects-single-holder {
+    grid-area: single;
+  }
+}
+.projects-search-form {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #343434;
+}
 /*# sourceMappingURL=css/current-ltw-projects.css.map */

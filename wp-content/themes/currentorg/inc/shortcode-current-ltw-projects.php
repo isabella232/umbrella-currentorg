@@ -27,6 +27,7 @@ function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '')
 	$align = empty( $atts['align'] ) ? '' : 'align' . esc_attr( $atts['align'] );
 	$actual_classes = implode( ' ', array(
 		$align,
+		'current-ltw-shortcode',
 	) );
 
 	// placeholder in case we're ever worried about having more than one of this on a page:
@@ -40,7 +41,7 @@ function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '')
 
 	// start box
 	printf(
-		'<div id="%1$s" class="%2$s"></div>',
+		'<div id="%1$s" class="%2$s">',
 		esc_attr( $actual_id ),
 		esc_attr( $actual_classes )
 	);
