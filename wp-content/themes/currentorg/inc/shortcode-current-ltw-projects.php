@@ -34,6 +34,8 @@ function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '')
 	$actual_id = "current-ltw-shortcode-1";
 
 	// start output
+	wp_enqueue_style('current-ltw-stylesheet');
+	wp_enqueue_script('current-ltw-script');
 	ob_start();
 
 	// start box
@@ -67,3 +69,23 @@ add_action( 'init', function() {
 		add_shortcode( 'current-ltw-projects', 'current_ltw_projects_shortcode' );
 	}
 });
+
+/**
+ * Register the assets for this project
+ */
+function current_ltw_projects_assets() {
+	wp_register_style(
+		'current-ltw-stylesheet',
+		get_stylesheet_directory_uri() . '/css/current-ltw-projects.css',
+		array(),
+		filemtime( get_stylesheet_directory() . '/css/current-ltw-projects.css' )
+	);
+	wp_register_script(
+		'current-ltw-script',
+		get_stylesheet_directory_uri() . '/js/current-ltw-projects.js',
+		array(),
+		filemtime( get_stylesheet_directory() . '/js/current-ltw-projects.js' ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'current_ltw_projects_assets' );
