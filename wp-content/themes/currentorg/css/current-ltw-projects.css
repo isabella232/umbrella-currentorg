@@ -5,8 +5,10 @@
   @media (min-width: 771px) {
     .current-ltw-shortcode {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 5fr 7fr;
       grid-template-areas: "search search" "list single";
+      grid-gap: 1.5rem;
+      gap: 1.5rem;
     }
   }
   .current-ltw-shortcode .projects-search-form {
@@ -22,5 +24,20 @@
 .projects-search-form {
   padding: 1.5rem 0;
   border-bottom: 1px solid #343434;
+}
+.projects-list {
+  border: 1px solid #343434;
+  padding: 0.75rem;
+}
+.projects-list-item {
+  border: 1px solid #343434;
+  padding: 0.75rem;
+}
+.projects-list-item + .projects-list-item {
+  margin-top: 0.75rem;
+}
+.projects-single-holder {
+  border: 1px solid #343434;
+  padding: 0.75rem;
 }
 /*# sourceMappingURL=css/current-ltw-projects.css.map */

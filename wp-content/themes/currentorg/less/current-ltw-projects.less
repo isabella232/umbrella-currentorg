@@ -7,11 +7,13 @@
 	@supports( display: grid ) {
 		@media ( min-width: 771px ) {
 			display: grid;
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 5fr 7fr;
 			grid-template-areas:
 				"search search"
 				"list single"
 			;
+			grid-gap: @common-whitespace;
+			gap: @common-whitespace;
 		}
 		.projects-search-form {
 			grid-area: search;
@@ -28,4 +30,19 @@
 .projects-search-form {
 	padding: @common-whitespace 0;
 	border-bottom: 1px solid @grey-d;
+}
+.projects-list {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
+}
+.projects-list-item {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
+	& + .projects-list-item {
+		margin-top: @common-whitespace * 0.5;
+	}
+}
+.projects-single-holder {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
 }
