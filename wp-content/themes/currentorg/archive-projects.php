@@ -15,9 +15,6 @@ $queried_object = get_queried_object();
 	<?php
 		if ( have_posts() || largo_have_featured_posts() ) {
 
-			// queue up the first post so we know what type of archive page we're dealing with
-			the_post();
-
 			/*
 			 * Display some different stuff in the header
 			 * depending on what type of archive page we're looking at
