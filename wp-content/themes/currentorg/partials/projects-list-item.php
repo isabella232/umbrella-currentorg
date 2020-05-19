@@ -13,14 +13,12 @@ $args = array (
 	'values' => get_post_custom( $post->ID ),
 
 	// this should be filtered in the event of a term-specific archive
-	'featured' => has_term( 'homepage-featured', 'prominence' ),
+	'featured' => false,
 
 	// $show_thumbnail does not control whether or not the thumbnail is displayed;
 	// it controls whether or not the thumbnail is displayed normally.
 	'show_thumbnail' => TRUE,
-	'show_byline' => TRUE,
 	'show_excerpt' => TRUE,
-	'in_series' => FALSE,
 );
 
 $args = apply_filters( 'largo_content_partial_arguments', $args, get_queried_object() );
@@ -69,12 +67,6 @@ if ( $featured ) {
 		<h2 class="entry-title">
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
 		</h2>
-
-		<?php
-			if ( $show_byline ) { ?>
-				<h5 class="byline"><?php largo_byline( true, false, get_the_ID() ); ?></h5>
-			<?php }
-		?>
 
 		<?php
 			if ( $show_excerpt ) {
