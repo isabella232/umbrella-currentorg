@@ -522,7 +522,7 @@ function wpbdp_page_specific_css() {
 	 * On the assumption that the page the directory is displayed on will always be post 5909
 	 */
 	$qo = get_queried_object();
-	if ( ! is_object( $qo ) || 5909 !== (int) $qo->ID ) {
+	if ( ! is_object( $qo ) || ! isset( $qo->ID ) || 5909 !== (int) $qo->ID ) {
 		return;
 	}
 

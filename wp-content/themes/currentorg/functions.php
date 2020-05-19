@@ -21,6 +21,7 @@ function largo_child_require_files() {
 		'/homepages/layouts/current.php',
 		'/inc/custom-taxonomies.php',
 		'/inc/business-directory-plugin.php',
+		'/inc/shortcode-current-ltw-projects.php',
 	);
 	foreach ( $includes as $include ) {
 		if ( 0 === validate_file( get_stylesheet_directory() . $include ) ) {
