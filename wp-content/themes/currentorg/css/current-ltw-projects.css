@@ -1,6 +1,9 @@
 /**
  * Variables
  */
+.current-ltw-shortcode {
+  margin: 1.5rem 0;
+}
 @supports ( display: grid ) {
   @media (min-width: 771px) {
     .current-ltw-shortcode {
