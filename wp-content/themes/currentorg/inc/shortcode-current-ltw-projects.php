@@ -54,6 +54,8 @@ function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '')
 		echo do_shortcode($content);
 	}
 
+	get_template_part( 'partials/projects-base' );
+
 	// end box
 	echo '</div>';
 
