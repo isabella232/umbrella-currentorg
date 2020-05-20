@@ -7,7 +7,17 @@
 				get_template_part( 'partials/content', 'projects-list-item' );
 				$counter++;
 			}
-			largo_content_nav( 'nav-below' );
+
+			// not using largo_content_nav( 'nav-below' ) so that we can set $query
+			largo_render_template(
+				'partials/load-more-posts',
+				null,
+				array(
+					'nav_id' => 'nav-below',
+					'the_query' => $query,
+					'posts_term' => ( ! empty( $posts_term ) ) ? $posts_term : esc_html__( 'Projects', 'current-ltw-projects' )
+				)
+			);
 		} else {
 			get_template_part( 'partials/content', 'not-found' );
 		}
