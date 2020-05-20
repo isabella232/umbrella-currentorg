@@ -1,0 +1,50 @@
+@import "vars.less";
+
+// this sets common values for a lot of padding and margins in this file
+@common-whitespace: 1.5rem;
+
+.current-ltw-shortcode {
+	margin: @common-whitespace 0;
+
+	@supports( display: grid ) {
+		@media ( min-width: 771px ) {
+			display: grid;
+			grid-template-columns: 5fr 7fr;
+			grid-template-areas:
+				"search search"
+				"list single"
+			;
+			grid-gap: @common-whitespace;
+			gap: @common-whitespace;
+		}
+		.projects-search-form {
+			grid-area: search;
+		}
+		.projects-list {
+			grid-area: list;
+		}
+		.projects-single-holder {
+			grid-area: single;
+		}
+	}
+}
+
+.projects-search-form {
+	padding: @common-whitespace 0;
+	border-bottom: 1px solid @grey-d;
+}
+.projects-list {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
+}
+.projects-list-item {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
+	& + .projects-list-item {
+		margin-top: @common-whitespace * 0.5;
+	}
+}
+.projects-single-holder {
+	border: 1px solid @grey-d;
+	padding: @common-whitespace * 0.5;
+}
