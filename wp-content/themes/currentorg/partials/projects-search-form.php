@@ -15,9 +15,9 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 ?>
 <form class="projects-search-form-search form-search" role="search" method="get" action="<?php echo esc_url( $form_url ); ?>">
 	<div class="project-search-container">
-		<label for="project-search">
+		<label for="projects-search">
 			<?php esc_html_e( 'Search for:', 'mwen' ); ?>
-			<input type="text" class="searchbox search-query" value="<?php the_search_query(); ?>" name="project-search" />
+			<input type="text" class="searchbox search-query" value="<?php the_search_query(); ?>" name="projects-search" />
 		</label>
 	</div>
 </form>

@@ -92,3 +92,25 @@ function current_ltw_projects_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'current_ltw_projects_assets' );
+
+/**
+ * Filter the query
+ */
+function current_ltw_projects_pre_get_posts( $query ) {
+	if ( is_admin() ) {
+		return $query;
+	}
+
+	if ( 'projects' !== $query->query_vars['post_type'] ) {
+		error_log(var_export( 'aborting', true));
+		return $query;
+	}
+
+	error_log(var_export( 'b', true));
+
+	if ( isset( $_GET['projects-search'] ) && ! empty( $_GET['projects-search'] ) ) {
+		$query->set( 's', sanitize_title_for_query( $_GET['projects-search'] ) );
+		error_log(var_export( 's', true));
+	}
+}
+add_action( 'pre_get_posts', 'current_ltw_projects_pre_get_posts', 10, 1 );
