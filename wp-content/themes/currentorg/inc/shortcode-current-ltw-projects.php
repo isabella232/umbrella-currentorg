@@ -94,23 +94,35 @@ function current_ltw_projects_assets() {
 add_action( 'wp_enqueue_scripts', 'current_ltw_projects_assets' );
 
 /**
- * Filter the query
+ * Filter queries for the projects post type
  */
 function current_ltw_projects_pre_get_posts( $query ) {
 	if ( is_admin() ) {
 		return $query;
 	}
 
-	if ( 'projects' !== $query->query_vars['post_type'] ) {
-		error_log(var_export( 'aborting', true));
+	if ( isset( $query->query_vars['post_type'] ) && 'projects' !== $query->query_vars['post_type'] ) {
 		return $query;
 	}
 
-	error_log(var_export( 'b', true));
-
 	if ( isset( $_GET['projects-search'] ) && ! empty( $_GET['projects-search'] ) ) {
 		$query->set( 's', sanitize_title_for_query( $_GET['projects-search'] ) );
-		error_log(var_export( 's', true));
 	}
 }
 add_action( 'pre_get_posts', 'current_ltw_projects_pre_get_posts', 10, 1 );
+
+/**
+ * Filter which post type partial Largo uses for the LMP button on projects
+ *
+ * @link https://github.com/INN/largo/blob/v0.6.4/inc/ajax-functions.php#L203
+ */
+function current_ltw_projects_largo_lmp_template_partial( $partial, $query ) {
+	// on the assumption that the only place where this site will LMP some posts of this type is on the list view
+	// an assumption that is only valid because the archive uses the shortcode that renders the list view
+	if ( isset( $query->query_vars['post_type'] ) && 'projects' === $query->query_vars['post_type'] ) {
+		return 'projects-list-item';
+	}
+
+	return $partial;
+}
+add_filter( 'largo_lmp_template_partial', 'current_ltw_projects_largo_lmp_template_partial', 10, 2);
