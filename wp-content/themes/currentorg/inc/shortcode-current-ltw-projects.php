@@ -109,7 +109,7 @@ function current_ltw_projects_pre_get_posts( $query ) {
 		$query->set( 's', sanitize_title_for_query( $_GET['projects-search'] ) );
 	}
 }
-add_action( 'pre_get_posts', 'current_ltw_projects_pre_get_posts', 10, 1 );
+#add_action( 'pre_get_posts', 'current_ltw_projects_pre_get_posts', 10, 1 );
 
 /**
  * Filter which post type partial Largo uses for the LMP button on projects
