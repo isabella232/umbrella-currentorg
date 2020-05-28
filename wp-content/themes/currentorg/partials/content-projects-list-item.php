@@ -47,10 +47,8 @@ $custom = get_post_custom();
 		</h2>
 
 		<?php
-			// we may need to redo these links as search query params instead
-			$status = get_the_terms( get_the_ID(), 'project-status' );
-			$categories = get_the_terms( get_the_ID(), 'project-category' );
-			$org_types = get_the_terms( get_the_ID(), 'project-org-type' );
+			// these are presently links to the term archive pages
+			// we may need to redo these links as links to the present page with search query params instead
 
 			$terms = array();
 			foreach ( array( 'project-status', 'project-category', 'project-org-type' ) as $tax ) {
