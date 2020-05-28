@@ -43,4 +43,11 @@
   border: 1px solid #343434;
   padding: 0.75rem;
 }
+.projects-single-holder .entry-content .project-tags {
+  margin-left: 0;
+}
+.projects-single-holder .entry-content label {
+  font-weight: bold;
+  display: inline;
+}
 /*# sourceMappingURL=css/current-ltw-projects.css.map */

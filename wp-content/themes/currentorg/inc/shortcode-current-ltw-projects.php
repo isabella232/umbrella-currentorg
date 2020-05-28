@@ -86,13 +86,57 @@ function current_ltw_projects_assets() {
 	wp_register_script(
 		'current-ltw-script',
 		get_stylesheet_directory_uri() . '/js/current-ltw-projects.js',
-		array(),
+		array( 'jquery' ),
 		filemtime( get_stylesheet_directory() . '/js/current-ltw-projects.js' ),
 		true
+	);
+	wp_localize_script( 
+		'current-ltw-script', 
+		'ajax_object',
+		array( 'ajax_url' => admin_url( 'admin-ajax.php' ) )
 	);
 }
 add_action( 'wp_enqueue_scripts', 'current_ltw_projects_assets' );
 
+/**
+ * Load a single project when it is selected from the project list
+ */
+function current_ltw_projects_load_single_project_callback() {
+
+	// make sure post id is set and actually a valid post
+    if( isset( $_GET['post_id'] ) && get_post_status( $_GET['post_id'] ) ) {
+
+		$post_id = $_GET["post_id"];
+		
+		// set up basic args for our query to grab the post
+		$single_project_args = array(
+			'post_type' => 'projects',
+			'p' => $post_id
+		);
+
+		$single_project_query = new WP_Query( $single_project_args );
+
+		if( $single_project_query->have_posts() ){
+			
+			while ( $single_project_query->have_posts() ) : $single_project_query->the_post();
+
+				// show singular project with the project single template partial
+				get_template_part( 'partials/projects', 'single-holder' );
+
+			endwhile;
+
+		}
+		
+	} else {
+
+		echo '<p>The project could not be found.</p>';
+
+	}
+	
+	wp_die();
+	
+}
+add_action( 'wp_ajax_load_more_post', 'current_ltw_projects_load_single_project_callback' );
 /**
  * Filter queries for the projects post type
  */
