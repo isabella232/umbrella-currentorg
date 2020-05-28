@@ -17,7 +17,7 @@
 			grid-gap: @common-whitespace;
 			gap: @common-whitespace;
 		}
-		.projects-search-form {
+		.projects-search-form-search {
 			grid-area: search;
 		}
 		.projects-list {
@@ -29,9 +29,53 @@
 	}
 }
 
-.projects-search-form {
+.projects-search-form-search {
 	padding: @common-whitespace 0;
 	border-bottom: 1px solid @grey-d;
+	input, .btn, button, select {
+		padding: 4px;
+	}
+	input, .btn, button, details, select, label {
+		box-sizing: border-box;
+		line-height: 1.5;
+		font-size: 16px;
+		border-radius: 0;
+		height: unset;
+		margin-top: 0;
+		margin-bottom: 0;
+		display: inline-block;
+		vertical-align: middle;
+		float: left;
+	}
+	.btn-submit {
+		border: 1px solid @grey-m;
+		background-color: @brand;
+		color: white;
+	}
+	.project-category .btn::after {
+		content: "\1f893";
+		display: inline;
+	}
+	
+	details[open] {
+		border: 1px solid @grey-d;
+		position: relative;
+		top: 0;
+		vertical-align: top;
+		max-height: 50vh;
+		overflow: scroll;
+	}
+	details {
+		li {
+			display: list-item;
+			list-style: none;
+			margin-bottom: 0;
+		}
+		label {
+			float: none;
+			clear: both;
+		}
+	}
 }
 .projects-list {
 	border: 1px solid @grey-d;

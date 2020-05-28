@@ -14,7 +14,7 @@
       gap: 1.5rem;
     }
   }
-  .current-ltw-shortcode .projects-search-form {
+  .current-ltw-shortcode .projects-search-form-search {
     grid-area: search;
   }
   .current-ltw-shortcode .projects-list {
@@ -24,9 +24,58 @@
     grid-area: single;
   }
 }
-.projects-search-form {
+.projects-search-form-search {
   padding: 1.5rem 0;
   border-bottom: 1px solid #343434;
+}
+.projects-search-form-search input,
+.projects-search-form-search .btn,
+.projects-search-form-search button,
+.projects-search-form-search select {
+  padding: 4px;
+}
+.projects-search-form-search input,
+.projects-search-form-search .btn,
+.projects-search-form-search button,
+.projects-search-form-search details,
+.projects-search-form-search select,
+.projects-search-form-search label {
+  box-sizing: border-box;
+  line-height: 1.5;
+  font-size: 16px;
+  border-radius: 0;
+  height: unset;
+  margin-top: 0;
+  margin-bottom: 0;
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+.projects-search-form-search .btn-submit {
+  border: 1px solid #666666;
+  background-color: #1c819e;
+  color: white;
+}
+.projects-search-form-search .project-category .btn::after {
+  content: "\1f893";
+  display: inline;
+}
+.projects-search-form-search details[open] {
+  border: 1px solid #343434;
+  position: relative;
+  top: 0;
+  vertical-align: top;
+  max-height: 50vh;
+  overflow: scroll;
+}
+.projects-search-form-search details li {
+  display: list-item;
+  list-style: none;
+  margin-bottom: 0;
+}
+.projects-search-form-search details label {
+  float: none;
+  clear: both;
 }
 .projects-list {
   border: 1px solid #343434;
