@@ -192,6 +192,9 @@ add_action( 'add_meta_boxes', 'projects_add_meta_box' );
  * The meta box for the project meta fields
  */
 function projects_meta_box( $post ) {
+	?>
+		<h1>hola</h1>
+	<?php
 	// project-contact-name - text
 	// project-contact-email - email
 	// project-organization - text
