@@ -16,11 +16,28 @@ if ( isset( $_GET['projects-search'] ) && ! empty( $_GET['projects-search'] ) ) 
 
 $tax_query = array();
 if ( isset( $_GET['project-org-type'] ) && ! empty( $_GET['project-org-type'] ) ) {
-	$tax_query[] = array(
-		'taxonomy' => 'project-org-type',
-		'terms' => sanitize_title_for_query( $_GET['project-org-type'] ),
-		'field' => 'term_id',
-	);
+	$term = sanitize_title_for_query( $_GET['project-org-type'] );
+	if ( ! empty( $term ) && is_numeric( $term ) ) {
+		$tax_query[] = array(
+			'taxonomy' => 'project-org-type',
+			'terms' => $term,
+			'field' => 'term_id',
+		);
+	}
+	unset( $term );
+}
+if ( isset( $_GET['tax_input']['project-category'] ) && is_array( $_GET['tax_input']['project-category'] ) ) {
+	foreach( $_GET['tax_input']['project-category'] as $term ) {
+		$term = sanitize_title_for_query( $term );
+		if ( ! empty( $term ) && is_numeric( $term ) ) {
+			$tax_query[] = array(
+				'taxonomy' => 'project-category',
+				'field' => 'term_id',
+				'terms' => $term,
+			);
+		}
+		unset( $term );
+	}
 }
 if ( ! empty( $tax_query ) ) {
 	$args['tax_query'] = $tax_query;

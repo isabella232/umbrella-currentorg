@@ -1,4 +1,12 @@
 <?php
+/**
+ * The search box and other controls for the [current-ltw-project] shortcode
+ */
+
+// Because wp_terms_checklist is not defined otherwise
+if ( ! function_exists( 'wp_terms_checklist' ) ) {
+	include ABSPATH . 'wp-admin/includes/template.php';
+}
 
 $search_query = $query->query_vars['s'];
 
@@ -30,6 +38,11 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 					'name' => 'project-org-type',
 					'taxonomy' => 'project-org-type',
 					'selected' => ( isset( $_GET['project-org-type'] ) ) ? (int) $_GET['project-org-type'] : '' ,
+				) );
+				error_log(var_export( $_GET['tax_input'], true));
+				wp_terms_checklist( null, array(
+					'taxonomy' => 'project-category',
+					'selected_cats' => ( isset( $_GET['tax_input']['project-category'] ) && is_array( $_GET['tax_input']['project-category'] ) ) ? $_GET['tax_input']['project-category'] : '' ,
 				) );
 			?>
 		</label>
