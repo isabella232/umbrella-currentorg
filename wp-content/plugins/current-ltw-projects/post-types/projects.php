@@ -102,76 +102,108 @@ function projects_updated_messages( $messages ) {
 add_filter( 'post_updated_messages', 'projects_updated_messages' );
 
 /**
+ * canon source for metabox information
+ *
+ * Returns an array of arrays, each array containing arguments
+ * for register_post_meta in a form that can be passed
+ * through call_user_func_array.
+ *
+ * Additionally, within the array argument, this function specifies
+ * some private parameters for our use:
+ * - 
+ *
+ * @return Array 
+ * @see call_user_func_array
+ * @see projects_register_post_meta
+ * @link https://developer.wordpress.org/reference/functions/register_meta/ for required params
+ */
+function projects_post_meta_items() {
+	return array(
+		array(
+			'projects',
+			'project-contact-name',
+			array(
+				'object_subtype' => 'post',
+				'type' => 'string',
+				'description' => esc_html__('The contact human for this project.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'text', // HTML input type
+			)
+		),
+		array(
+			'projects',
+			'project-contact-email',
+			array(
+				'object_subtype' => 'post',
+				'type' => 'string',
+				'description' => esc_html__( 'The contact email for this project.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+				'_projects_input_type' => 'email',
+			)
+		),
+		array(
+			'projects',
+			'project-organization',
+			array(
+				'object_subtype' => 'post',
+				'type' => 'string',
+				'description' => esc_html__( 'The organization responsible for this project.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+				'_projects_input_type' => 'text',
+			)
+		),
+		array(
+			'projects',
+			'project-video',
+			array(
+				'object_subtype' => 'post',
+				'type' => 'string',
+				'description' => esc_html__( 'Link to video URL for this project', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'esc_url_raw',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+				'_projects_input_type' => 'url',
+			)
+		),
+	);
+}
+
+/**
  * Register the custom post meta for Local That Works projects
  *
+ * @uses projects_post_meta_items;
  * @link https://developer.wordpress.org/reference/functions/register_meta/
  * @link https://developer.wordpress.org/block-editor/tutorials/plugin-sidebar-0/
  */
 function projects_register_post_meta() {
-	register_post_meta(
-		'projects',
-		'project-contact-name',
-		array(
-			'object_subtype' => 'post',
-			'type' => 'string',
-			'description' => 'The contact human for this project.',
-			'single' => true,
-			'sanitize_callback' => 'sanitize_text_field',
-			// 'auth_callback' => .... I don't know the answer to this question.
-			'show_in_rest' => true,
-		)
-	);
-	register_post_meta(
-		'projects',
-		'project-contact-email',
-		array(
-			'object_subtype' => 'post',
-			'type' => 'string',
-			'description' => 'The contact email for this project.',
-			'single' => true,
-			'sanitize_callback' => 'sanitize_text_field',
-			// 'auth_callback' => .... I don't know the answer to this question.
-			'show_in_rest' => true,
-		)
-	);
-	register_post_meta(
-		'projects',
-		'project-organization',
-		array(
-			'object_subtype' => 'post',
-			'type' => 'string',
-			'description' => 'The organization responsible for this project.',
-			'single' => true,
-			'sanitize_callback' => 'sanitize_text_field',
-			// 'auth_callback' => .... I don't know the answer to this question.
-			'show_in_rest' => true,
-		)
-	);
-	register_post_meta(
-		'projects',
-		'project-video',
-		array(
-			'object_subtype' => 'post',
-			'type' => 'string',
-			'description' => 'Link to video URL for this project',
-			'single' => true,
-			'sanitize_callback' => 'esc_url_raw',
-			// 'auth_callback' => .... I don't know the answer to this question.
-			'show_in_rest' => true,
-		)
-	);
+	$items = projects_post_meta_items();
+	foreach ( $items as $item ) {
+		call_user_func_array( 'register_post_meta', $item );
+	}
 }
 add_action( 'init', 'projects_register_post_meta' );
 
 /**
- * Add the meta boxes for the projects meta fields 
+ * Add the meta boxes for the projects meta fields
  *
  */
 function projects_add_meta_box() {
 	add_meta_box(
 		'current-ltw-project',
 		__( 'Project Metadata', 'current-ltw-projects' ),
-		'projects_meta_box',
+		'projects_meta_box_callback',
 		'projects', // post type
 		'advanced',
 		'high',
@@ -185,18 +217,96 @@ add_action( 'add_meta_boxes', 'projects_add_meta_box' );
 
 /*
  * Save callback for the project meta fields
+ *
+ * @uses projects_post_meta_items, specifically _projects_input_type and sanitize_callback
  */
+function projects_meta_save() {
+}
 
 
 /**
  * The meta box for the project meta fields
  */
-function projects_meta_box( $post ) {
+function projects_meta_box_callback( $post ) {
+	$items = projects_post_meta_items();
+
+	// stealing a lot of styles from #postcustomstuff
 	?>
-		<h1>hola</h1>
+		<style class="text/css">
+			#current-ltw-project table {
+				width: 100%;
+				border: 1px solid #ddd;
+				border-spacing: 0;
+				background-color: #f9f9f9;
+			}
+			#current-ltw-project tr {
+				vertical-align: top;
+			}
+			#current-ltw-project th {
+				padding: 5px 8px 8px;
+				background-color: #f1f1f1;
+			}
+			#current-ltw-project th.left,
+			#current-ltw-project td.left {
+				width: 38%;
+			}
+			#current-ltw-project td label {
+				margin: 8px;
+				display: block;
+				font-size: 14px;
+			}
+			#current-ltw-project td input {
+				margin: 8px;
+				width: 96%;
+				box-sizing: border-box;
+			}
+		</style>
+
 	<?php
-	// project-contact-name - text
-	// project-contact-email - email
-	// project-organization - text
-	// project-video - url
+
+	echo '<table>';
+
+	echo '<thead>';
+	printf(
+		'<tr><th class="left">%1$s</th><th>%2$s</th></tr>',
+		esc_html__( 'Description', 'currentorg' ),
+		esc_html__( 'Value', 'currentorg' )
+	);
+	echo '</thead>';
+
+	echo '<tbody>';
+
+	foreach ( $items as $item ) {
+		// check that we've got valid items
+		if (
+			! is_string( $item[0] )
+			|| ! is_string( $item[1] )
+			|| ! is_array( $item[2] )
+			|| isset( $item[3] )
+		) {
+			error_log( 'unexpected parameter passed in projects_meta_box_callback: ' . var_export( $item, true));
+		}
+
+		switch ( $item[2]['_projects_input_type'] ) {
+			case 'textarea':
+				echo "This is a textarea!";
+				break;
+			case 'url':
+			case 'text':
+			case 'email':
+				printf(
+					'<tr><td class="left"><label for="%1$s">%2$s</label></td><td class="right"><input id="%1$s" name="%1$s" class="" type="%3$s" value="%4$s"></input></td></tr>',
+					esc_attr( $item[1] ),
+					esc_html( $item[2]['description'] ),
+					esc_attr( $item[2]['_projects_input_type'] ),
+					esc_attr( get_post_meta( $post->ID, $item[1], true ) )
+				);
+				break;
+			default:
+				echo "This is a textarea!";
+		}
+	}
+
+	echo '</tbody>';
+	echo '</table>';
 }
