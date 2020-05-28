@@ -43,4 +43,25 @@
   border: 1px solid #343434;
   padding: 0.75rem;
 }
+.project-tags {
+  padding: 0;
+  margin: 1em 0;
+}
+.project-tags li {
+  display: inline-block;
+  padding: 0.5em;
+  border: 1px solid #343434;
+}
+.project-tags li + li {
+  margin-left: 0.5em;
+}
+.project-tags [class*=project-status] {
+  background: yellow;
+}
+.project-tags [class*=project-org-type] {
+  background: aliceblue;
+}
+.project-tags [class*=project-category] {
+  background: lavender;
+}
 /*# sourceMappingURL=css/current-ltw-projects.css.map */

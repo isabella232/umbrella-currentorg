@@ -50,15 +50,14 @@ $custom = get_post_custom();
 			// we may need to redo these links as search query params instead
 			$status = get_the_terms( get_the_ID(), 'project-status' );
 			$categories = get_the_terms( get_the_ID(), 'project-category' );
-			// @todo this throws errors when no terms are found for this type of post 
-			if ( is_array( $status) && is_array( $status ) ) {
-				$terms = array_merge( $status, $categories );
-			} else if ( is_array( $status ) ) {
-				$terms = $status;
-			} else if ( is_array( $categories ) ) {
-				$terms = $categories;
-			} else {
-				$terms = array();
+			$org_types = get_the_terms( get_the_ID(), 'project-org-type' );
+
+			$terms = array();
+			foreach ( array( 'project-status', 'project-category', 'project-org-type' ) as $tax ) {
+				$tax_terms = get_the_terms( get_the_ID(), $tax );
+				if ( is_array( $tax_terms ) ) {
+					$terms = array_merge( $terms, $tax_terms );
+				}
 			}
 
 			if ( ! empty( $terms ) ) {

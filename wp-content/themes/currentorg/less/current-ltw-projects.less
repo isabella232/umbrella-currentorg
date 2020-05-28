@@ -48,3 +48,25 @@
 	border: 1px solid @grey-d;
 	padding: @common-whitespace * 0.5;
 }
+.project-tags {
+	padding: 0;
+	margin: 1em 0;
+	li {
+		display: inline-block;
+		padding: 0.5em;
+		border: 1px solid @grey-d;
+
+		& + li {
+			margin-left: 0.5em;
+		}
+	}
+	[class*=project-status] {
+		background: yellow;
+	}
+	[class*=project-org-type] {
+		background: aliceblue;
+	}
+	[class*=project-category] {
+		background: lavender;
+	}
+}

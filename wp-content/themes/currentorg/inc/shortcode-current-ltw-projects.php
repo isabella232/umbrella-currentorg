@@ -15,8 +15,8 @@
  * @param String $tag     the shortcode tag.
  * @link https://developer.wordpress.org/plugins/shortcodes/shortcodes-with-parameters/#complete-example
  */
-function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '')
-{
+function current_ltw_projects_shortcode( $atts = [], $content = null, $tag = '') {
+
 	// normalize attribute keys, lowercase
 	$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
