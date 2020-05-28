@@ -137,6 +137,7 @@ function current_ltw_projects_load_single_project_callback() {
 	
 }
 add_action( 'wp_ajax_load_more_post', 'current_ltw_projects_load_single_project_callback' );
+add_action( 'wp_ajax_nopriv_load_more_post', 'current_ltw_projects_load_single_project_callback' );
 /**
  * Filter queries for the projects post type
  */
