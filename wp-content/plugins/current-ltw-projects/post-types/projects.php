@@ -216,8 +216,13 @@ function projects_add_meta_box() {
 add_action( 'add_meta_boxes', 'projects_add_meta_box' );
 
 /*
- * There is no specific save callback for this item, because we've registered the post meta with sanitize callbacks
+ * Save callback for the project meta fields
+ *
+ * @uses projects_post_meta_items, specifically _projects_input_type and sanitize_callback
  */
+function projects_meta_save() {
+}
+
 
 /**
  * The meta box for the project meta fields
