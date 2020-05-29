@@ -120,10 +120,10 @@ add_filter( 'post_updated_messages', 'projects_updated_messages' );
 function projects_post_meta_items() {
 	return array(
 		array(
-			'projects',
+			'post',
 			'project-contact-name',
 			array(
-				'object_subtype' => 'post',
+				'object_subtype' => 'projects',
 				'type' => 'string',
 				'description' => esc_html__('The contact human for this project.', 'currentorg' ),
 				'single' => true,
@@ -136,10 +136,10 @@ function projects_post_meta_items() {
 			)
 		),
 		array(
-			'projects',
+			'post',
 			'project-contact-email',
 			array(
-				'object_subtype' => 'post',
+				'object_subtype' => 'projects',
 				'type' => 'string',
 				'description' => esc_html__( 'The contact email for this project.', 'currentorg' ),
 				'single' => true,
@@ -150,10 +150,10 @@ function projects_post_meta_items() {
 			)
 		),
 		array(
-			'projects',
+			'post',
 			'project-organization',
 			array(
-				'object_subtype' => 'post',
+				'object_subtype' => 'projects',
 				'type' => 'string',
 				'description' => esc_html__( 'The organization responsible for this project.', 'currentorg' ),
 				'single' => true,
@@ -164,10 +164,10 @@ function projects_post_meta_items() {
 			)
 		),
 		array(
-			'projects',
+			'post',
 			'project-video',
 			array(
-				'object_subtype' => 'post',
+				'object_subtype' => 'projects',
 				'type' => 'string',
 				'description' => esc_html__( 'Link to video URL for this project', 'currentorg' ),
 				'single' => true,
@@ -218,10 +218,64 @@ add_action( 'add_meta_boxes', 'projects_add_meta_box' );
 /*
  * Save callback for the project meta fields
  *
- * @uses projects_post_meta_items, specifically _projects_input_type and sanitize_callback
+ * @uses projects_post_meta_items, specifically sanitize_callback
+ * @return Bool whether the post meta was attempted to be updated
  */
-function projects_meta_save() {
+function projects_meta_save( $post_id ) {
+	if ( ! isset( $_POST['project-meta-fields-nonce'] ) ) {
+		error_log(var_export( 'nonce not set', true));
+		return false;
+	}
+
+	if ( ! wp_verify_nonce( $_POST['project-meta-fields-nonce'], 'project-meta-fields-nonce' ) ) {
+		error_log(var_export( 'nonce did not verify', true));
+		return false;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		error_log(var_export( 'current user cannot edit post', true));
+		return false;
+	}
+
+	if ( wp_is_post_autosave( $post_id ) ) {
+		error_log(var_export( 'is post autosave', true));
+		return false;
+	}
+
+	if ( wp_is_post_revision( $post_id ) ) {
+		error_log(var_export( 'is post revision', true));
+		return false;
+	}
+
+	if ( 'projects' !== get_post_type( $post_id ) ) {
+		error_log(var_export( 'wrong post type to save this data on', true));
+		return false;
+	}
+
+	$items = projects_post_meta_items();
+	foreach ( $items as $item ) {
+		// $item[0] is 'post'
+		// $item[1] is the field/meta name
+		// $item[2] is an array of arguments passed to register_post_type
+		if ( isset( $_POST[$item[1]] ) ) {
+
+			$sanitize_callback = $item[2]['sanitize_callback'];
+			$value = call_user_func_array(
+				$sanitize_callback,
+				array( $_POST[$item[1]] )
+			);
+
+			update_post_meta(
+				$post_id,
+				$item[1],
+				$value
+			);
+		}
+	}
+
+	return true;
 }
+add_action( 'save_post', 'projects_meta_save' );
 
 
 /**
@@ -229,6 +283,7 @@ function projects_meta_save() {
  */
 function projects_meta_box_callback( $post ) {
 	$items = projects_post_meta_items();
+	wp_nonce_field( 'project-meta-fields-nonce', 'project-meta-fields-nonce' );
 
 	// stealing a lot of styles from #postcustomstuff
 	?>
