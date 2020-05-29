@@ -89,8 +89,8 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 	// organization
 	if ( ! empty( $custom['project-organization'][0] ) ) {
 		printf(
-			'<label class="project-single-organization">%1$s:</label>
-			<span class="project-organization">%2$s</span>',
+			'<div><label class="project-single-organization">%1$s:</label>
+			<span class="project-organization">%2$s</span></div>',
 			__( 'Organization', 'current-ltw-projects' ),
 			esc_html( $custom['project-organization'][0] )
 		);
@@ -98,8 +98,8 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 
 	// year submitted
 	printf(
-		'<label class="project-single-submission-year">%1$s:</label>
-		<span class="project-submission-year">%2$s</span>',
+		'<div><label class="project-single-submission-year">%1$s:</label>
+		<span class="project-submission-year">%2$s</span></div>',
 		__( 'Year Submitted', 'current-ltw-projects' ),
 		get_the_date( 'Y' )
 	);
@@ -110,7 +110,7 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 		$delimiter = ', ';
 		$org_types_count = count( $org_types );
 		$org_type_index = 0;
-		_e( '<label class="project-org-types-label">Type of Organization:</label>', 'current-ltw-projects' );
+		_e( '<div><label class="project-org-types-label">Type of Organization: </label>', 'current-ltw-projects' );
 		foreach ( $org_types as $org_type ) {
 			$org_type_index++;
 			printf(
@@ -125,20 +125,20 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 				echo '<span class="comma-delimiter">' . $delimiter . '</span>';
 			}
 		}
-		echo '</ul>';
+		echo '</ul></div>';
 	}
 
 	// contact name and email
 	if ( ! empty( $custom['project-contact-name'][0] ) || ! empty( $custom['project-contact-email'] ) ) {
 		printf(
-			'<label class="project-single-contact">%1$s:</label>',
+			'<label class="project-single-contact">%1$s: </label>',
 			__( 'Contact', 'current-ltw-projects' ),
 		);
 	}
 
 	if ( ! empty( $custom['project-contact-name'][0] ) ) {
 		printf(
-			'<span class="project-contact-name">%1$s</span>',
+			'<span class="project-contact-name">%1$s</span><br/>',
 			esc_html( $custom['project-contact-name'][0] )
 		);
 	}
