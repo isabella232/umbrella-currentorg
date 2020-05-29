@@ -125,7 +125,7 @@ function projects_post_meta_items() {
 			array(
 				'object_subtype' => 'projects',
 				'type' => 'string',
-				'description' => esc_html__('The contact human for this project.', 'currentorg' ),
+				'description' => esc_html__('The public-facing human point-of-contact for this project.', 'currentorg' ),
 				'single' => true,
 				'sanitize_callback' => 'sanitize_text_field',
 				// 'auth_callback' => .... I don't know the answer to this question.
@@ -141,7 +141,7 @@ function projects_post_meta_items() {
 			array(
 				'object_subtype' => 'projects',
 				'type' => 'string',
-				'description' => esc_html__( 'The contact email for this project.', 'currentorg' ),
+				'description' => esc_html__( 'The public-facing contact email for this project.', 'currentorg' ),
 				'single' => true,
 				'sanitize_callback' => 'sanitize_text_field',
 				// 'auth_callback' => .... I don't know the answer to this question.
@@ -169,7 +169,7 @@ function projects_post_meta_items() {
 			array(
 				'object_subtype' => 'projects',
 				'type' => 'string',
-				'description' => esc_html__( 'Link to video URL for this project', 'currentorg' ),
+				'description' => esc_html__( 'Video URL for this project.', 'currentorg' ),
 				'single' => true,
 				'sanitize_callback' => 'esc_url_raw',
 				// 'auth_callback' => .... I don't know the answer to this question.
