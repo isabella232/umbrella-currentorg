@@ -31,20 +31,6 @@ $custom = get_post_custom();
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix projects-list-item'); ?>>
 
 	<?php
-		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails
-		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) { ?>
-			<header>
-				<div class="hero span12 <?php echo $hero_class; ?>">
-				<?php
-					if( has_post_thumbnail() ){
-						echo( '<a href="?project_id=' . get_the_ID() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark" data-post-id="' . get_the_ID() . '">' );
-						the_post_thumbnail( 'full' );
-						echo( '</a>' );
-					}
-				?>
-				</div>
-			</header>
-		<?php } // end Homepage Featured thumbnail block
 
 		echo '<div class="' . $entry_classes . '">';
 
