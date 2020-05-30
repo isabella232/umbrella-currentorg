@@ -121,6 +121,84 @@ function projects_post_meta_items() {
 	return array(
 		array(
 			'post',
+			'project-submitter-name',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The name of the person who submitted this project. Kept private.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'text', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-submitter-email',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The email address of the person who submitted this project. Kept private.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'text', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-organization',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__( 'The organization responsible for this project.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+				'_projects_input_type' => 'text',
+			)
+		),
+		array(
+			'post',
+			'project-city',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The city where this organization is located.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'text', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-state',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The state or territory where this organization is located.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'text', // HTML input type
+			)
+		),
+		array(
+			'post',
 			'project-contact-name',
 			array(
 				'object_subtype' => 'projects',
@@ -151,16 +229,130 @@ function projects_post_meta_items() {
 		),
 		array(
 			'post',
-			'project-organization',
+			'project-revenue',
 			array(
 				'object_subtype' => 'projects',
 				'type' => 'string',
-				'description' => esc_html__( 'The organization responsible for this project.', 'currentorg' ),
+				'description' => esc_html__('Did the initiative generate revenue?', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_textarea_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'textarea', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-impact',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The project impact statement.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_textarea_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'textarea', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-link',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('The public-facing link for this project.', 'currentorg' ),
 				'single' => true,
 				'sanitize_callback' => 'sanitize_text_field',
 				// 'auth_callback' => .... I don't know the answer to this question.
 				'show_in_rest' => true,
-				'_projects_input_type' => 'text',
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-additional-link-1',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('Internal link for judging, #1.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-additional-link-2',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('Internal link for judging, #2.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-additional-link-3',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('Internal link for judging, #3.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-additional-link-4',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('Internal link for judging, #4.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
+			)
+		),
+		array(
+			'post',
+			'project-additional-link-5',
+			array(
+				'object_subtype' => 'projects',
+				'type' => 'string',
+				'description' => esc_html__('Internal link for judging, #5.', 'currentorg' ),
+				'single' => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				// 'auth_callback' => .... I don't know the answer to this question.
+				'show_in_rest' => true,
+
+				// now for our private arguments
+				'_projects_input_type' => 'url', // HTML input type
 			)
 		),
 		array(
@@ -310,6 +502,7 @@ function projects_meta_box_callback( $post ) {
 				display: block;
 				font-size: 14px;
 			}
+			#current-ltw-project td textarea,
 			#current-ltw-project td input {
 				margin: 8px;
 				width: 96%;
@@ -344,7 +537,13 @@ function projects_meta_box_callback( $post ) {
 
 		switch ( $item[2]['_projects_input_type'] ) {
 			case 'textarea':
-				echo "This is a textarea!";
+				printf(
+					'<tr><td class="left"><label for="%1$s">%2$s</label></td><td class="right"><textarea id="%1$s" name="%1$s" class="" >%4$s</textarea></td></tr>',
+					esc_attr( $item[1] ),
+					esc_html( $item[2]['description'] ),
+					null,
+					esc_html( get_post_meta( $post->ID, $item[1], true ) )
+				);
 				break;
 			case 'url':
 			case 'text':
