@@ -111,7 +111,7 @@ function current_ltw_projects_load_single_project_callback() {
 		// set up basic args for our query to grab the post
 		$single_project_args = array(
 			'post_type' => 'projects',
-			'p' => $post_id
+			'p' => abs( intval( $post_id ) )
 		);
 
 		$single_project_query = new WP_Query( $single_project_args );
