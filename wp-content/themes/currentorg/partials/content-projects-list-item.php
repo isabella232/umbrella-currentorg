@@ -31,6 +31,7 @@ $custom = get_post_custom();
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix projects-list-item'); ?>>
 
 	<?php
+
 		echo '<div class="' . $entry_classes . '">';
 
 		if ( largo_has_categories_or_tags() ) {
@@ -43,7 +44,7 @@ $custom = get_post_custom();
 	?>
 
 		<h2 class="entry-title">
-			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
+			<a href="?project_id=<?php echo get_the_ID(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark" data-post-id="<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
 		</h2>
 
 		<?php
@@ -51,7 +52,7 @@ $custom = get_post_custom();
 			$status = get_the_terms( get_the_ID(), 'project-status' );
 			$categories = get_the_terms( get_the_ID(), 'project-category' );
 			// @todo this throws errors when no terms are found for this type of post 
-			if ( is_array( $status) && is_array( $status ) ) {
+			if ( is_array( $status) && is_array( $categories ) ) {
 				$terms = array_merge( $status, $categories );
 			} else if ( is_array( $status ) ) {
 				$terms = $status;

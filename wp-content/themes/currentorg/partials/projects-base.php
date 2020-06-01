@@ -17,5 +17,4 @@ $query = new WP_Query( $args );
 // so we can pass $query to these
 include( locate_template( 'partials/projects-search-form.php', false, false ) );
 include( locate_template( 'partials/projects-list.php', false, false ) );
-
-get_template_part( 'partials/projects-single-holder' );
+include( locate_template( 'partials/projects-single-holder.php', false, false ) );
