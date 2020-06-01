@@ -174,26 +174,9 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 		printf(
 			'<label class="project-specific-link">%1$s:</label>
 			<a class="project-specific-link" href="%2$s" target="_blank">%2$s</a>',
-			__( 'Project Specific Links', 'current-ltw-projects' ),
+			__( 'Project Specific Link', 'current-ltw-projects' ),
 			esc_html( $custom['project-link'][0] )
 		);
-	}
-
-	// additional project links
-	$project_additional_links = array(
-		'project-additional-link-1', 
-		'project-additional-link-2', 
-		'project-additional-link-3', 
-		'project-additional-link-4', 
-		'project-additional-link-5'
-	);
-	foreach( $project_additional_links as $project_additional_link ) {
-		if( ! empty( $custom[$project_additional_link] ) ) {
-			printf(
-				'<a class="project-specific-link" href="%1$s" target="_blank">%1$s</a>',
-				esc_html( $custom[$project_additional_link][0] )
-			);
-		}
 	}
 
 	?>
