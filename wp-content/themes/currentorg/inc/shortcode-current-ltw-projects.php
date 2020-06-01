@@ -121,7 +121,7 @@ function current_ltw_projects_load_single_project_callback() {
 			while ( $single_project_query->have_posts() ) : $single_project_query->the_post();
 
 				// show singular project with the project single template partial
-				get_template_part( 'partials/projects', 'single-holder' );
+				get_template_part( 'partials/projects', 'single-held' );
 
 			endwhile;
 
