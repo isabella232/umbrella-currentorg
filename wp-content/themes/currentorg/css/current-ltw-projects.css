@@ -43,14 +43,18 @@
   border: 1px solid #343434;
   padding: 0.75rem;
 }
-.projects-single-layout .entry-content .project-tags {
+.projects-single-layout .projects-single-holder .entry-content iframe,
+.projects-single-layout .projects-single-holder .entry-content img {
+  max-width: 100%;
+}
+.projects-single-layout .projects-single-holder .entry-content .project-tags {
   margin-left: 0;
 }
-.projects-single-layout .entry-content label {
+.projects-single-layout .projects-single-holder .entry-content label {
   font-weight: bold;
   display: inline;
 }
-.projects-single-layout .entry-content .project-specific-link {
+.projects-single-layout .projects-single-holder .entry-content .project-specific-link {
   display: block;
 }
 /*# sourceMappingURL=css/current-ltw-projects.css.map */
