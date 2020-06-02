@@ -29,6 +29,12 @@
   border-bottom: 1px solid #343434;
 }
 .projects-search-form-search input,
+.projects-search-form-search button,
+.projects-search-form-search select,
+.projects-search-form-search details {
+  border: 1px solid #666666;
+}
+.projects-search-form-search input,
 .projects-search-form-search .btn,
 .projects-search-form-search button,
 .projects-search-form-search select {
@@ -52,7 +58,6 @@
   float: left;
 }
 .projects-search-form-search .btn-submit {
-  border: 1px solid #666666;
   background-color: #1c819e;
   color: white;
 }
