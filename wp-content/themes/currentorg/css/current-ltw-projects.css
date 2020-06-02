@@ -20,7 +20,7 @@
   .current-ltw-shortcode .projects-list {
     grid-area: list;
   }
-  .current-ltw-shortcode .projects-single-holder {
+  .current-ltw-shortcode .projects-single-layout {
     grid-area: single;
   }
 }
@@ -88,9 +88,23 @@
 .projects-list-item + .projects-list-item {
   margin-top: 0.75rem;
 }
-.projects-single-holder {
+.projects-single-layout {
   border: 1px solid #343434;
   padding: 0.75rem;
+}
+.projects-single-layout .projects-single-holder .entry-content iframe,
+.projects-single-layout .projects-single-holder .entry-content img {
+  max-width: 100%;
+}
+.projects-single-layout .projects-single-holder .entry-content .project-tags {
+  margin-left: 0;
+}
+.projects-single-layout .projects-single-holder .entry-content label {
+  font-weight: bold;
+  display: inline;
+}
+.projects-single-layout .projects-single-holder .entry-content .project-specific-link {
+  display: block;
 }
 .project-tags {
   padding: 0;

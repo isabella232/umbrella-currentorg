@@ -31,6 +31,7 @@ $custom = get_post_custom();
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix projects-list-item'); ?>>
 
 	<?php
+
 		echo '<div class="' . $entry_classes . '">';
 
 		if ( largo_has_categories_or_tags() ) {
@@ -43,13 +44,11 @@ $custom = get_post_custom();
 	?>
 
 		<h2 class="entry-title">
-			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
+			<a href="?project_id=<?php echo get_the_ID(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark" data-post-id="<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
 		</h2>
 
 		<?php
-			// these are presently links to the term archive pages
-			// we may need to redo these links as links to the present page with search query params instead
-
+			// get all terms for this project
 			$terms = array();
 			foreach ( array( 'project-status', 'project-category', 'project-org-type' ) as $tax ) {
 				$tax_terms = get_the_terms( get_the_ID(), $tax );
@@ -58,6 +57,7 @@ $custom = get_post_custom();
 				}
 			}
 
+			// output list of terms as links to search query for that term
 			if ( ! empty( $terms ) ) {
 				echo '<ul class="project-tags">';
 				foreach ( $terms as $term ) {

@@ -23,7 +23,7 @@
 		.projects-list {
 			grid-area: list;
 		}
-		.projects-single-holder {
+		.projects-single-layout {
 			grid-area: single;
 		}
 	}
@@ -88,9 +88,27 @@
 		margin-top: @common-whitespace * 0.5;
 	}
 }
-.projects-single-holder {
+.projects-single-layout {
 	border: 1px solid @grey-d;
 	padding: @common-whitespace * 0.5;
+	.projects-single-holder {
+		.entry-content {
+			iframe,
+			img {
+				max-width: 100%;
+			}
+			.project-tags {
+				margin-left: 0;
+			}
+			label {
+				font-weight: bold;
+				display: inline;
+			}
+			.project-specific-link {
+				display: block;
+			}
+		}
+	}
 }
 .project-tags {
 	padding: 0;
