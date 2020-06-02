@@ -51,10 +51,21 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 					'<summary class="btn">%1$s</summary>',
 					__( 'Categories', 'currentorg' )
 				);
-				wp_terms_checklist( null, array(
+				
+				echo '<ul>';
+				// because whether an input is disabled is based on the present $post,
+				// but we're using it outside that context
+				$checklist = wp_terms_checklist( null, array(
 					'taxonomy' => 'project-category',
 					'selected_cats' => ( isset( $_GET['tax_input']['project-category'] ) && is_array( $_GET['tax_input']['project-category'] ) ) ? $_GET['tax_input']['project-category'] : '' ,
+					'echo' => false,
 				) );
+				echo str_replace(
+					disabled( false, false, false ),
+					'',
+					$checklist
+				);
+				echo '</ul>';
 			?>
 		</details>
 	</div>
