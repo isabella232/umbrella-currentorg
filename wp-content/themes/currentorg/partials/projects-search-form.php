@@ -29,18 +29,30 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 			<input type="text" class="searchbox search-query" value="<?php echo esc_attr( $search_query ); ?>" name="projects-search" placeholder="<?php esc_attr_e( 'Search', 'currentorg' ); ?>"/>
 		</label>
 		<button type="submit" class="btn btn-submit"><?php esc_html_e( 'Search', 'currentorg' ); ?></button>
-		<label for="project-org-type" class="project-org-type">
+		<label for="tax_input[project-org-type][]" class="project-org-type">
 			<?php
 				printf(
 					'<span class="visuallyhidden">%1$s</span>',
 					esc_html__( 'Limit by organization type:', 'currentorg' )
 				);
+
+				// normalize the selected item before using it as an argument on wp_dropdown_categories.
+				if ( isset( $_GET['tax_input'] ) && array_key_exists( 'project-org-type', $_GET['tax_input'] ) ) {
+					$selected_maybe = $_GET['tax_input']['project-org-type'];
+					if ( is_array( $selected_maybe ) ) {
+						$selected = (int) $selected_maybe[0];
+					} elseif ( is_string( $selected_maybe ) || is_number( $selected_maybe ) ) {
+						$selected = (int) $selected_maybe;
+					}
+				} else {
+					$selected = 0;
+				}
 				wp_dropdown_categories( array(
 					'show_option_none' => __( 'Organization type', 'currentorg' ),
 					'option_none_value' => '',
-					'name' => 'project-org-type',
+					'name' => 'tax_input[project-org-type][]',
 					'taxonomy' => 'project-org-type',
-					'selected' => ( isset( $_GET['project-org-type'] ) ) ? (int) $_GET['project-org-type'] : '' ,
+					'selected' => $selected
 				) );
 			?>
 		</label>
@@ -53,15 +65,16 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 				);
 				
 				echo '<ul>';
-				// because whether an input is disabled is based on the present $post,
-				// but we're using it outside that context
+				// whether an input is disabled is based on the present $post,
+				// but we're using it outside that context,
+				// so we must remove the disabled arguments if they exist.
 				$checklist = wp_terms_checklist( null, array(
 					'taxonomy' => 'project-category',
 					'selected_cats' => ( isset( $_GET['tax_input']['project-category'] ) && is_array( $_GET['tax_input']['project-category'] ) ) ? $_GET['tax_input']['project-category'] : '' ,
 					'echo' => false,
 				) );
 				echo str_replace(
-					disabled( false, false, false ),
+					disabled( false, false, false ), // get the wp-generated disabled attribute, which doesn't vary from case to case.
 					'',
 					$checklist
 				);
