@@ -5,6 +5,7 @@
 
 .current-ltw-shortcode {
 	margin: @common-whitespace 0;
+	position: relative;
 
 	@supports( display: grid ) {
 		@media ( min-width: 771px ) {
@@ -27,6 +28,20 @@
 			grid-area: single;
 		}
 	}
+	@media ( max-width: 770px ) {
+		display: flex;
+		flex-direction: column;
+		.projects-search-form-search {
+			order: 1;
+		}
+		.projects-single-layout {
+			order: 2;
+			display: none;
+		}
+		.projects-list {
+			order: 3;
+		}
+	}
 }
 
 .projects-search-form {
@@ -47,6 +62,19 @@
 .projects-single-layout {
 	border: 1px solid @grey-d;
 	padding: @common-whitespace * 0.5;
+	width: 95%;
+	&.open {
+		position: absolute;
+		background: #fff;
+		height: 100%;
+	}
+	.projects-single-interior-container {
+		position: sticky;
+		top: 1%;
+		.sticky-show & {
+			top: 7%;
+		}
+	}
 	.projects-single-holder {
 		.entry-content {
 			iframe,
@@ -63,6 +91,16 @@
 			.project-specific-link {
 				display: block;
 			}
+		}
+	}
+	html:not(.no-js) & {
+		.projects-single-layout {
+			display: none;
+		}
+	}
+	@media (min-width: 771px) {
+		.projects-single-close {
+			display: none;
 		}
 	}
 }
