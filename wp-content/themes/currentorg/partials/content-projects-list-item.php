@@ -66,7 +66,7 @@ $custom = get_post_custom();
 						esc_attr( $term->taxonomy ),
 						esc_attr( $term->slug ),
 						// @todo: make this be a link that triggers the search filter for this term
-						esc_attr( '?' . $term->taxonomy . '=' . $term->term_id ),
+						esc_attr( '?tax_input[' . $term->taxonomy . '][]=' . $term->term_id ),
 						esc_html( $term->name )
 					);
 				}
