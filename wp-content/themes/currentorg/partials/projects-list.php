@@ -29,6 +29,16 @@
 					'posts_term' => ( ! empty( $posts_term ) ) ? $posts_term : esc_html__( 'Projects', 'current-ltw-projects' )
 				)
 			);
+
+			// reset the_post to the first post in the query results
+			if ( $query->have_posts() ) {
+				$counter = 1;
+				while ( $query->have_posts() && $counter === 1 ) {
+					$query->the_post();
+					$counter++;
+				}
+			}
+
 		} else {
 			echo wpautop( esc_html__( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'current-ltw-projects' ) );
 		}
