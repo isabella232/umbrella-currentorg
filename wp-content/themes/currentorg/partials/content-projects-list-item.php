@@ -38,9 +38,6 @@ $custom = get_post_custom();
 			largo_maybe_top_term();
 		}
 
-		if ( $show_thumbnail ) {
-			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
-		}
 	?>
 
 		<h2 class="entry-title">
