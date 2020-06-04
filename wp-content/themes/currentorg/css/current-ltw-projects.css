@@ -194,8 +194,11 @@
 .projects-single-layout .projects-single-interior-container {
   position: sticky;
   top: 1%;
+  max-height: 95vh;
+  overflow-y: scroll;
 }
 .sticky-show .projects-single-layout .projects-single-interior-container {
+  max-height: calc(95vh - 56px);
   top: 7%;
 }
 .projects-single-layout .projects-single-holder .entry-content .project-tags .delimiter {
