@@ -19,7 +19,7 @@
 				)
 			);
 		} else {
-			get_template_part( 'partials/content', 'not-found' );
+			echo wpautop( esc_html__( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'largo' ) );
 		}
 	?>
 </div>

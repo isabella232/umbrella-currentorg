@@ -48,20 +48,16 @@ $custom = get_post_custom();
 		</h2>
 
 		<?php
-			// we may need to redo these links as search query params instead
-			$status = get_the_terms( get_the_ID(), 'project-status' );
-			$categories = get_the_terms( get_the_ID(), 'project-category' );
-			// @todo this throws errors when no terms are found for this type of post 
-			if ( is_array( $status) && is_array( $categories ) ) {
-				$terms = array_merge( $status, $categories );
-			} else if ( is_array( $status ) ) {
-				$terms = $status;
-			} else if ( is_array( $categories ) ) {
-				$terms = $categories;
-			} else {
-				$terms = array();
+			// get all terms for this project
+			$terms = array();
+			foreach ( array( 'project-status', 'project-category', 'project-org-type' ) as $tax ) {
+				$tax_terms = get_the_terms( get_the_ID(), $tax );
+				if ( is_array( $tax_terms ) ) {
+					$terms = array_merge( $terms, $tax_terms );
+				}
 			}
 
+			// output list of terms as links to search query for that term
 			if ( ! empty( $terms ) ) {
 				echo '<ul class="project-tags">';
 				foreach ( $terms as $term ) {
@@ -70,7 +66,7 @@ $custom = get_post_custom();
 						esc_attr( $term->taxonomy ),
 						esc_attr( $term->slug ),
 						// @todo: make this be a link that triggers the search filter for this term
-						get_term_link( $term ),
+						esc_attr( '?tax_input[' . $term->taxonomy . '][]=' . $term->term_id ),
 						esc_html( $term->name )
 					);
 				}
