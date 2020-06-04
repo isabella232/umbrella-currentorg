@@ -50,6 +50,7 @@
 .projects-search-form-search {
   padding: 1.5rem 0;
   border-bottom: 1px solid #343434;
+  position: relative;
 }
 .projects-search-form-search input,
 .projects-search-form-search button,
@@ -80,6 +81,9 @@
   vertical-align: middle;
   float: left;
 }
+.projects-search-form-search label {
+  padding-right: 15px;
+}
 .projects-search-form-search .btn-submit {
   background-color: #1c819e;
   color: white;
@@ -100,11 +104,12 @@
 }
 .projects-search-form-search details[open] {
   border: 1px solid #343434;
-  position: relative;
-  top: 0;
+  position: absolute;
   vertical-align: top;
   max-height: 50vh;
   overflow: scroll;
+  background: #fff;
+  z-index: 10;
 }
 .projects-search-form-search details[open] summary {
   width: 100%;

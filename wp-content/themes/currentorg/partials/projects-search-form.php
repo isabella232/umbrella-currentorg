@@ -27,8 +27,8 @@ if ( is_a( $qo, 'WP_Post_Type' ) ) {
 		<label for="projects-search">
 			<span class="visuallyhidden"><?php esc_html_e( 'Search for:', 'currentorg' ); ?></span>
 			<input type="text" class="searchbox search-query" value="<?php echo esc_attr( $search_query ); ?>" name="projects-search" placeholder="<?php esc_attr_e( 'Search', 'currentorg' ); ?>"/>
+			<button type="submit" class="btn btn-submit"><?php esc_html_e( 'Search', 'currentorg' ); ?></button>
 		</label>
-		<button type="submit" class="btn btn-submit"><?php esc_html_e( 'Search', 'currentorg' ); ?></button>
 		<label for="tax_input[project-org-type][]" class="project-org-type">
 			<?php
 				printf(

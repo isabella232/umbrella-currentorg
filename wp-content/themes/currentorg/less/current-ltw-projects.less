@@ -54,6 +54,7 @@
 .projects-search-form-search {
 	padding: @common-whitespace 0;
 	border-bottom: 1px solid @grey-d;
+	position: relative;
 
 	input, button, select, details {
 		border: 1px solid @grey-m;
@@ -72,6 +73,9 @@
 		display: inline-block;
 		vertical-align: middle;
 		float: left;
+	}
+	label {
+		padding-right: 15px;
 	}
 	.btn-submit {
 		background-color: @brand;
@@ -98,11 +102,12 @@
 
 	details[open] {
 		border: 1px solid @grey-d;
-		position: relative;
-		top: 0;
+		position: absolute;
 		vertical-align: top;
 		max-height: 50vh;
 		overflow: scroll;
+		background: @white;
+		z-index: 10;
 		summary {
 			width: 100%;
 		}
@@ -146,7 +151,7 @@
 	width: 95%;
 	&.open {
 		position: absolute;
-		background: #fff;
+		background: @white;
 		height: 100%;
 	}
 	.projects-single-interior-container {
