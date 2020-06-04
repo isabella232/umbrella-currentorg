@@ -31,12 +31,10 @@
 			);
 
 			// reset the_post to the first post in the query results
-			if ( $query->have_posts() ) {
-				$counter = 1;
-				while ( $query->have_posts() && $counter === 1 ) {
-					$query->the_post();
-					$counter++;
-				}
+			$counter = 1;
+			while ( $query->have_posts() && $counter === 1 ) {
+				$query->the_post();
+				$counter++;
 			}
 
 		} else {
