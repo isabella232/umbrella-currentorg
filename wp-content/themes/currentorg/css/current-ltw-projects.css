@@ -125,6 +125,9 @@
   margin: 0;
   vertical-align: initial;
 }
+.projects-search-form-search details summary::-webkit-details-marker {
+  display: none;
+}
 .projects-list {
   border: 1px solid #343434;
   padding: 0.75rem;
