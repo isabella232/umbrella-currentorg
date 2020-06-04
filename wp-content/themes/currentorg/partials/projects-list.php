@@ -1,3 +1,14 @@
+<div class="projects-results-count">
+	<?php
+		if ( $query->found_posts ) {
+			printf(
+				'<p>%1$s %2$s</p>',
+				$query->found_posts,
+                __( 'results found.', 'current-ltw-projects' )
+            );
+		}
+	?>
+</div>
 <div class="projects-list">
 	<?php
 		if ( $query->have_posts() ) {
@@ -19,7 +30,7 @@
 				)
 			);
 		} else {
-			echo wpautop( esc_html__( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'largo' ) );
+			echo wpautop( esc_html__( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'current-ltw-projects' ) );
 		}
 	?>
 </div>

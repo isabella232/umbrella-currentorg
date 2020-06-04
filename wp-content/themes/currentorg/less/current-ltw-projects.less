@@ -13,6 +13,7 @@
 			grid-template-columns: 5fr 7fr;
 			grid-template-areas:
 				"search search"
+				"results-count results-count"
 				"list single"
 			;
 			grid-gap: @common-whitespace;
@@ -20,6 +21,9 @@
 		}
 		.projects-search-form-search {
 			grid-area: search;
+		}
+		.projects-results-count {
+			grid-area: results-count;
 		}
 		.projects-list {
 			grid-area: list;
@@ -34,12 +38,15 @@
 		.projects-search-form-search {
 			order: 1;
 		}
-		.projects-single-layout {
+		.projects-results-count {
 			order: 2;
+		}
+		.projects-single-layout {
+			order: 3;
 			display: none;
 		}
 		.projects-list {
-			order: 3;
+			order: 4;
 		}
 	}
 }

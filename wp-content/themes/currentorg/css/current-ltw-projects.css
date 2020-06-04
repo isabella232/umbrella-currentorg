@@ -10,13 +10,16 @@
     .current-ltw-shortcode {
       display: grid;
       grid-template-columns: 5fr 7fr;
-      grid-template-areas: "search search" "list single";
+      grid-template-areas: "search search" "results-count results-count" "list single";
       grid-gap: 1.5rem;
       gap: 1.5rem;
     }
   }
   .current-ltw-shortcode .projects-search-form-search {
     grid-area: search;
+  }
+  .current-ltw-shortcode .projects-results-count {
+    grid-area: results-count;
   }
   .current-ltw-shortcode .projects-list {
     grid-area: list;
@@ -33,12 +36,15 @@
   .current-ltw-shortcode .projects-search-form-search {
     order: 1;
   }
-  .current-ltw-shortcode .projects-single-layout {
+  .current-ltw-shortcode .projects-results-count {
     order: 2;
+  }
+  .current-ltw-shortcode .projects-single-layout {
+    order: 3;
     display: none;
   }
   .current-ltw-shortcode .projects-list {
-    order: 3;
+    order: 4;
   }
 }
 .projects-search-form-search {
