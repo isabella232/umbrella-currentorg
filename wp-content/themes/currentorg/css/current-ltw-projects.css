@@ -188,6 +188,7 @@
   position: absolute;
   background: #fff;
   height: 100%;
+  width: 94%;
 }
 .projects-single-layout .projects-single-interior-container {
   position: sticky;
