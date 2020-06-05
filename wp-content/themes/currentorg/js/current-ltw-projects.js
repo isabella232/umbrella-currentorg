@@ -18,7 +18,7 @@ $(document).ready(function(){
         $(".projects-single-layout").hide();
     });
 
-    $(document).on('scroll', function(){   
+    $(document).on('scroll', function(){
         if($('.sticky-nav-holder').hasClass('show')) {
             $('html').addClass('sticky-show');
         } else {
@@ -26,6 +26,10 @@ $(document).ready(function(){
         }
     });
 
+    $('#tax_input\\[project-org-type\\]\\[\\]').on('change', function( event ) {
+        console.log( event );
+        $(this).closest('form').find('\[type=submit\]').click();
+    });
 });
 
 /**
