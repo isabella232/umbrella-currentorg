@@ -27,8 +27,55 @@ $(document).ready(function(){
     });
 
     $('#tax_input\\[project-org-type\\]\\[\\]').on('change', function( event ) {
-        console.log( event );
         $(this).closest('form').find('\[type=submit\]').click();
+    });
+
+    // this keeps track of the array of events
+    var $checkboxes = $('details.project-category input');
+    var checkboxValues = Array();
+    var initialCheckboxValues = Array();
+
+    function maybeToggleDisabledInputs() {
+        if ( checkboxValues.length >= 3 ) {
+            // disable unchecked checkboxes
+            $checkboxes.filter( ':not(:checked)' ).prop( 'disabled', true );
+        } else {
+            $checkboxes.prop( 'disabled', false );
+        }
+    }
+
+    // setup
+    $checkboxes.each( function( index ) {
+        if ( this.checked ) {
+            checkboxValues.push( this.value );
+            initialCheckboxValues.push( this.value );
+        }
+    });
+    maybeToggleDisabledInputs();
+
+    $checkboxes.on('change', function( event ) {
+        if ( event.target.checked ) {
+            // add it to the array and perform cleanup
+            checkboxValues.push( event.target.value );
+            maybeToggleDisabledInputs();
+        } else {
+            // remove it from the array and perform cleanup
+            let index = checkboxValues.indexOf( event.target.value );
+            if ( index > -1 ) {
+                checkboxValues.splice( index, 1 );
+            }
+            maybeToggleDisabledInputs();
+        }
+    });
+
+    $('details.project-category').on('toggle', function( event ) {
+        console.log( event, checkboxValues, initialCheckboxValues );
+        if ( ! this.open ) {
+            console.log( checkboxValues.toString(), initialCheckboxValues.toString(),  checkboxValues.sort().toString() != initialCheckboxValues.sort().toString() );
+            if ( checkboxValues.sort().toString() != initialCheckboxValues.sort().toString() ) {
+                $(this).closest('form').find('\[type=submit\]').click();
+            }
+        }
     });
 });
 
