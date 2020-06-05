@@ -7,9 +7,14 @@ $(document).ready(function(){
         e.preventDefault();
         var post_id = $(this).data("post-id");
         current_ltw_projects_load_single_project(post_id);
+
+        // add active left border
+        $('.projects-list-item').removeClass('active');
+        $(this).closest('.projects-list-item').addClass('active');
     });
 
     $(".projects-single-close").on('click', function(){
+        $('.projects-list-item').removeClass('active');
         $(".projects-single-layout").hide();
     });
 

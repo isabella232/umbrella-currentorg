@@ -62,11 +62,11 @@ if( ! empty ( $custom['project-video'][0] ) ) {
             echo '<ul class="project-tags">';
             $terms_count = count( $terms );
             $terms_index = 0;
-            $delimiter = ' | ';
+            $delimiter = '|';
             foreach ( $terms as $term ) {
                 $terms_index++;
                 printf(
-                    '<a class="project-tag %1$s-%2$s" href="%3$s">%4$s </a>',
+                    '<a class="project-tag %1$s-%2$s" href="%3$s">%4$s</a>',
                     esc_attr( $term->taxonomy ),
                     esc_attr( $term->slug ),
                     // @todo: make this be a link that triggers the search filter for this term
@@ -82,7 +82,7 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 
         // thumbnail or video
         if ( $show_thumbnail ) {
-            echo '<div class="has-thumbnail '.$hero_class.'"><a href="?project_id=' . get_the_ID() . '">' . get_the_post_thumbnail() . '</a></div>';
+            echo '<div class="has-thumbnail '.$hero_class.'"><a href="?project_id=' . get_the_ID() . '">' . get_the_post_thumbnail( get_the_ID(), 'large' ) . '</a></div>';
         } else if( $show_youtube && wp_oembed_get( $custom['project-video'][0] ) ) {
             echo wp_oembed_get( $custom['project-video'][0] );
         }
@@ -175,7 +175,7 @@ if( ! empty ( $custom['project-video'][0] ) ) {
             printf(
                 '<label class="project-specific-link">%1$s:</label>
                 <a class="project-specific-link" href="%2$s" target="_blank">%2$s</a>',
-                __( 'Project Specific Link', 'current-ltw-projects' ),
+                __( 'Project Link', 'current-ltw-projects' ),
                 esc_html( $custom['project-link'][0] )
             );
         }
