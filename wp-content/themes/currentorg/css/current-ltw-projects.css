@@ -144,7 +144,7 @@
   background: #fff;
   z-index: 10;
 }
-.projects-search-form-search details[open] summary {
+.projects-search-form-search details[open] summary.btn {
   width: 100%;
 }
 .projects-search-form-search details ul {
