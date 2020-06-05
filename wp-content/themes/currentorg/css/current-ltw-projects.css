@@ -166,6 +166,38 @@
 .projects-search-form-search details summary::-webkit-details-marker {
   display: none;
 }
+@media (max-width: 770px) {
+  .projects-search-form-search label[for=projects-search] {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding-right: 0;
+  }
+  .projects-search-form-search label[for=projects-search] input {
+    width: 85%;
+  }
+  .projects-search-form-search label[for=projects-search] button {
+    width: 15%;
+  }
+  .projects-search-form-search label.project-org-type {
+    width: 47%;
+    padding-right: 0;
+  }
+  .projects-search-form-search label.project-org-type select {
+    width: 100%;
+  }
+  .projects-search-form-search details.project-category {
+    float: right;
+    width: 47%;
+  }
+  .projects-search-form-search details.project-category[open] {
+    display: block;
+    right: 0;
+    top: 55%;
+  }
+  .projects-search-form-search details.project-category .btn {
+    width: 100%;
+  }
+}
 .projects-list-item {
   border: 1px solid #343434 !important;
   padding: 0.75rem;

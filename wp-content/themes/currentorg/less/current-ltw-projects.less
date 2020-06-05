@@ -166,6 +166,39 @@
 			display: none;
 		}
 	}
+	@media (max-width: 770px) {
+		label[for=projects-search] {
+			width: 100%;
+			margin-bottom: @common-whitespace * 0.5;
+			padding-right: 0;
+			input {
+				width: 85%;
+			}
+			button {
+				width: 15%;
+			}
+		}
+		label.project-org-type {
+			width: 47%;
+			padding-right: 0;
+			select {
+				width: 100%;
+			}
+		}
+		details.project-category {
+			float: right;
+			width: 47%;
+			&[open] {
+				display: block;
+				right: 0;
+				top: 55%;
+			}
+			.btn {
+				width: 100%;
+			}
+		}
+
+	}
 }
 .projects-list {
 }
