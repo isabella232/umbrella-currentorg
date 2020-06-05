@@ -14,6 +14,7 @@ $(document).ready(function(){
     });
 
     $(".projects-single-close").on('click', function(){
+        $('.projects-list-item').removeClass('active');
         $(".projects-single-layout").hide();
     });
 

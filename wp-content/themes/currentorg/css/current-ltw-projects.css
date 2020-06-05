@@ -235,6 +235,11 @@
   max-height: calc(95vh - 56px);
   top: 7%;
 }
+.projects-single-layout .projects-single-interior-container .projects-single-close {
+  background-color: #1c819e;
+  color: #fff;
+  border: none;
+}
 .projects-single-layout .projects-single-holder .entry-content .project-tags .delimiter {
   padding: 0 5px;
 }
