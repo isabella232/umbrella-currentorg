@@ -62,11 +62,11 @@ if( ! empty ( $custom['project-video'][0] ) ) {
             echo '<ul class="project-tags">';
             $terms_count = count( $terms );
             $terms_index = 0;
-            $delimiter = ' |';
+            $delimiter = '|';
             foreach ( $terms as $term ) {
                 $terms_index++;
                 printf(
-                    '<a class="project-tag %1$s-%2$s" href="%3$s">%4$s </a>',
+                    '<a class="project-tag %1$s-%2$s" href="%3$s">%4$s</a>',
                     esc_attr( $term->taxonomy ),
                     esc_attr( $term->slug ),
                     // @todo: make this be a link that triggers the search filter for this term
