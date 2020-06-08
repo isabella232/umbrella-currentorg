@@ -67,4 +67,8 @@ $query = new WP_Query( $args );
 // so we can pass $query to these
 include( locate_template( 'partials/projects-search-form.php', false, false ) );
 include( locate_template( 'partials/projects-list.php', false, false ) );
-include( locate_template( 'partials/projects-single-holder.php', false, false ) );
+
+// only load the single holder if posts are found
+if ( $query->have_posts() ) {
+    include( locate_template( 'partials/projects-single-holder.php', false, false ) );
+} 
