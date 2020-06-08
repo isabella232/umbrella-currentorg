@@ -26,10 +26,6 @@ $(document).ready(function(){
         }
     });
 
-    $('#tax_input\\[project-org-type\\]\\[\\]').on('change', function( event ) {
-        $(this).closest('form').find('\[type=submit\]').click();
-    });
-
     // this keeps track of the array of events
     var $checkboxes = $('details.project-category input');
     var checkboxValues = Array();
@@ -65,16 +61,6 @@ $(document).ready(function(){
                 checkboxValues.splice( index, 1 );
             }
             maybeToggleDisabledInputs();
-        }
-    });
-
-    $('details.project-category').on('toggle', function( event ) {
-        console.log( event, checkboxValues, initialCheckboxValues );
-        if ( ! this.open ) {
-            console.log( checkboxValues.toString(), initialCheckboxValues.toString(),  checkboxValues.sort().toString() != initialCheckboxValues.sort().toString() );
-            if ( checkboxValues.sort().toString() != initialCheckboxValues.sort().toString() ) {
-                $(this).closest('form').find('\[type=submit\]').click();
-            }
         }
     });
 });
