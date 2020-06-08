@@ -48,6 +48,11 @@
     display: flex;
     flex-direction: column;
   }
+  .current-ltw-shortcode .left,
+  .current-ltw-shortcode .right {
+    float: none;
+    clear: both;
+  }
   .current-ltw-shortcode .projects-search-form-search {
     order: 1;
   }
@@ -61,6 +66,20 @@
   .current-ltw-shortcode .projects-list {
     order: 4;
   }
+}
+.current-ltw-shortcode .left,
+.current-ltw-shortcode .right {
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+}
+.current-ltw-shortcode .left label.projects-search,
+.current-ltw-shortcode .right label.projects-search,
+.current-ltw-shortcode .left label.project-org-type,
+.current-ltw-shortcode .right label.project-org-type,
+.current-ltw-shortcode .left .project-category-holder,
+.current-ltw-shortcode .right .project-category-holder {
+  flex: 1 1 auto;
 }
 .projects-search-form-search {
   padding: 1.5rem 0;
@@ -84,7 +103,8 @@
 .projects-search-form-search button,
 .projects-search-form-search details,
 .projects-search-form-search select,
-.projects-search-form-search label {
+.projects-search-form-search label,
+.projects-search-form-search .project-category-holder {
   box-sizing: border-box;
   line-height: 1.5;
   font-size: 16px;
@@ -94,10 +114,10 @@
   margin-bottom: 0;
   display: inline-block;
   vertical-align: middle;
-  float: left;
 }
-.projects-search-form-search label {
-  padding-right: 40px;
+.projects-search-form-search label,
+.projects-search-form-search .project-category-holder {
+  margin-right: 10px;
 }
 .projects-search-form-search .btn-submit {
   background-color: #1c819e;
@@ -137,12 +157,15 @@
 }
 .projects-search-form-search details[open] {
   border: 1px solid #343434;
-  position: absolute;
   vertical-align: top;
   max-height: 50vh;
   overflow: scroll;
   background: #fff;
   z-index: 10;
+  float: left;
+  position: absolute;
+  left: 50%;
+  right: 0;
 }
 .projects-search-form-search details[open] summary.btn {
   width: 100%;
@@ -167,32 +190,35 @@
   display: none;
 }
 @media (max-width: 770px) {
-  .projects-search-form-search label[for=projects-search] {
+  .projects-search-form-search .right,
+  .projects-search-form-search .left {
     width: 100%;
     margin-bottom: 0.75rem;
     padding-right: 0;
   }
-  .projects-search-form-search label[for=projects-search] input {
-    width: 85%;
+  .projects-search-form-search .right button,
+  .projects-search-form-search .left button {
+    flex: 0 0 15%;
   }
-  .projects-search-form-search label[for=projects-search] button {
-    width: 15%;
-  }
-  .projects-search-form-search label.project-org-type {
-    width: 47%;
-    padding-right: 0;
-  }
-  .projects-search-form-search label.project-org-type select {
+  .projects-search-form-search .right select,
+  .projects-search-form-search .left select,
+  .projects-search-form-search .right input[type=text],
+  .projects-search-form-search .left input[type=text] {
     width: 100%;
   }
+  .projects-search-form-search .right button,
+  .projects-search-form-search .left button {
+    width: 15%;
+  }
   .projects-search-form-search details.project-category {
-    float: right;
-    width: 47%;
+    width: 100%;
   }
   .projects-search-form-search details.project-category[open] {
     display: block;
     right: 0;
-    top: 55%;
+    left: 0;
+    top: 52%;
+    position: absolute;
   }
   .projects-search-form-search details.project-category .btn {
     width: 100%;
