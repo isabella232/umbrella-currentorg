@@ -49,6 +49,10 @@
 	@media ( max-width: 770px ) {
 		display: flex;
 		flex-direction: column;
+		.left, .right {
+			float: none;
+			clear: both;
+		}
 		.projects-search-form-search {
 			order: 1;
 		}
@@ -61,6 +65,18 @@
 		}
 		.projects-list {
 			order: 4;
+		}
+	}
+
+	.left, .right {
+		margin-left: 0;
+		margin-right: 0;
+		display: flex;
+
+		label.projects-search,
+		label.project-org-type,
+		.project-category-holder {
+			flex: 1 1 auto;
 		}
 	}
 }
@@ -76,7 +92,7 @@
 	input[type=text], .btn, button, select {
 		padding: 4px;
 	}
-	input[type=text], .btn, button, details, select, label {
+	input[type=text], .btn, button, details, select, label, .project-category-holder {
 		box-sizing: border-box;
 		line-height: 1.5;
 		font-size: 16px;
@@ -86,10 +102,9 @@
 		margin-bottom: 0;
 		display: inline-block;
 		vertical-align: middle;
-		float: left;
 	}
-	label {
-		padding-right: 40px;
+	label, .project-category-holder {
+		margin-right: 10px;
 	}
 	.btn-submit {
 		background-color: @brand;
@@ -135,13 +150,17 @@
 
 	details[open] {
 		border: 1px solid @grey-d;
-		position: absolute;
 		vertical-align: top;
 		max-height: 50vh;
 		overflow: scroll;
 		background: @white;
 		z-index: 10;
-		summary {
+		float: left;
+		position: absolute;
+		left: 50%;
+		right: 0;
+
+		summary.btn {
 			width: 100%;
 		}
 	}
@@ -167,31 +186,32 @@
 		}
 	}
 	@media (max-width: 770px) {
-		label[for=projects-search] {
+		.right,
+		.left {
 			width: 100%;
 			margin-bottom: @common-whitespace * 0.5;
 			padding-right: 0;
-			input {
-				width: 85%;
+
+			button {
+				flex: 0 0 15%;
+			}
+
+			select,
+			input[type=text] {
+				width: 100%;
 			}
 			button {
 				width: 15%;
 			}
 		}
-		label.project-org-type {
-			width: 47%;
-			padding-right: 0;
-			select {
-				width: 100%;
-			}
-		}
 		details.project-category {
-			float: right;
-			width: 47%;
+			width: 100%;
 			&[open] {
 				display: block;
 				right: 0;
-				top: 55%;
+				left: 0;
+				top: 52%;
+				position: absolute;
 			}
 			.btn {
 				width: 100%;
