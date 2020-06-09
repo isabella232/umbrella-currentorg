@@ -314,7 +314,7 @@ html:not(.no-js) .projects-single-layout .projects-single-layout {
   display: inline-block;
   padding: 4px 6px;
   border: 1px solid #343434;
-  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 .project-tags .project-status-finalist {
   background: #A11282;
@@ -336,6 +336,11 @@ html:not(.no-js) .projects-single-layout .projects-single-layout {
 }
 .project-tags .project-status-winner a {
   color: #fff;
+}
+.projects-single-held .project-tags .project-status-finalist,
+.projects-single-held .project-tags .project-status-semi-finalist,
+.projects-single-held .project-tags .project-status-winner {
+  padding: 0 6px;
 }
 .project-tags [class*=project-org-type] {
   background: aliceblue;

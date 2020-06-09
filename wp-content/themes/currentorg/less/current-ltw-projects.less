@@ -317,7 +317,7 @@
 		display: inline-block;
 		padding: 4px 6px;
 		border: 1px solid @grey-d;
-		margin-left: 0.5em;
+		margin-right: 0.5em;
 	}
 	.project-status-finalist {
 		background: @finalist;
@@ -338,6 +338,13 @@
 		color: @white;
 		a {
 			color: @white;
+		}
+	}
+	.projects-single-held & {
+		.project-status-finalist,
+		.project-status-semi-finalist,
+		.project-status-winner {
+			padding: 0 6px;
 		}
 	}
 	[class*=project-org-type] {
