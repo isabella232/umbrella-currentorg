@@ -119,6 +119,10 @@
 .projects-search-form-search .project-category-holder {
   margin-right: 10px;
 }
+.projects-search-form-search .project-category-holder {
+  position: relative;
+  width: 175px;
+}
 .projects-search-form-search .btn-submit {
   background-color: #1c819e;
   color: white;
@@ -162,10 +166,8 @@
   overflow: scroll;
   background: #fff;
   z-index: 10;
-  float: left;
   position: absolute;
-  left: 50%;
-  right: 0;
+  width: 175px;
 }
 .projects-search-form-search details[open] summary.btn {
   width: 100%;
@@ -217,7 +219,7 @@
     display: block;
     right: 0;
     left: 0;
-    top: 52%;
+    top: 0;
     position: absolute;
   }
   .projects-search-form-search details.project-category .btn {
@@ -279,6 +281,7 @@
   max-width: 100%;
   float: none;
   margin: 0;
+  margin-bottom: 0.99rem;
 }
 .projects-single-layout .projects-single-holder .entry-content .project-tags {
   margin-left: 0;
@@ -311,8 +314,6 @@ html:not(.no-js) .projects-single-layout .projects-single-layout {
   display: inline-block;
   padding: 4px 6px;
   border: 1px solid #343434;
-}
-.project-tags li + li {
   margin-left: 0.5em;
 }
 .project-tags .project-status-finalist {

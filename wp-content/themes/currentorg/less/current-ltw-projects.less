@@ -106,6 +106,10 @@
 	label, .project-category-holder {
 		margin-right: 10px;
 	}
+	.project-category-holder {
+		position: relative;
+		width: 175px;
+	}
 	.btn-submit {
 		background-color: @brand;
 		color: white;
@@ -155,10 +159,8 @@
 		overflow: scroll;
 		background: @white;
 		z-index: 10;
-		float: left;
 		position: absolute;
-		left: 50%;
-		right: 0;
+		width: 175px;
 
 		summary.btn {
 			width: 100%;
@@ -210,7 +212,7 @@
 				display: block;
 				right: 0;
 				left: 0;
-				top: 52%;
+				top: 0;
 				position: absolute;
 			}
 			.btn {
@@ -280,6 +282,7 @@
 				max-width: 100%;
 				float: none;
 				margin: 0;
+				margin-bottom: @common-whitespace * 0.66;
 			}
 			.project-tags {
 				margin-left: 0;
@@ -314,10 +317,7 @@
 		display: inline-block;
 		padding: 4px 6px;
 		border: 1px solid @grey-d;
-
-		& + li {
-			margin-left: 0.5em;
-		}
+		margin-left: 0.5em;
 	}
 	.project-status-finalist {
 		background: @finalist;
