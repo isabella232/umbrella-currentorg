@@ -38,7 +38,7 @@
 			}
 
 		} else {
-			echo wpautop( esc_html__( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'current-ltw-projects' ) );
+			echo wpautop( esc_html__( 'Apologies, but no results were found. Try choosing fewer filters and try again.', 'current-ltw-projects' ) );
 		}
 	?>
 </div>
