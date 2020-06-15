@@ -571,3 +571,113 @@ add_action('largo_before_post_header', function() {
 		esc_html( var_export( get_post_custom( get_the_ID() ), true) )
 	);
 });
+
+/**
+ * Remove the filter that allows users to filter projects by M/Y
+ * 
+ * @param bool $disable Whether to disable the dropdown. Defaults to false.
+ * @param str $post_type The post type.
+ * 
+ * @return bool $disable Whether to disable the dropdown.
+ */
+function projects_disable_date_filter( $disable, $post_type ) {
+
+	if( 'projects' == $post_type ) {
+		$disable = true;
+	}
+
+	return $disable;
+
+}
+add_action( 'disable_months_dropdown', 'projects_disable_date_filter', 10, 2 );
+
+
+/**
+ * Create new dropdown filter that allows users to filter projects by Y
+ * 
+ * Mostly copied from the core months_dropdown function
+ * @see https://github.com/WordPress/WordPress/blob/99c6adfeaa0a8acc03a8b13a661567892a804655/wp-admin/includes/class-wp-list-table.php#L533-L619
+ * 
+ * @param str $post_type The post type slug
+ * @param str $which The location of the extra table nav markup
+ */
+function projects_year_dropdown_filter( $post_type, $which ){
+	
+	global $wpdb;
+
+	if( 'projects' != $post_type) {
+		return;
+	}
+
+	$extra_checks = "AND post_status != 'auto-draft'";
+    if ( ! isset( $_GET['post_status'] ) || 'trash' !== $_GET['post_status'] ) {
+        $extra_checks .= " AND post_status != 'trash'";
+    } elseif ( isset( $_GET['post_status'] ) ) {
+        $extra_checks = $wpdb->prepare( ' AND post_status = %s', $_GET['post_status'] );
+    }
+ 
+    $years = $wpdb->get_results(
+        $wpdb->prepare(
+            "
+				SELECT DISTINCT YEAR( post_date ) AS year
+				FROM $wpdb->posts
+				WHERE post_type = %s
+				$extra_checks
+				ORDER BY post_date DESC
+			",
+            $post_type
+        )
+	);
+
+	$year_count = count( $years );
+ 
+    if ( ! $year_count || ( 1 == $year_count && 0 == $years[0]->year ) ) {
+        return;
+    }
+ 
+    $y = isset( $_GET['y'] ) ? (int) $_GET['y'] : 0;
+    ?>
+    <label for="ltw_projects_filter_year" class="screen-reader-text"><?php _e( 'Filter by date' ); ?></label>
+    <select name="ltw_projects_filter_year" id="ltw_projects_filter_year">
+        <option<?php selected( $y, 0 ); ?> value="0"><?php _e( 'All dates' ); ?></option>
+    <?php
+    foreach ( $years as $option ) {
+        if ( 0 == $option->year ) {
+            continue;
+        }
+ 
+        $year = $option->year;
+ 
+        printf(
+            "<option %s value='%s'>%s</option>\n",
+            selected( $y, false ),
+            esc_attr( $option->year  ),
+            sprintf( __( '%1$s' ), $year )
+        );
+	}
+	
+}
+add_action( 'restrict_manage_posts', 'projects_year_dropdown_filter', 10, 2 );
+	 
+/**
+ * Actually filter the new year dropdown in the query
+ * 
+ * @param obj $query The query parameters
+ * 
+ * @return obj $query The query parameters
+ */
+function projects_year_dropdown_filter_query( $query ){
+
+	global $pagenow;
+
+	// make sure we're on the edit page and the post type == projects
+	if ( $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && 'projects' == $_GET['post_type'] ) {
+		if( isset( $_GET['ltw_projects_filter_year'] ) && ! empty( $_GET['ltw_projects_filter_year'] ) ) {
+			$query->query_vars['year'] = $_GET['ltw_projects_filter_year'];
+		}
+	}
+
+	return $query;
+
+}
+add_filter( 'parse_query', 'projects_year_dropdown_filter_query', 10, 1 );
