@@ -14,10 +14,10 @@ function ltw_content_categories_init() {
 		'query_var'         => true,
 		'rewrite'           => true,
 		'capabilities'      => array(
-			'manage_terms'  => 'edit_posts',
-			'edit_terms'    => 'edit_posts',
-			'delete_terms'  => 'edit_posts',
-			'assign_terms'  => 'edit_posts',
+			'manage_terms'  => 'edit_projects',
+			'edit_terms'    => 'edit_projects',
+			'delete_terms'  => 'edit_projects',
+			'assign_terms'  => 'edit_projects',
 		),
 		'labels'            => array(
 			'name'                       => __( 'Content Categories', 'current-ltw-projects' ),

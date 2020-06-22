@@ -60,6 +60,8 @@ function projects_init() {
 			// 'page-attributes',
 			// 'post-formats',
 		),
+		'capability_type'         => array( 'project', 'projects' ),
+		'map_meta_cap'            => true,
 	) );
 
 }
