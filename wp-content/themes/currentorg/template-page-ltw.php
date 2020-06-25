@@ -32,7 +32,11 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <?php wp_head(); ?>
     <?php 
+        // enqueue stylesheet for this template
         wp_enqueue_style('current-ltw-template-stylesheet'); 
+
+        // dequeue nav script since there is no nav here
+        wp_dequeue_script('largo-navigation');
     ?>
 </head>
 

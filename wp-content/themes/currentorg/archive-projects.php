@@ -9,7 +9,11 @@
 
 wp_head();
 
+// enqueue stylesheet for this template
 wp_enqueue_style('current-ltw-template-stylesheet'); 
+
+// dequeue nav script since there is no nav here
+wp_dequeue_script('largo-navigation');
 
 $queried_object = get_queried_object();
 ?>
@@ -21,7 +25,7 @@ $queried_object = get_queried_object();
 		do_action( 'largo_before_header' );
 		get_template_part( 'partials/largo-header' );
 		do_action( 'largo_after_header' );
-		
+
 		if ( have_posts() || largo_have_featured_posts() ) {
 
 			/*
