@@ -10,7 +10,8 @@ module.exports = function(grunt) {
 
     var CSS_LESS_FILES = {
         'css/wpbdp.css': 'less/wpbdp.less',
-        'css/current-ltw-projects.css': 'less/current-ltw-projects.less'
+        'css/current-ltw-projects.css': 'less/current-ltw-projects.less',
+        'css/current-ltw-template.css': 'less/current-ltw-template.less'
     };
 
     grunt.initConfig({

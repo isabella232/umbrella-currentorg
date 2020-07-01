@@ -6,13 +6,26 @@
  * @since 0.1
  * @filter largo_partial_by_post_type
  */
-get_header();
+
+wp_head();
+
+// enqueue stylesheet for this template
+wp_enqueue_style('current-ltw-template-stylesheet'); 
+
+// dequeue nav script since there is no nav here
+wp_dequeue_script('largo-navigation');
+
 $queried_object = get_queried_object();
 ?>
-
-<div class="clearfix">
+<body <?php body_class(); ?>>
+<div id="page" class="hfeed clearfix">
 
 	<?php
+
+		do_action( 'largo_before_header' );
+		get_template_part( 'partials/largo-header' );
+		do_action( 'largo_after_header' );
+
 		if ( have_posts() || largo_have_featured_posts() ) {
 
 			/*
