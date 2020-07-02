@@ -17,6 +17,7 @@ $includes = array(
 	'/taxonomies/project-status.php',
 	'/taxonomies/project-org-type.php',
 	'/taxonomies/project-category.php',
+	'/user-roles/user-roles.php'
 );
 foreach ( $includes as $include ) {
 	if ( 0 === validate_file( $include ) ) {
