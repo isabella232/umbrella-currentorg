@@ -41,3 +41,25 @@ function ltw_projects_add_role_capabilities() {
 
 }
 add_action( 'admin_init', 'ltw_projects_add_role_capabilities', 999 );
+
+/**
+ * Unregister LTW taxonomies from Largo CFTL landing page object type
+ * so that the new ltw_editor user role doesn't have access to series landing pages
+ * 
+ * @see https://github.com/INN/largo/blob/c41d8519370b48a6e53ce36b3b516d3e54e39d66/inc/wp-taxonomy-landing/functions/cftl-admin.php#L77-L84
+ * @see https://github.com/INN/umbrella-currentorg/pull/156#issuecomment-652672358
+ */
+function ltw_projects_unregister_taxonomies_from_cftl_landing() {
+
+    $ltw_projects_taxonomies = array(
+        'project-category',
+        'project-org-type',
+        'project-status'
+    );
+
+    foreach( $ltw_projects_taxonomies as $taxonomy ) {
+        unregister_taxonomy_for_object_type( $taxonomy, 'cftl-tax-landing' );
+    }
+    
+}
+add_action( 'init', 'ltw_projects_unregister_taxonomies_from_cftl_landing', 999999 );
