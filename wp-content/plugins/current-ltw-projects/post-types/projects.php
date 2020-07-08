@@ -567,13 +567,6 @@ function projects_meta_box_callback( $post ) {
 	echo '</table>';
 }
 
-add_action('largo_before_post_header', function() {
-	printf(
-		'<pre>%1$s</pre>',
-		esc_html( var_export( get_post_custom( get_the_ID() ), true) )
-	);
-});
-
 /**
  * Remove the filter that allows users to filter projects by M/Y
  * 
