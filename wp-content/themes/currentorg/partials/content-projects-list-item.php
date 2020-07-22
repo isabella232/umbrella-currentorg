@@ -40,9 +40,6 @@ $custom = get_post_custom();
 
 	?>
 
-		<!-- delete this after debugging -->
-		<h1><?php echo get_the_date( 'Y' ); ?></h1>
-		
 		<h2 class="entry-title">
 			<a href="?project_id=<?php echo get_the_ID(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark" data-post-id="<?php echo get_the_ID(); ?>"><?php the_title(); ?></a>
 		</h2>
