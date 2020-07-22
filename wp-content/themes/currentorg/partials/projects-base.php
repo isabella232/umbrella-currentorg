@@ -8,6 +8,12 @@
 $args = array(
 	'post_type' => 'projects',
 	'post_status' => 'publish',
+	'orderby' => array(
+		// sort date by DESC so it grabs newest years first
+		'date' => 'DESC',
+		// sort titel by ASC so it grabs alphabetically
+		'title' => 'ASC'
+	)
 );
 
 if ( isset( $_GET['projects-search'] ) && ! empty( $_GET['projects-search'] ) ) {
