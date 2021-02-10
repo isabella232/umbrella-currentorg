@@ -289,6 +289,7 @@
 .projects-single-layout .projects-single-holder .entry-content label {
   font-weight: bold;
   display: inline;
+  font-family: "freight-sans-pro", "Helvetica Neue", Arial, sans-serif;
 }
 .projects-single-layout .projects-single-holder .entry-content label.label--border-bottom {
   border-bottom: 1px #eee solid;
