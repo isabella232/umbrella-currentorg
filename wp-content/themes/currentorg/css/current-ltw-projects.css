@@ -290,8 +290,10 @@
   font-weight: bold;
   display: inline;
 }
-.projects-single-layout .projects-single-holder .entry-content .project-specific-link {
+.projects-single-layout .projects-single-holder .entry-content label.label--border-bottom {
+  border-bottom: 1px #eee solid;
   display: block;
+  margin: 0.5em 0 -0.2em;
 }
 html:not(.no-js) .projects-single-layout .projects-single-layout {
   display: none;
