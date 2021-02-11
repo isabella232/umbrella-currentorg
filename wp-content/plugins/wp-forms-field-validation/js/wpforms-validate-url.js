@@ -17,18 +17,15 @@ $(function () {
       if ( label.includes('video')) {
 
         // Find input field (only if URL)
-        let input = $(this).find('input[type="url"');
-        let inputID = $(input).attr('id');
-        let errorID = inputID + '-videoURL-error';
-        
-        let errorMsg = '<label class="wpforms-error" id="' + errorID + '" style="display:none;">Please enter a valid YouTube URL (e.g. https://www.youtube.com/watch?v=ABCDEFGHIJK)</label>';
-
-        $(errorMsg).insertAfter(input);
+        let input = $(this).find('input[type="url"'); 
 
         // Validate URL format on change
         $(input).blur(function () {
-          if ($(input).val().includes('youtube')) {
-            validateYouTubeUrl($(input), errorID);
+          let val = $(input).val();
+          if (val.includes('youtube')) {
+            validateYouTubeUrl(val, error(val, input));
+          } else if (val.includes('vimeo')) {
+            validateVimeoURL(val, error(val, input));
           }
         });
       }
@@ -37,9 +34,7 @@ $(function () {
 
   }
 
-  function validateYouTubeUrl(val, error) {    
-    var url = $(val).val();
-    error = '#' + error;
+  function validateYouTubeUrl(url) {    
 
     if (url != undefined || url != '') {        
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
@@ -54,24 +49,44 @@ $(function () {
     }
   }
 
-  function validateVimeoURL() {
+  function validateVimeoURL(url) {
     var VIMEO_BASE_URL = "https://vimeo.com/api/oembed.json?url=";
-    var yourTestUrl = "https://vimeo.com/23374724";
+    var testUrl = url;
 
     $.ajax({
-      url: VIMEO_BASE_URL + yourTestUrl,
+      url: VIMEO_BASE_URL + testUrl,
       type: 'GET',
       success: function(data) {
         if (data != null && data.video_id > 0) {
           // Valid Vimeo url
+          console.log('valid Vimeo');
         } else {
           // not a valid Vimeo url
+          console.log('invalid Vimeo');
         }
       },
       error: function(data) {
         // not a valid Vimeo url
+
       }
     });
+  }
+
+  function error(data, el) {
+
+    let urlType, exampleUrl;
+
+    console.log(data);
+    if (data.includes('youtube')) {
+      urlType = 'youtube';
+      exampleUrl = 'https://www.youtube.com/watch?v=ABCDEFGHIJK';
+    } else if (data.includes('vimeo')) {
+      urlType = 'vimeo';
+      exampleUrl = 'https:www.vimeo.com/12345678';
+    }
+
+    let errorMsg = '<label class="wpforms-error" style="display:none;">Please enter a valid ' + urlType + ' URL (e.g. ' + exampleUrl + ')</label>';
+    $(errorMsg).insertAfter(el);
   }
 
 });
