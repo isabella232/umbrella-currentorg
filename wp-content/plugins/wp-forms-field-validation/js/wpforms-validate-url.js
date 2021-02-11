@@ -20,32 +20,21 @@ $(function () {
         let input = $(this).find('input[type="url"');
         let inputID = $(input).attr('id');
         let errorID = inputID + '-videoURL-error';
-        let wpFormsID = '#' + inputID + '-error';
         
         let errorMsg = '<label class="wpforms-error" id="' + errorID + '" style="display:none;">Please enter a valid YouTube URL (e.g. https://www.youtube.com/watch?v=ABCDEFGHIJK)</label>';
 
-        $(errorMsg).appendTo(el);
+        $(errorMsg).insertAfter(input);
 
         // Validate URL format on change
-        $(input).on('keyup', function () {
-          validateYouTubeUrl($(input), errorID);
-          suppressError(wpFormsID);
-        });
-
         $(input).blur(function () {
-          suppressError(wpFormsID);
+          if ($(input).val().includes('youtube')) {
+            validateYouTubeUrl($(input), errorID);
+          }
         });
       }
 
     });
 
-  }
-
-  // Suppress built in error
-  function suppressError(el) {
-    setTimeout(function () {
-      $(el).remove();
-    }, 1);
   }
 
   function validateYouTubeUrl(val, error) {    
@@ -63,6 +52,26 @@ $(function () {
           $(error).show();
         }
     }
+  }
+
+  function validateVimeoURL() {
+    var VIMEO_BASE_URL = "https://vimeo.com/api/oembed.json?url=";
+    var yourTestUrl = "https://vimeo.com/23374724";
+
+    $.ajax({
+      url: VIMEO_BASE_URL + yourTestUrl,
+      type: 'GET',
+      success: function(data) {
+        if (data != null && data.video_id > 0) {
+          // Valid Vimeo url
+        } else {
+          // not a valid Vimeo url
+        }
+      },
+      error: function(data) {
+        // not a valid Vimeo url
+      }
+    });
   }
 
 });
