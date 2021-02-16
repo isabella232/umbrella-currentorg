@@ -18,14 +18,13 @@ $(function () {
 
         // Find input field (only if URL)
         let input = $(this).find('input[type="url"'); 
-
         // Validate URL format on change
-        $(input).blur(function () {
+        $(input).on('input', function () {
           let val = $(input).val();
           if (val.includes('youtube')) {
-            validateYouTubeUrl(val, error(val, input));
+            validateYouTubeUrl(val, input);
           } else if (val.includes('vimeo')) {
-            validateVimeoURL(val, error(val, input));
+            validateVimeoURL(val, input);
           }
         });
       }
@@ -34,22 +33,22 @@ $(function () {
 
   }
 
-  function validateYouTubeUrl(url) {    
+  function validateYouTubeUrl(url, el) {    
 
     if (url != undefined || url != '') {        
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
         var match = url.match(regExp);
         if (match && match[2].length == 11) {
           // Validity check - leave empty if no action needed
-          $(error).hide();
+          $('#wpformsValidateError').hide();
         } else {
           // Display error on invalid URL
-          $(error).show();
+          validateError(url, el);
         }
     }
   }
 
-  function validateVimeoURL(url) {
+  function validateVimeoURL(url, el) {
     var VIMEO_BASE_URL = "https://vimeo.com/api/oembed.json?url=";
     var testUrl = url;
 
@@ -59,24 +58,20 @@ $(function () {
       success: function(data) {
         if (data != null && data.video_id > 0) {
           // Valid Vimeo url
-          console.log('valid Vimeo');
-        } else {
-          // not a valid Vimeo url
-          console.log('invalid Vimeo');
-        }
+          $('#wpformsValidateError').hide();
+        } 
       },
       error: function(data) {
         // not a valid Vimeo url
-
+        validateError(url, el);
       }
     });
   }
 
-  function error(data, el) {
+  function validateError(data, el) {
 
     let urlType, exampleUrl;
 
-    console.log(data);
     if (data.includes('youtube')) {
       urlType = 'youtube';
       exampleUrl = 'https://www.youtube.com/watch?v=ABCDEFGHIJK';
@@ -85,8 +80,10 @@ $(function () {
       exampleUrl = 'https:www.vimeo.com/12345678';
     }
 
-    let errorMsg = '<label class="wpforms-error" style="display:none;">Please enter a valid ' + urlType + ' URL (e.g. ' + exampleUrl + ')</label>';
+    let errorMsg = '<label class="wpforms-error" id="wpformsValidateError">Please enter a valid ' + urlType + ' URL (e.g. ' + exampleUrl + ')</label>';
+    $('#wpformsValidateError').remove();
     $(errorMsg).insertAfter(el);
+    $(errorMsg).show();
   }
 
 });
