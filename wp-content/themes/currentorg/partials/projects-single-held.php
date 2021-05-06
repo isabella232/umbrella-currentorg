@@ -146,37 +146,37 @@ if( ! empty ( $custom['project-video'][0] ) ) {
 
         if ( ! empty( $custom['project-contact-email'][0] ) ) {
             printf(
-                '<span class="project-contact-email">%1$s</span>',
+                '<span class="project-contact-email">%1$s</span><br/>',
                 esc_html( $custom['project-contact-email'][0] )
             );
         }
 
-        // tell your story / main content
-        the_content();
-
-        // project revenue
-        if ( ! empty( $custom['project-revenue'][0] ) ) {
+        // primary url
+        if (! empty($custom['project-link'][0])) {
             printf(
-                '<p class="project-revenue">%1$s</p>',
-                esc_html( $custom['project-revenue'][0] )
+                '<label>%1$s:</label>
+                <a class="project-specific-link" href="%2$s" target="_blank">%2$s</a><br/>',
+                __('Project Link', 'current-ltw-projects'),
+                esc_html($custom['project-link'][0])
             );
         }
+
+        // tell your story / main content
+        printf('<label class="label--border-bottom">Project Details</label>'); the_content();
 
         // specific impact
-        if ( ! empty( $custom['project-impact'][0] ) ) {
+        if (! empty($custom['project-impact'][0])) {
             printf(
-                '<p class="project-specific-impact">%1$s</p>',
-                esc_html( $custom['project-impact'][0] )
+                '<p class="project-specific-impact"><label>Project Impact: </label>%1$s</p>',
+                nl2br($custom['project-impact'][0])
             );
         }
 
-        // primary url
-        if ( ! empty( $custom['project-link'][0] ) ) {
+        // project revenue
+        if (! empty($custom['project-revenue'][0])) {
             printf(
-                '<label class="project-specific-link">%1$s:</label>
-                <a class="project-specific-link" href="%2$s" target="_blank">%2$s</a>',
-                __( 'Project Link', 'current-ltw-projects' ),
-                esc_html( $custom['project-link'][0] )
+                '<p class="project-revenue"><label>Funding (if applicable): </label>%1$s</p>',
+                nl2br($custom['project-revenue'][0])
             );
         }
 
