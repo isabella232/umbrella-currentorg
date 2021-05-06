@@ -168,7 +168,7 @@ if( ! empty ( $custom['project-video'][0] ) ) {
         if (! empty($custom['project-impact'][0])) {
             printf(
                 '<p class="project-specific-impact"><label>Project Impact: </label>%1$s</p>',
-                esc_html($custom['project-impact'][0])
+                nl2br($custom['project-impact'][0])
             );
         }
 
@@ -176,7 +176,7 @@ if( ! empty ( $custom['project-video'][0] ) ) {
         if (! empty($custom['project-revenue'][0])) {
             printf(
                 '<p class="project-revenue"><label>Funding (if applicable): </label>%1$s</p>',
-                esc_html($custom['project-revenue'][0])
+                nl2br($custom['project-revenue'][0])
             );
         }
 
